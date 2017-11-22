@@ -1,6 +1,7 @@
 /**
  * Created by Antonina on 21.11.2017.
  */
+
 $(function() {
     $("#register-form").validate({
         rules: {
@@ -20,7 +21,7 @@ $(function() {
             },
             confirm_password: {
                 required: true,
-                equalTo: '#password'
+                equalTo: '#password-sign-up'
             }
         },
         messages: {
@@ -48,7 +49,36 @@ $(function() {
             return true;
         },
         errorClass: "form-input_error",
-        validClass: "form-input_success"
+        validClass: "form-input_success",
+        submitHandler: createProfile()
     });
-
 });
+
+function createProfile() {
+    $('#sign-up-button').click(function() {
+        var first_name = $('#first-name-sign-up').val();
+        var last_name = $('#last-name-sign-up').val();
+        var email = $('#email-sign-up').val();
+        var login = $('#login-sign-up').val();
+        var password = $('#password-sign-up').val();
+        var data = {
+            'first_name': first_name,
+            'last_name': last_name,
+            'email': email,
+            'login': login,
+            'password': password
+        };
+        $.ajax({
+            url: '/signUp', //the page containing python script
+            data: JSON.stringify(data),
+            type: 'POST',
+            success: function() {
+                console.log('user created');
+                window.location = 'profile-s.html';
+            },
+            error: function() {
+                console.log('error');
+            }
+        });
+    });
+}

@@ -1,6 +1,7 @@
 /**
  * Created by Antonina on 21.11.2017.
  */
+
 $(function() {
     $("#login-form").validate({
         rules: {
@@ -33,7 +34,30 @@ $(function() {
             return true;
         },
         errorClass: "form-input_error",
-        validClass: "form-input_success"
+        validClass: "form-input_success",
+        submitHandler: signIn()
     });
-
 });
+
+function signIn() {
+    $('#sign-in-button').click(function() {
+        var login = $('#login-sign-up').val();
+        var password = $('#password-sign-up').val();
+        var data = {
+            'login': login,
+            'password': password
+        };
+        $.ajax({
+            url: '/signIn', //the page containing python script
+            data: JSON.stringify(data),
+            type: 'POST',
+            success: function() {
+                console.log('user created');
+                window.location = '#'; // profile-s.html or profile-c.html
+            },
+            error: function() {
+                console.log('error');
+            }
+        });
+    });
+}
