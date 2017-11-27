@@ -44,11 +44,11 @@ class UpdateCompany:
         cursor.close()
 
     @classmethod
-    def update_company_name(cls):
+    def update_company_name(cls, company_name, id_company):
         connect = mysql.connect()
         cursor = connect.cursor()
-        query = ''
-        param = ()
+        query = 'update company SET CompanyName=%s where idCompany=%s'
+        param = (company_name, id_company)
         cursor.execute(query, param)
         connect.commit()
         cursor.close()
@@ -113,6 +113,11 @@ def api_update_company():
     if 'Photo' in request.json:
         photo = request.json['Photo']
         UpdateCompany.update_image(photo, id_company)
+        value = 1
+
+    if 'CompanyName' in request.json:
+        company_name = request.json['CompanyName']
+        UpdateCompany.update_company_name(company_name, id_company)
         value = 1
 
     if value == 0:
