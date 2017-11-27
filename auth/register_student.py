@@ -1,5 +1,6 @@
 from flask import Blueprint, request, abort, jsonify
 from setting.config import mysql
+from security.hash_password import Password
 
 register_student = Blueprint('register_student', __name__)
 
@@ -97,11 +98,10 @@ def register_student_api():
 
     if Student.check_login_for_used(login) == 0:
         return jsonify(status='Login already exists'), 400
-    if Student.check_email_for_used(email) == 0:
+    elif Student.check_email_for_used(email) == 0:
         return jsonify(status='Email already exists'), 400
-
-    # password_enc = generate_password_hash(password)
-
-    Student.save_students_user(login, first_name, last_name, email, password)
+    else:
+        #hash_password = Password.generate_password(password)
+        Student.save_students_user(login, first_name, last_name, email, password)
 
     return jsonify(status='success'), 201

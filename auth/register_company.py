@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request, abort
 from setting.config import mysql
-from werkzeug.security import generate_password_hash
+from users.get_company import GetCompany
 
 class Company:
     def __init__(self, name,email,login,password):
@@ -63,6 +63,15 @@ class Company:
         connect.commit()
         cursor.close()
 
+    @classmethod
+    def save_info_about_company(cls, id_company):
+        connect = mysql.connect()
+        cursor = connect.cursor()
+        query_save = 'insert into InfoAboutCompany(idCompany) values(%s)'
+        param_save = (id_company)
+        cursor.execute(query_save, param_save)
+        connect.commit()
+        cursor.close()
 
 register_company=Blueprint('register_company',__name__)
 
@@ -92,5 +101,8 @@ def register_company_api():
         #password_enc = generate_password_hash(password)
 
         Company.save_company_user(login,name,email,password)
+        id = GetCompany.get_company_id_from_db(login)
+        print(id)
+        Company.save_info_about_company(id)
 
         return jsonify(status="success"), 201

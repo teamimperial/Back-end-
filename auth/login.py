@@ -3,7 +3,7 @@ from flask import Blueprint, request, jsonify, abort
 from werkzeug.security import check_password_hash
 from users.get_student import GetStudent
 from users.get_company import GetCompany
-from auth.session import UserSession
+from security.hash_password import Password
 
 
 class Login:
@@ -30,10 +30,15 @@ class Login:
     def get_password_from_students(cls, login):
         connect = mysql.connect()
         cursor = connect.cursor()
+
         query_get_password = 'SELECT StudentsPassword FROM students WHERE StudentsLogin=%s'
         param_get_password = (login)
         cursor.execute(query_get_password, param_get_password)
         password = str(cursor.fetchone()[0])
+
+        connect.commit()
+        cursor.close()
+
         return password
 
     @classmethod
@@ -47,6 +52,7 @@ class Login:
         if cursor.fetchone()[0] == 1:
             check = 1
             return check
+
         connect.commit()
         cursor.close()
 
@@ -54,10 +60,15 @@ class Login:
     def get_password_from_Company(cls, login):
         connect = mysql.connect()
         cursor = connect.cursor()
+
         query_get_password = 'SELECT CompanyPassword FROM company WHERE CompanyLogin=%s'
         param_get_password = (login)
         cursor.execute(query_get_password, param_get_password)
         password = str(cursor.fetchone()[0])
+
+        connect.commit()
+        cursor.close()
+
         return password
 
     @classmethod  # метод не працює
@@ -92,12 +103,13 @@ def login():
 
     if Login.search_user_in_student_list(login) == 1:
         password_from_db = Login.get_password_from_students(login)
-        if Login.equals_password(password, password_from_db) == 1:
+        if Password.check_password(password, password_from_db) == 1:
             first_name = GetStudent.get_student_first_name_from_db(login)
             last_name = GetStudent.get_student_last_name_from_db(login)
             email = GetStudent.get_student_email_from_db(login)
+            id_students = GetStudent.get_students_id_from_db(login)
             # UserSession.create_session_student(login)
-            return jsonify(firstName=first_name, lastName=last_name, email=email, login=login, userType="student"), 201
+            return jsonify(idStudents=id_students,firstName=first_name, lastName=last_name, email=email, login=login, userType="student"), 201
         else:
             return jsonify(status="Incorrect password"), 400
 

@@ -34,3 +34,18 @@ class GetCompany:
         cursor.close()
 
         return email
+
+    @classmethod
+    def get_company_id_from_db(cls, login):
+        connect = mysql.connect()
+        cursor = connect.cursor()
+
+        query_get_id = 'select idCompany from company where CompanyLogin=%s'
+        param_get_id = (login)
+        cursor.execute(query_get_id,param_get_id)
+        id = cursor.fetchone()[0]
+
+        connect.commit()
+        cursor.close()
+
+        return id
