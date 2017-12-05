@@ -4,7 +4,7 @@ from users.get_company import GetCompany
 
 
 class UpdateCompany:
-    def __init__(self,login, country,city,image,company_name,web_site,about_company):
+    def __init__(self, login, country, city, image, company_name, web_site, about_company):
         self.login = login
         self.country = country
         self.city = city
@@ -14,12 +14,12 @@ class UpdateCompany:
         self.about_company = about_company
 
     @classmethod
-    def update_web_site(cls, id_company , web_site):
+    def update_web_site(cls, id_company, web_site):
         connect = mysql.connect()
         cursor = connect.cursor()
         query = 'update infoaboutcompany Set WebSite=%s where idCompany=%s'
         param = (web_site, id_company)
-        cursor.execute(query,param)
+        cursor.execute(query, param)
         connect.commit()
         cursor.close()
 
@@ -83,7 +83,9 @@ class UpdateCompany:
         connect.commit()
         cursor.close()
 
+
 update_company = Blueprint('update_company', __name__)
+
 
 @update_company.route('/company/update', methods=['POST'])
 def api_update_company():
@@ -124,6 +126,3 @@ def api_update_company():
         return jsonify(status='something bad'), 404
     if value == 1:
         return jsonify(status='success'), 201
-
-
-

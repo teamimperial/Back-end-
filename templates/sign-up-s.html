@@ -12,39 +12,40 @@
 
 <div class="pen-title">
 	<div class="container">
-		<div class="col-md-3"></div>
-		<div class="col-md-6">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
 			<div class="card">
 				<img src="images/logo.png" width="80%" style="margin-bottom: 5%">
 				<h1 class="title">Sign Up</h1>
-				<form>
+				<form action="#" method="#" class="form" id="register-form">
+					<div class="message js-form-message"></div>
 					<div class="input-container">
-						<input type="text" id="first-name-sign-up" required="required"/>
+						<input type="text" id="first-name-sign-up" name="first_name" required="required"/>
 						<label for="first-name-sign-up">first name</label>
 						<div class="bar"></div>
 					</div>
 					<div class="input-container">
-						<input type="text" id="last-name-sign-up" required="required"/>
+						<input type="text" id="last-name-sign-up" name="last_name" required="required"/>
 						<label for="last-name-sign-up">last name</label>
 						<div class="bar"></div>
 					</div>
 					<div class="input-container">
-						<input type="email" id="email-sign-up" required="required"/>
+						<input type="email" id="email-sign-up" name="email" required="required"/>
 						<label for="email-sign-up">email</label>
 						<div class="bar"></div>
 					</div>
 					<div class="input-container">
-						<input type="text" id="login-sign-up" required="required"/>
+						<input type="text" id="login-sign-up" name="login" required="required"/>
 						<label for="login-sign-up">login</label>
 						<div class="bar"></div>
 					</div>
 					<div class="input-container">
-						<input type="password" id="password-sign-up" required="required"/>
+						<input type="password" id="password-sign-up" name="password" required="required"/>
 						<label for="password-sign-up">password</label>
 						<div class="bar"></div>
 					</div>
 					<div class="input-container">
-						<input type="password" id="confirm-password-sign-up" required="required"/>
+						<input type="password" id="confirm-password-sign-up" name="confirm_password" required="required"/>
 						<label for="confirm-password-sign-up">confirm password</label>
 						<div class="bar"></div>
 					</div>
@@ -52,17 +53,20 @@
 						<button type="submit" id="sign-up-button"><span>Confirm</span></button>
 					</div>
 				</form>
-
 			</div>
 		</div>
-		<div class="col-md-3"></div>
+		<div class="col-md-2"></div>
 	</div>
 </div>
+
 
 <script src='js/jquery.min.js'></script>
 <script src='js/scroolreveal.js'></script>
 <script src='js/bootstrap.min.js'></script>
 <script src='js/magnific-popup.js'></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="js/sign-up-s.js"></script>
 
 </body>
 </html>

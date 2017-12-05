@@ -1,5 +1,5 @@
 from setting.config import mysql
-from flask import Blueprint, request, jsonify, abort
+from flask import Blueprint, request, jsonify, abort, session, redirect
 from werkzeug.security import check_password_hash
 from users.get_student import GetStudent
 from users.get_company import GetCompany
@@ -74,7 +74,8 @@ class Login:
     @classmethod  # метод не працює
     def check_password(cls, password, password_from_db):
         if check_password_hash(password_from_db, password):
-            return jsonify(status="success"), 201
+            check = 1
+            return check
 
     @classmethod  # метод для перевірки паролю
     def equals_password(cls, password, password_from_db):
@@ -109,16 +110,17 @@ def login():
             email = GetStudent.get_student_email_from_db(login)
             id_students = GetStudent.get_students_id_from_db(login)
             # UserSession.create_session_student(login)
-            return jsonify(idStudents=id_students,firstName=first_name, lastName=last_name, email=email, login=login, userType="student"), 201
+            return jsonify(idStudents=id_students,firstName=first_name, lastName=last_name, email=email, login=login, userType="student"), 200
         else:
             return jsonify(status="Incorrect password"), 400
 
     elif Login.search_user_in_company_list(login) == 1:
         password_from_db = Login.get_password_from_Company(login)
-        if Login.equals_password(password, password_from_db) == 1:
+        if Login.check_password(password, password_from_db) == 1:
             name = GetCompany.get_company_name_from_db(login)
             email = GetCompany.get_company_email_from_db(login)
-            return jsonify(name=name, email=email, login=login, userType="company"), 201
+            session['company'] = name
+            return redirect('/user/company/' + login), 200
         else:
             return jsonify(status="Incorrect password"), 400
 

@@ -1,6 +1,7 @@
 from flask import Blueprint, request, abort, jsonify
 from setting.config import mysql
 from security.hash_password import Password
+from users.get_student import GetStudent
 
 register_student = Blueprint('register_student', __name__)
 
@@ -69,6 +70,18 @@ class Student:
         connect.commit()
         cursor.close()
 
+    @classmethod
+    def save_info_about_students(cls, id):
+        connect = mysql.connect()
+        cursor = connect.cursor()
+
+        query_save = 'INSERT INTO infoaboutstudent(idStudents) VALUES(%s)'
+        param_save = (id)
+        cursor.execute(query_save, param_save)
+
+        connect.commit()
+        cursor.close()
+
 
 @register_student.route('/api/register/student', methods=['Post'])
 def register_student_api():
@@ -101,7 +114,9 @@ def register_student_api():
     elif Student.check_email_for_used(email) == 0:
         return jsonify(status='Email already exists'), 400
     else:
-        #hash_password = Password.generate_password(password)
+        # hash_password = Password.generate_password(password)
         Student.save_students_user(login, first_name, last_name, email, password)
+        id_student = GetStudent.get_students_id_from_db(login)
+        Student.save_info_about_students(id_student)
 
     return jsonify(status='success'), 201

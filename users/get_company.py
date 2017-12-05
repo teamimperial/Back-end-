@@ -42,8 +42,11 @@ class GetCompany:
 
         query_get_id = 'select idCompany from company where CompanyLogin=%s'
         param_get_id = (login)
-        cursor.execute(query_get_id,param_get_id)
-        id = cursor.fetchone()[0]
+        result = cursor.execute(query_get_id,param_get_id)
+        if result == 0:
+            id = 0
+        else:
+            id = cursor.fetchone()[0]
 
         connect.commit()
         cursor.close()
