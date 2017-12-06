@@ -201,3 +201,19 @@ class GetStudent:
         cursor.close()
 
         return cv
+
+    @classmethod
+    def get_students_password_from_db(cls, login):
+        connect = mysql.connect()
+        cursor = connect.cursor()
+
+        query_get_id = 'SELECT idStudents FROM students WHERE StudentsLogin=%s'
+        param_get_id = (login)
+        cursor.execute(query_get_id, param_get_id)
+
+        password = cursor.fetchone()[0]
+
+        connect.commit()
+        cursor.close()
+
+        return password

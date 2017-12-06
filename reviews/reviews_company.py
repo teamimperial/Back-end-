@@ -20,6 +20,6 @@ def api_info_about_company(login):
             country = GetCompany.get_company_country(id_company)
             about_company = GetCompany.get_about_company(id_company)
             photo = GetCompany.get_photo_company(id_company)
-            company = {'name': name, 'email': email, 'website': web_site, 'city': city,'country': country,
+            company = {'name': name, 'email': email, 'website': web_site, 'city': city, 'country': country,
                        'about_company': about_company}
-            return render_template("profile-c.html", user=company)
+            return render_template("profile-c.html", company=company)

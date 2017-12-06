@@ -1,6 +1,8 @@
 from flask import Blueprint, request, abort, jsonify
 from setting.config import mysql
 from users.get_company import GetCompany
+from users.get_student import GetStudent
+from security.change_password_company import ChangePasswordCompany
 
 
 class UpdateCompany:
@@ -98,30 +100,42 @@ def api_update_company():
     id_company = GetCompany.get_company_id_from_db(login)
 
     if 'webSite' in request.json:
-        web_site = request.json['WebSite']
-        UpdateCompany.update_web_site(id_company, web_site)
-        value = 1
+        web_site = request.json['webSite']
+        if web_site != "":
+            UpdateCompany.update_web_site(id_company, web_site)
+            value = 1
 
     if 'City' in request.json:
         city = request.json['City']
-        UpdateCompany.update_city(city, id_company)
-        value = 1
+        if city != "":
+            UpdateCompany.update_city(city, id_company)
+            value = 1
 
     if 'Country' in request.json:
         country = request.json['Country']
-        UpdateCompany.update_country(country, id_company)
-        value = 1
+        if country != "":
+            UpdateCompany.update_country(country, id_company)
+            value = 1
 
     if 'Photo' in request.json:
         photo = request.json['Photo']
-        UpdateCompany.update_image(photo, id_company)
-        value = 1
+        if photo != "":
+            UpdateCompany.update_image(photo, id_company)
+            value = 1
 
     if 'CompanyName' in request.json:
         company_name = request.json['CompanyName']
-        UpdateCompany.update_company_name(company_name, id_company)
-        value = 1
+        if company_name != "":
+            UpdateCompany.update_company_name(company_name, id_company)
+            value = 1
 
+    if 'NewPassword' in request.json and 'OldPassword' in request.json:
+        new_password = request.json['NewPassword']
+        old_password = request.json['OldPassword']
+        if new_password != "" and old_password != "":
+            password_from_db = GetStudent.get_students_password_from_db(login)
+            ChangePasswordCompany.equals_password(old_password, password_from_db, login, new_password)
+            value = 1
     if value == 0:
         return jsonify(status='something bad'), 404
     if value == 1:
