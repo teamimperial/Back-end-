@@ -1,4 +1,4 @@
-from flask import Blueprint, request, abort, jsonify
+from flask import Blueprint, request, abort, jsonify, session
 from setting.config import mysql
 from users.get_student import GetStudent
 from werkzeug.security import generate_password_hash
@@ -86,7 +86,7 @@ class Student:
 @register_student.route('/api/register/student', methods=['Post'])
 def register_student_api():
     if not request.json:
-        abort(400)
+        return jsonify(status="Bed request"), 400
 
     if 'login' not in request.json:
         return jsonify(status='Enter login'), 400
@@ -118,5 +118,5 @@ def register_student_api():
         Student.save_students_user(login, first_name, last_name, email, enc_password)
         id_student = GetStudent.get_students_id_from_db(login)
         Student.save_info_about_students(id_student)
-
-    return jsonify(status='success'), 201
+    session['student'] = login
+    return jsonify(redirect="true",redirect_url="/user/student/"+login), 201

@@ -64,19 +64,22 @@ function createProfile() {
         var login = $('#login-sign-up').val();
         var password = $('#password-sign-up').val();
         var data = {
-            'first_name': first_name,
-            'last_name': last_name,
-            'email': email,
-            'login': login,
-            'password': password
+            "firstName": first_name,
+            "lastName": last_name,
+            "email": email,
+            "login": login,
+            "password": password
         };
         $.ajax({
-            url: '/signUp', //the page containing python script
+            url: '/api/register/student', //the page containing python script
+            dataType: 'json',
+            contentType: 'application/json',
             data: JSON.stringify(data),
             type: 'POST',
-            success: function() {
-                console.log('user created');
-                window.location = 'profile-s.html';
+            success: function(response) {
+                if (response.redirect !== undefined && response.redirect){
+                    window.location.href = response.redirect_url;
+                }
             },
             error: function() {
                 console.log('error');

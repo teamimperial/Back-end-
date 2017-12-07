@@ -44,17 +44,19 @@ function signIn() {
         var login = $('#login-sign-in').val();
         var password = $('#password-sign-in').val();
         var data = {
-            'login': login,
-            'password': password
+            "login": login,
+            "password": password
         };
         $.ajax({
             url: '/login', //the page containing python script
-            dataType: "json",
+            dataType: 'json',
+            contentType: 'application/json',
             data: JSON.stringify(data),
             type: 'POST',
-            success: function() {
-                console.log('user created');
-                window.location = '#'; // profile-s.html or profile-c.html
+            success: function(response) {
+                if (response.redirect !== undefined && response.redirect){
+                    window.location.href = response.redirect_url;
+                }
             },
             error: function() {
                 console.log('error');

@@ -92,7 +92,8 @@ login_api = Blueprint('login_api', __name__)
 @login_api.route('/login', methods=["Get", "POST"])
 def login():
     if not request.json:
-        abort(400)
+        print(request)
+        return jsonify(status="Bad request"), 400
     if 'login' not in request.json:
         return jsonify(status="Enter login"), 400
     if 'password' not in request.json:
@@ -108,7 +109,10 @@ def login():
             last_name = GetStudent.get_student_last_name_from_db(login)
             email = GetStudent.get_student_email_from_db(login)
             id_students = GetStudent.get_students_id_from_db(login)
-            return jsonify(idStudents=id_students,firstName=first_name, lastName=last_name, email=email, login=login, userType="student"), 200
+            #return jsonify(idStudents=id_students,firstName=first_name, lastName=last_name, email=email, login=login, userType="student"), 200
+            session['student'] = login
+            return jsonify(redirect="true",redirect_url="/user/student/"+login), 200
+
         else:
             return jsonify(status="Incorrect password"), 400
 

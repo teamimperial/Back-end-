@@ -1,4 +1,4 @@
-from flask import redirect, send_from_directory, render_template, send_file, Flask
+from flask import redirect, send_from_directory, render_template, Flask, url_for
 from auth.login import login_api
 from auth.register_student import register_student
 from auth.register_company import register_company
@@ -6,6 +6,7 @@ from reviews.reviews_students import get_info_about_student
 from users.update_company import update_company
 from reviews.reviews_company import get_info_about_company
 from users.update_student import update_students
+from security.session_student import StudentSession
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -28,6 +29,12 @@ def sign_company_api():
 @app.route('/sign_up_student', methods=['GET'])
 def sign_students_api():
     return render_template('sign-up-s.html')
+
+
+@app.route('/student/logout', methods=['GET'])
+def api_logout_student():
+    StudentSession.delete_session()
+    return redirect('/')
 
 
 app.register_blueprint(register_student)
