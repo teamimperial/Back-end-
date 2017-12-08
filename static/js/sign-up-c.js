@@ -61,19 +61,21 @@ function createProfile() {
         var login = $('#login-sign-up').val();
         var password = $('#password-sign-up').val();
         var data = {
-            'name': name,
-            'email': email,
-            'login': login,
-            'password': password
+            "name": name,
+            "email": email,
+            "login": login,
+            "password": password
         };
         $.ajax({
             url: '/api/register/company', //the page containing python script
+            dataType: 'json',
+            contentType: 'application/json',
             type: 'POST',
-            dataType: "json",
             data: JSON.stringify(data),
-            success: function() {
-                console.log('user created');
-                window.location = 'profile-c.html';
+            success: function(response) {
+                if (response.redirect !== undefined && response.redirect){
+                    window.location.href = response.redirect_url;
+                }
             },
             error: function() {
                 console.log('error');

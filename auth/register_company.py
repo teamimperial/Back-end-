@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, abort, render_template
+from flask import Blueprint, jsonify, request, abort, render_template, session
 from setting.config import mysql
 from users.get_company import GetCompany
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -96,7 +96,7 @@ def register_company_api():
     name = request.json['name']
     password = request.json['password']
     email = request.json['email']
-    print(login + ' ' + name + " " + password + " " + email)
+
     if Company.check_login_for_used(login) == 0:
         return jsonify(status="Login already exist"), 400
     if Company.check_email_for_used(email) == 0:
@@ -107,5 +107,6 @@ def register_company_api():
         Company.save_company_user(login, name, email, password_enc)
         id = GetCompany.get_company_id_from_db(login)
         Company.save_info_about_company(id)
+        session['company'] = login
 
-    return jsonify(status="success"), 201
+    return jsonify(redirect='true',redirect_url='/user/company/'+login), 200

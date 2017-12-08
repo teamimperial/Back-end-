@@ -14,7 +14,7 @@
 		<div class="navbar-header">
 			<a class="navbar-brand" href="#">
 				<div class="logo-wrapper">
-					<img class="logo" src="images/logo.png" width="100px"/>
+					<img class="logo" src="/static/images/logo.png" width="100px"/>
 				</div>
 			</a>
 			<button class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navHeaderCollapse">
@@ -25,11 +25,11 @@
 		</div>
 		<div class="collapse navbar-collapse navHeaderCollapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">Praxis</a></li>
-				<li><a href="about-us.html">About praxis</a></li>
+				<li><a href="/">Praxis</a></li>
+				<li><a href="/about_us">About praxis</a></li>
 				<li style="display: none"><a href="index.html"><i class="glyphicon glyphicon-log-in"></i> Log in</a></li>
 				<li><a href="courses.html">My courses</a></li>
-				<li><a href="profile-s.html">Profile</a></li>
+				<li class="active"><a href="/returnToProfile">Profile</a></li>
 				<li><a href="/student/logout"><i class="glyphicon glyphicon-log-out"></i> Log out</a></li>
 			</ul>
 		</div>
@@ -45,7 +45,7 @@
 					<div class="col-sm-6 col-md-4">
 						<img src="http://placehold.it/500x500" alt="" class="img-rounded img-responsive"/>
 						<div class="button-container" style="margin: 20px; text-align: center">
-							<a href="edit-s.html"><button type="button"><span>Edit profile</span></button></a>
+							<a href="/edit/student"><button type="button"><span>Edit profile</span></button></a>
 						</div>
 					</div>
 					<div class="col-sm-6 col-md-8">

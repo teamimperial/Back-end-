@@ -1,4 +1,4 @@
-from flask import redirect, send_from_directory, render_template, Flask, url_for
+from flask import redirect, send_from_directory, render_template, Flask, session
 from auth.login import login_api
 from auth.register_student import register_student
 from auth.register_company import register_company
@@ -7,6 +7,8 @@ from users.update_company import update_company
 from reviews.reviews_company import get_info_about_company
 from users.update_student import update_students
 from security.session_student import StudentSession
+from security.session_company import CompanySession
+from reviews.edit_redirect import GetSessionStudent, GetSessionCompany
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -26,15 +28,72 @@ def sign_company_api():
     return render_template('sign-up-c.html')
 
 
+@app.route('/about_us', methods=['GET'])
+def about_us_url():
+    return render_template('about-us.html')
+
+
 @app.route('/sign_up_student', methods=['GET'])
 def sign_students_api():
     return render_template('sign-up-s.html')
+
+
+@app.route('/company/logout', methods=['GET'])
+def api_logout_company():
+    CompanySession.delete_session_company()
+    return redirect('/')
+
+
+@app.route('/edit/student', methods=['GET'])
+def api_edit_student():
+    return render_template('edit-s.html')
+
+
+@app.route('/edit/company', methods=['GET'])
+def api_edit_company():
+    return render_template('edit-c.html')
 
 
 @app.route('/student/logout', methods=['GET'])
 def api_logout_student():
     StudentSession.delete_session()
     return redirect('/')
+
+
+@app.route('/company/return')
+def api_redirect_company():
+    result = GetSessionCompany.api_get_company_session()
+    return redirect('/user/company/' + result)
+
+
+@app.route('/student/return')
+def api_redirect_student():
+    result = GetSessionStudent.api_get_student_session()
+    return redirect('/user/student/' + result)
+
+
+@app.route('/logout')
+def api_logout():
+    if 'student' in session:
+        return redirect('/student/logout')
+    if 'company' in session:
+        return redirect('/company/logout')
+
+
+@app.route('/returnToProfile')
+def api_return_to_profile():
+    if 'student' in session:
+        result = GetSessionStudent.api_get_student_session()
+        if result != 0:
+            return redirect('/user/student/' + result)
+        else:
+            return 'Please log in'
+    if 'company' in session:
+        result = GetSessionCompany.api_get_company_session()
+        if result != 0:
+            return redirect('/user/company/' + result)
+        else:
+            return 'Please log in'
 
 
 app.register_blueprint(register_student)
