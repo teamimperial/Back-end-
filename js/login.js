@@ -41,8 +41,8 @@ $(function() {
 
 function signIn() {
     $('#sign-in-button').click(function() {
-        var login = $('#login-sign-up').val();
-        var password = $('#password-sign-up').val();
+        var login = $('#login-sign-in').val();
+        var password = $('#password-sign-in').val();
         var data = {
             'login': login,
             'password': password
