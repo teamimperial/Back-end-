@@ -30,7 +30,10 @@ def sign_company_api():
 
 @app.route('/about_us', methods=['GET'])
 def about_us_url():
-    return render_template('about-us.html')
+    if 'student' in session or 'company' in session:
+        return render_template('about-us.html')
+    else:
+        return render_template('about-us-unlog.html')
 
 
 @app.route('/sign_up_student', methods=['GET'])
@@ -94,6 +97,11 @@ def api_return_to_profile():
             return redirect('/user/company/' + result)
         else:
             return 'Please log in'
+
+
+@app.route('/error/<message>')
+def api_error(message):
+    return render_template('error.html',message=message)
 
 
 app.register_blueprint(register_student)
