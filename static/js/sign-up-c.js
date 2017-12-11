@@ -25,7 +25,8 @@ $(function() {
             }
         },
         messages: {
-            company_name: "please enter your company name",
+            first_name: "please enter your first name",
+            last_name: "please enter your last name",
             login: "please enter your login",
             email: "please enter a valid email address",
             password: {
@@ -41,6 +42,7 @@ $(function() {
         focusInvalid: false,
         invalidHandler: function(event, validator) {
             $(".js-form-message").text("Please correct all errors.");
+            return false;
         },
         onkeyup: function(element) {
             $(".js-form-message").text("");
@@ -56,25 +58,26 @@ $(function() {
 
 function createProfile() {
     $('#sign-up-button').click(function() {
-        var first_name = $('#first-name-sign-up').val();
-        var last_name = $('#last-name-sign-up').val();
+        var company_name = $('#company-name-sign-up').val();
         var email = $('#email-sign-up').val();
         var login = $('#login-sign-up').val();
         var password = $('#password-sign-up').val();
         var data = {
-            'first_name': first_name,
-            'last_name': last_name,
-            'email': email,
-            'login': login,
-            'password': password
+            "company_name": company_name,
+            "email": email,
+            "login": login,
+            "password": password
         };
         $.ajax({
-            url: '/signUp', //the page containing python script
-            data: JSON.stringify(data),
+            url: '/api/register/company', //the page containing python script
+            dataType: 'json',
+            contentType: 'application/json',
             type: 'POST',
-            success: function() {
-                console.log('user created');
-                window.location = 'profile-s.html';
+            data: JSON.stringify(data),
+            success: function(response) {
+                if (response.redirect !== undefined && response.redirect){
+                    window.location.href = response.redirect_url;
+                }
             },
             error: function() {
                 console.log('error');

@@ -1,9 +1,6 @@
 /**
  * Created by Antonina on 09.12.2017.
  */
-/**
- * Created by Antonina on 09.12.2017.
- */
 
 $('#save-button').click(function() {
     var img = $('#profile-img').src;
@@ -23,10 +20,15 @@ $('#save-button').click(function() {
         "password": password
     };
     $.ajax({
-        url: '/', //the page containing python script
+        url: '/update/company', //the page containing python script
+        dataType: 'json',
+        contentType: 'application/json',
         data: JSON.stringify(data),
         type: 'POST',
         success: function() {
+            if (response.redirect !== undefined && response.redirect){
+                window.location.href = response.redirect_url;
+            }
             console.log('info changed');
         },
         error: function() {
