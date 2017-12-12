@@ -26,8 +26,7 @@ $(function() {
             }
         },
         messages: {
-            first_name: "please enter your first name",
-            last_name: "please enter your last name",
+            company_name: "please enter your company name",
             login: "please enter your login",
             email: "please enter a valid email address",
             password: {
@@ -43,6 +42,7 @@ $(function() {
         focusInvalid: false,
         invalidHandler: function(event, validator) {
             $(".js-form-message").text("Please correct all errors.");
+            return false;
         },
         onkeyup: function(element) {
             $(".js-form-message").text("");

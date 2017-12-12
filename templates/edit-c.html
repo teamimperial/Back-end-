@@ -4,8 +4,8 @@
 	<meta charset="UTF-8">
 	<title>Edit profile</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel='stylesheet' href='/static/css/bootstrap.min.css'>
-	<link rel='stylesheet' href='/static/css/magnific-popup.css'>
+	<link rel='stylesheet' href='../static/css/bootstrap.min.css'>
+	<link rel='stylesheet' href='../static/css/magnific-popup.css'>
 	<link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
@@ -14,7 +14,7 @@
 		<div class="navbar-header">
 			<a class="navbar-brand" href="#">
 				<div class="logo-wrapper">
-					<img class="logo" src="images/logo.png" width="100px"/>
+					<img class="logo" src="../static/images/logo.png" width="100px"/>
 				</div>
 			</a>
 			<button class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navHeaderCollapse">
@@ -42,7 +42,7 @@
 			<div class="well well-sm">
 				<div class="row">
 					<div class="col-md-1"></div>
-					<form action="#" method="#" class="col-md-10">
+					<form class="col-md-10">
 						<br><br>
 						<div class="form-group row ">
 							<div class="col-md-4"><label>Upload Image</label></div>
@@ -57,33 +57,32 @@
 						<hr>
 						<div class="form-group row">
 							<div class="col-md-4"><label for="company-name">Company name</label></div>
-							<div class="col-md-6"><input type="text" id="company-name" class="form-control"/></div>
+							<div class="col-md-6"><input type="text" id="company-name" class="form-control"
+							                             required="required"/></div>
 						</div>
 						<hr>
 						<div class="form-group row">
-							<div class="col-md-4"><label for="company-city">City</label></div>
- 							<div class="col-md-6"><input type="text" id="company-city" class="form-control"/></div>
-						</div>
-						<hr>
-						<div class="form-group row">
-							<div class="col-md-4"><label for="company-country">Country</label></div>
- 							<div class="col-md-6"><input type="text" id="company-country" class="form-control"/></div>
+							<div class="col-md-4"><label for="geolocation">City, Country</label></div>
+							<div class="col-md-6"><input type="text" id="geolocation" class="form-control"
+							                             required="required"/></div>
 						</div>
 						<hr>
 						<div class="form-group row">
 							<div class="col-md-4"><label for="link">Website</label></div>
-							<div class="col-md-6"><input type="text" id="link" class="form-control"/></div>
+							<div class="col-md-6"><input type="text" id="link" class="form-control"
+							                             required="required"/></div>
 						</div>
 						<hr>
 						<div class="form-group row">
 							<div class="col-md-4"><label for="bio">About company</label></div>
 							<div class="col-md-6"><textarea type="text" id="bio" class="form-control" rows="10"
-							                                ></textarea></div>
+							                                required="required"></textarea></div>
 						</div>
 						<hr>
 						<div class="form-group row">
 							<div class="col-md-4"><label for="email">Email</label></div>
-							<div class="col-md-6"><input type="email" id="email" class="form-control"/></div>
+							<div class="col-md-6"><input type="email" id="email" class="form-control"
+							                             required="required"/></div>
 						</div>
 						<hr>
 						<div class="form-group row">
@@ -94,17 +93,20 @@
 						<div class=row" id="passwords-container" style="display:none;">
 							<div class="form-group row">
 								<div class="col-md-4"><label for="password">Old password</label></div>
-								<div class="col-md-6"><input type="password" id="password" class="form-control"></div>
+								<div class="col-md-6"><input type="password" id="password" class="form-control"
+								                             required="required"/></div>
 							</div>
 							<div class="form-group row">
 								<div class="col-md-4"><label for="new-password">New password</label></div>
-								<div class="col-md-6"><input type="password" id="new-password" class="form-control"/></div>
+								<div class="col-md-6"><input type="password" id="new-password" class="form-control"
+								                             required="required"/></div>
 
 							</div>
 							<div class="form-group row">
 								<div class="col-md-4"><label for="confirm-new-password">Confirm password</label></div>
 								<div class="col-md-6"><input type="password" id="confirm-new-password"
-								                             class="form-control"/></div>
+								                             class="form-control"
+								                             required="required"/></div>
 
 							</div>
 						</div>
@@ -144,6 +146,7 @@
 <script src='/static/js/bootstrap.min.js'></script>
 <script src='/static/js/magnific-popup.js'></script>
 <script src='/static/js/edit-c.js'></script>
+
 
 
 </body>

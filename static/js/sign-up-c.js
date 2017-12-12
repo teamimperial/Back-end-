@@ -25,7 +25,8 @@ $(function() {
             }
         },
         messages: {
-            company_name: "please enter your company name",
+            first_name: "please enter your first name",
+            last_name: "please enter your last name",
             login: "please enter your login",
             email: "please enter a valid email address",
             password: {
@@ -41,6 +42,7 @@ $(function() {
         focusInvalid: false,
         invalidHandler: function(event, validator) {
             $(".js-form-message").text("Please correct all errors.");
+            return false;
         },
         onkeyup: function(element) {
             $(".js-form-message").text("");
@@ -56,12 +58,12 @@ $(function() {
 
 function createProfile() {
     $('#sign-up-button').click(function() {
-        var name = $('#company-name-sign-up').val();
+        var company_name = $('#company-name-sign-up').val();
         var email = $('#email-sign-up').val();
         var login = $('#login-sign-up').val();
         var password = $('#password-sign-up').val();
         var data = {
-            "name": name,
+            "company_name": company_name,
             "email": email,
             "login": login,
             "password": password

@@ -26,6 +26,7 @@ $(function() {
         focusInvalid: false,
         invalidHandler: function(event, validator) {
             $(".js-form-message").text("Please correct all errors.");
+            return false;
         },
         onkeyup: function(element) {
             $(".js-form-message").text("");

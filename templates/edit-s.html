@@ -4,9 +4,9 @@
 	<meta charset="UTF-8">
 	<title>Edit profile</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel='stylesheet' href='/static/css/bootstrap.min.css'>
-	<link rel='stylesheet' href='/static/css/magnific-popup.css'>
-	<link rel="stylesheet" href="/static/css/style.css">
+	<link rel='stylesheet' href='../static/css/bootstrap.min.css'>
+	<link rel='stylesheet' href='../static/css/magnific-popup.css'>
+	<link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -27,7 +27,6 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="/">Praxis</a></li>
 				<li><a href="/about_us">About praxis</a></li>
-				<li style="display: none"><a href="index.html"><i class="glyphicon glyphicon-log-in"></i> Log in</a></li>
 				<li><a href="courses.html">My courses</a></li>
 				<li><a href="/student/return">Profile</a></li>
 				<li><a href="/logout"><i class="glyphicon glyphicon-log-out"></i> Log out</a></li>
@@ -69,18 +68,9 @@
 						</div>
 						<hr>
 						<div class="form-group row">
-							<div class="col-md-4"><label>City, Country</label></div>
-							<div class="col-md-3"><select id="geolocation-country" class="form-control"
-							                              required="required">
-								<option value="Null">Not selected</option>
-								<option value="UA">Ukraine</option>
-							</select></div>
-							<div class="col-md-3"><select id="geolocation-city" class="form-control"
-							                              required="required">
-								<option value="Null">Not selected</option>
-								<option value="LV">Lviv</option>
-								<option value="KV">Kyiv</option>
-							</select></div>
+							<div class="col-md-4"><label for="geolocation">City, Country</label></div>
+							<div class="col-md-6"><input type="text" id="geolocation" class="form-control"
+							                             required="required"/></div>
 						</div>
 						<hr>
 
