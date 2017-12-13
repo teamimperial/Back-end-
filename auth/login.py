@@ -106,20 +106,18 @@ def login():
         password_from_db = Login.get_password_from_students(login)
         if Login.check_password(password, password_from_db) == 1:
             session['student'] = login
-            return jsonify(redirect="true",redirect_url="/user/student/"+login), 200
+            return jsonify(redirect="true", redirect_url="/user/student/" + login), 200
 
         else:
-            return jsonify(status="Incorrect password"), 400
+            return jsonify(redirect='false', message='Incorrect password. Try again....'), 200
 
     elif Login.search_user_in_company_list(login) == 1:
         password_from_db = Login.get_password_from_Company(login)
         if Login.check_password(password, password_from_db) == 1:
-            name = GetCompany.get_company_name_from_db(login)
-            email = GetCompany.get_company_email_from_db(login)
             session['company'] = login
-            return jsonify(redirect='true', redirect_url="/user/company/"+login), 200
+            return jsonify(redirect='true', redirect_url="/user/company/" + login), 200
         else:
-            return jsonify(status="Incorrect password"), 400
+            return jsonify(redirect='false', message='Incorrect password. Try again....'), 200
 
     else:
-        return jsonify(status='Incorrect user login'), 400
+        return jsonify(redirect='false', message='No such user. Please sign up....'), 200

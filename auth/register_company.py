@@ -12,7 +12,7 @@ class Company:
         self.password = password
 
     @classmethod
-    def check_login_for_used(self, login):
+    def check_login_for_used(cls, login):
         connect = mysql.connect()
         cursor = connect.cursor()
 
@@ -34,7 +34,7 @@ class Company:
         cursor.close()
 
     @classmethod
-    def check_email_for_used(self, email):
+    def check_email_for_used(cls, email):
         conn = mysql.connect()
         cur = conn.cursor()
 
@@ -56,7 +56,7 @@ class Company:
         cur.close()
 
     @classmethod
-    def save_company_user(self, login, name, email, password):
+    def save_company_user(cls, login, name, email, password):
         connect = mysql.connect()
         cursor = connect.cursor()
         query_save = 'insert into Company(CompanyLogin,CompanyEmail,CompanyPassword,CompanyName,idTypeOfUsers,Company_Check) values(%s,%s,%s,%s,2,0)'
@@ -83,30 +83,27 @@ register_company = Blueprint('register_company', __name__)
 def register_company_api():
     if not request.json:
         abort(400)
-    if 'login' not in request.json:
-        return jsonify(status="Enter Login"), 400
-    if 'name' not in request.json:
-        return jsonify(status='Enter Name'), 400
-    if 'password' not in request.json:
-        return jsonify(status="Enter Password"), 400
-    if 'email' not in request.json:
-        return jsonify(status="Enter Email"), 400
+    if 'login' not in request.json and 'name' not in request.json and 'password' not in request.json and 'email' not in request.json and 'confirm' not in request.json:
+        abort(400)
 
     login = request.json['login']
     name = request.json['name']
     password = request.json['password']
     email = request.json['email']
-
-    if Company.check_login_for_used(login) == 0:
-        return jsonify(status="Login already exist"), 400
-    if Company.check_email_for_used(email) == 0:
-        return jsonify(status="Email already exists"), 400
-
+    confirm = request.json['confirm']
+    if password != confirm:
+        return jsonify(redirect='false', message='Passwords don`t match. Try again....'), 400
     else:
-        password_enc = generate_password_hash(password)
-        Company.save_company_user(login, name, email, password_enc)
-        id = GetCompany.get_company_id_from_db(login)
-        Company.save_info_about_company(id)
-        session['company'] = login
+        if Company.check_login_for_used(login) == 0:
+            return jsonify(redirect='false', message='Your login already exist. Try again....'), 400
+        if Company.check_email_for_used(email) == 0:
+            return jsonify(redirect='false', message='Your email already exist. Try again....'), 400
 
-    return jsonify(redirect='true',redirect_url='/user/company/'+login), 200
+        else:
+            password_enc = generate_password_hash(password)
+            Company.save_company_user(login, name, email, password_enc)
+            id = GetCompany.get_company_id_from_db(login)
+            Company.save_info_about_company(id)
+            session['company'] = login
+
+        return jsonify(redirect='true',redirect_url='/user/company/'+login), 200

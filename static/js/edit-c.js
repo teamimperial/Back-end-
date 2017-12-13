@@ -5,27 +5,29 @@
 $('#save-button').click(function() {
     var img = $('#profile-img').src;
     var company_name = $('#company-name').val();
-    var geolocation = $('#geolocation').val();
+    var city = $('#city').val();
+    var country = $('#country').val();
     var link = $('#link').val();
     var bio = $('#bio').val();
     var email = $('#email-sign-up').val();
     var password = $('#new-password').val();
     var data = {
-        "img": img,
-        "company_name": company_name,
-        "geolocation": geolocation,
-        "link": link,
-        "bio": bio,
-        "email": email,
+        "Photo": img,
+        "CompanyName": company_name,
+        "City": city,
+        "Country": country,
+        "webSite": link,
+        "AboutCompany": bio,
+        "Email": email,
         "password": password
     };
     $.ajax({
-        url: '/update/company', //the page containing python script
+        url: '/company/update', //the page containing python script
         dataType: 'json',
         contentType: 'application/json',
         data: JSON.stringify(data),
         type: 'POST',
-        success: function() {
+        success: function(response) {
             if (response.redirect !== undefined && response.redirect){
                 window.location.href = response.redirect_url;
             }

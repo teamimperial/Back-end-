@@ -28,7 +28,7 @@
 		</div>
 		<div class="collapse navbar-collapse navHeaderCollapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">Praxis</a></li>
+				<li><a href="/">Praxis</a></li>
 				<li><a href="/about_us">About praxis</a></li>
 				<li><a href="courses.html">My courses</a></li>
 				<li><a href="/returnToProfile">Profile</a></li>
@@ -51,12 +51,12 @@
 						</div>
 					</div>
 					<div class="col-sm-6 col-md-8">
-						<h4 id="user-name">{{ company.name }} <span id="check"></span></h4>
+						<h4 id="user-name">{{ company.name }} ({{ company.check }}) <span id="check"></span></h4>
 						<p><i class="glyphicon glyphicon-map-marker"></i> <cite id="geolocation">{{ company.country }}, {{ company.city }}</cite></p>
 						<p><i class="glyphicon glyphicon-envelope"></i> <span id="email">{{ company.email }}</span></p>
 						<p><i class="glyphicon glyphicon-info-sign"></i> <span id="bio">{{ company.about_company }}</span>
 						</p>
-						<p><i class="glyphicon glyphicon-globe"></i> <a><span id="link">{{ company.website }}</span></a></p>
+						<p><i class="glyphicon glyphicon-globe"></i> <a href={{ company.website }}><span id="link">{{ company.website }}</span></a></p>
 					</div>
 
 					<div class="col-md-12">

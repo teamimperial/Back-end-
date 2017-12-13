@@ -103,7 +103,7 @@ class GetCompany:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query_get_id = 'select Country from infoaboutcompany where idCompany=%s'
+        query_get_id = 'select AboutCompany from infoaboutcompany where idCompany=%s'
         param_get_id = (id_copmany)
         cursor.execute(query_get_id, param_get_id)
         about = cursor.fetchone()[0]
@@ -127,3 +127,18 @@ class GetCompany:
         cursor.close()
 
         return photo
+
+    @classmethod
+    def get_check_company(cls, login):
+        connect = mysql.connect()
+        cursor = connect.cursor()
+
+        query = 'select Company_Check from Company where CompanyLogin = %s'
+        param = (login)
+        cursor.execute(query, param)
+        check = cursor.fetchone()[0]
+
+        connect.commit()
+        cursor.close()
+
+        return check

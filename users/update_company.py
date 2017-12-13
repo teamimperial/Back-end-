@@ -76,7 +76,7 @@ class UpdateCompany:
         cursor.close()
 
     @classmethod
-    def update_email_company(cls, email,  id_company):
+    def update_email_company(cls, email, id_company):
         connect = mysql.connect()
         cursor = connect.cursor()
         query = 'update company SET CompanyEmail  = %s where idCompany = %s '
@@ -94,49 +94,44 @@ def api_update_company():
     if 'company' in session:
         login = session['company']
         id_company = GetCompany.get_company_id_from_db(login)
-        print(login)
-        value = 0
+        print(id_company)
+        city = request.json['City']
+        print(city)
         if 'webSite' in request.json:
             web_site = request.json['webSite']
             if web_site != "":
                 UpdateCompany.update_web_site(id_company, web_site)
-                value = 1
 
         if 'City' in request.json:
             city = request.json['City']
             if city != "":
                 UpdateCompany.update_city(city, id_company)
-                value = 1
 
         if 'Country' in request.json:
             country = request.json['Country']
             if country != "":
                 UpdateCompany.update_country(country, id_company)
-                value = 1
 
         if 'Photo' in request.json:
             photo = request.json['Photo']
             if photo != "":
                 UpdateCompany.update_image(photo, id_company)
-                value = 1
+                print(photo)
 
         if 'CompanyName' in request.json:
             company_name = request.json['CompanyName']
             if company_name != "":
                 UpdateCompany.update_company_name(company_name, id_company)
-                value = 1
 
         if 'AboutCompany' in request.json:
             about_company = request.json['AboutCompany']
             if about_company != "":
                 UpdateCompany.update_about_company(about_company, id_company)
-                value = 1
 
         if 'Email' in request.json:
             email = request.json['Email']
             if email != "":
                 UpdateCompany.update_email_company(email, id_company)
-                value = 1
 
         if 'NewPassword' in request.json and 'OldPassword' in request.json:
             new_password = request.json['NewPassword']
@@ -144,14 +139,9 @@ def api_update_company():
             if new_password != "" and old_password != "":
                 password_from_db = GetStudent.get_students_password_from_db(login)
                 ChangePasswordCompany.equals_password(old_password, password_from_db, login, new_password)
-                value = 1
-        if value == 0:
 
-            return jsonify(status='something bad'), 201
-        if value == 1:
-            return jsonify(status='success'), 201
+        return jsonify(redirect="true", redirect_url='/user/company/' + login), 200
 
     else:
         message = 'Please log in. Something wrong with your session.'
-        return jsonify(redirect='True',redirect_url='/error/' + message)
-
+        return jsonify(redirect='true', redirect_url='/error/' + message), 405

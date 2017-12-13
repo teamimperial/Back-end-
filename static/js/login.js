@@ -55,8 +55,11 @@ function signIn() {
             data: JSON.stringify(data),
             type: 'POST',
             success: function(response) {
-                if (response.redirect !== undefined && response.redirect){
+                if (response.redirect=="true"){
                     window.location.href = response.redirect_url;
+                }if(response.redirect=="false"){
+                    var msg = response.message;
+                    alert(msg);
                 }
             },
             error: function() {

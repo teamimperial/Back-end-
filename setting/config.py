@@ -8,5 +8,5 @@ app.config['MYSQL_DATABASE_PASSWORD'] = 'richbeach'
 app.config['MYSQL_DATABASE_DB'] = 'webproject'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 
-mysql=MySQL(app)
+mysql = MySQL(app)
 
