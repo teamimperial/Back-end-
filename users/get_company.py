@@ -142,3 +142,18 @@ class GetCompany:
         cursor.close()
 
         return check
+
+    @classmethod
+    def get_password_company(cls, login):
+        connect = mysql.connect()
+        cursor = connect.cursor()
+
+        query = 'select CompanyPassword from Company where CompanyLogin = %s'
+        param = (login)
+        cursor.execute(query,param)
+        password = cursor.fetchone()[0]
+
+        connect.commit()
+        cursor.close()
+
+        return password

@@ -10,7 +10,9 @@ $('#save-button').click(function() {
     var link = $('#link').val();
     var bio = $('#bio').val();
     var email = $('#email-sign-up').val();
-    var password = $('#new-password').val();
+    var confirm_password =$('#confirm-new-password').val();
+    var new_password = $('#new-password').val();
+    var password = $('#password').val();
     var data = {
         "Photo": img,
         "CompanyName": company_name,
@@ -19,7 +21,9 @@ $('#save-button').click(function() {
         "webSite": link,
         "AboutCompany": bio,
         "Email": email,
-        "password": password
+        "OldPassword": password,
+        "NewPassword": new_password,
+        "ConfirmPassword": confirm_password
     };
     $.ajax({
         url: '/company/update', //the page containing python script
@@ -28,10 +32,15 @@ $('#save-button').click(function() {
         data: JSON.stringify(data),
         type: 'POST',
         success: function(response) {
-            if (response.redirect !== undefined && response.redirect){
+            if (response.redirect=='true'){
+                var msg = response.message;
+                alert(msg);
                 window.location.href = response.redirect_url;
             }
-            console.log('info changed');
+            if (response.redirect=='false'){
+                var msg = response.message;
+                alert(msg);
+            }
         },
         error: function() {
             console.log('error');

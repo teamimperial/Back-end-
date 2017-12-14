@@ -129,7 +129,7 @@ update_students = Blueprint('update_students', __name__)
 @update_students.route('/student/update', methods=['POST'])
 def api_update_students():
     value = 0
-
+    print(request.json)
     if not request.json and 'login' not in request.json:
         abort(404)
 

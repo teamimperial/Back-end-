@@ -6,7 +6,8 @@ $('#save-button').click(function() {
     var img = $('#profile-img').src;
     var first_name = $('#first-name').val();
     var last_name = $('#last-name').val();
-    var geolocation = $('#geolocation').val();
+    var city = $('#city').val();
+    var country = $('#country').val();
     var date_of_birth = $('#date-of-birth').val();
     var university = $('#university').val();
     var time_of_studing = $('#time-of-studing').val();
@@ -18,7 +19,8 @@ $('#save-button').click(function() {
         "img": img,
         "first_name": first_name,
         "last_name": last_name,
-        "geolocation": geolocation,
+        "city": city,
+        "country": country,
         "date_of_birth": date_of_birth,
         "university": university,
         "time_of_studing": time_of_studing,
@@ -28,7 +30,9 @@ $('#save-button').click(function() {
         "password": password
     };
     $.ajax({
-        url: '/', //the page containing python script
+        url: '/student/update', //the page containing python script
+        dataType: 'json',
+        contentType: 'application/json',
         data: JSON.stringify(data),
         type: 'POST',
         success: function() {

@@ -1,7 +1,6 @@
-from flask import Blueprint, request, abort, jsonify, session, render_template
+from flask import Blueprint, request, jsonify, session
 from setting.config import mysql
 from users.get_company import GetCompany
-from users.get_student import GetStudent
 from security.change_password_company import ChangePasswordCompany
 
 
@@ -133,14 +132,18 @@ def api_update_company():
             if email != "":
                 UpdateCompany.update_email_company(email, id_company)
 
-        if 'NewPassword' in request.json and 'OldPassword' in request.json:
+        if 'NewPassword' in request.json and 'OldPassword' in request.json and 'ConfirmPassword' in request.json:
             new_password = request.json['NewPassword']
             old_password = request.json['OldPassword']
-            if new_password != "" and old_password != "":
-                password_from_db = GetStudent.get_students_password_from_db(login)
-                ChangePasswordCompany.equals_password(old_password, password_from_db, login, new_password)
-
-        return jsonify(redirect="true", redirect_url='/user/company/' + login), 200
+            confirm_password = request.json['ConfirmPassword']
+            if new_password != "" and old_password != "" and confirm_password != "":
+                if confirm_password == new_password:
+                    value = ChangePasswordCompany.equals_password(old_password,login,new_password)
+                    if value == 0:
+                        return jsonify(redirect='false', message='Incorrect old password'), 200
+                else:
+                    return jsonify(redirect='false',message='Password don`t match. Try again....'), 200
+        return jsonify(redirect="true", redirect_url='/user/company/' + login, message='Success update'), 200
 
     else:
         message = 'Please log in. Something wrong with your session.'
