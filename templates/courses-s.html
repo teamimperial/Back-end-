@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>{{company.name}}</title>
+	<title>Courses</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link rel='stylesheet' href='/static/css/bootstrap.min.css'>
@@ -17,7 +17,6 @@
 			<a class="navbar-brand" href="#">
 				<div class="logo-wrapper">
 					<img class="logo" src="/static/images/logo.png" width="100px"/>
-
 				</div>
 			</a>
 			<button class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navHeaderCollapse">
@@ -28,11 +27,11 @@
 		</div>
 		<div class="collapse navbar-collapse navHeaderCollapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="/">Praxis</a></li>
+				<li><a href="#">Praxis</a></li>
 				<li><a href="/about_us">About praxis</a></li>
-				<li><a href="courses.html">My courses</a></li>
+				<li><a href="#">My courses</a></li>
 				<li><a href="/returnToProfile">Profile</a></li>
-				<li><a href="/company/logout"><i class="glyphicon glyphicon-log-out"></i> Log out</a></li>
+				<li><a href="#"><i class="glyphicon glyphicon-log-out"></i> Log out</a></li>
 			</ul>
 		</div>
 	</div>
@@ -44,21 +43,39 @@
 		<div class="col-xs-12 col-sm-8 col-md-8">
 			<div class="well well-sm">
 				<div class="row">
-					<div class="col-sm-6 col-md-4">
-						<img src="http://placehold.it/500x500" alt="" class="img-rounded img-responsive"/>
-						<div class="button-container" style="margin: 20px; text-align: center">
-							<a href="/edit/company"><button type="button"><span>Edit profile</span></button></a>
+					<div class="col-md-12">
+						<div class="card container">
+							<div class="col-md-10">
+								<h4 id="course-name">Course name</h4></div>
+							<div class="col-md-2">
+								<p>Status: <span>{{status}}</span></p>
+							</div>
+
+							<div class="col-md-3">
+								<p><i class="glyphicon glyphicon-calendar"></i> <cite id="time">Course start -
+									end</cite></p>
+							</div>
+							<div class="col-md-3">
+								<p><i class="glyphicon glyphicon-map-marker"></i> <cite id="geolocation">Lviv, UA</cite>
+								</p>
+							</div>
+							<div class="col-md-3">
+								<p><i class="glyphicon glyphicon-list-alt"></i> <span
+										id="full-amount">Licensed amount</span></p>
+							</div>
+							<div class="col-md-3">
+								<p><i class="glyphicon glyphicon-user"></i> <span
+										id="apply-amount">Number of applys</span></p>
+							</div>
+							<div class="col-md-12">
+								<p><i class="glyphicon glyphicon-info-sign"></i> <span id="course-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+								</p>
+							</div>
+							<div class="button-container" style="margin: 20px; text-align: right; margin: 0">
+								<a href="/"><button type="button"><span>Cancel apply</span></button></a>
+							</div>
 						</div>
 					</div>
-					<div class="col-sm-6 col-md-8">
-						<h4 id="user-name">{{ company.name }} <span id="check">{{ company.check }}</span></h4>
-						<p><i class="glyphicon glyphicon-map-marker"></i> <cite id="geolocation">{{ company.country }}, {{ company.city }}</cite></p>
-						<p><i class="glyphicon glyphicon-envelope"></i> <span id="email">{{ company.email }}</span></p>
-						<p><i class="glyphicon glyphicon-info-sign"></i> <span id="bio">{{ company.about_company }}</span>
-						</p>
-						<p><i class="glyphicon glyphicon-globe"></i> <a href={{ company.website }}><span id="link">{{ company.website }}</span></a></p>
-					</div>
-
 
 				</div>
 			</div>
@@ -82,12 +99,10 @@
 	</div>
 </footer>
 
-
 <script src='/static/js/jquery.min.js'></script>
 <script src='/static/js/scroolreveal.js'></script>
 <script src='/static/js/bootstrap.min.js'></script>
 <script src='/static/js/magnific-popup.js'></script>
-<script src='/static/js/authentification-c.js'></script>
 
 </body>
 </html>
