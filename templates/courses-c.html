@@ -5,9 +5,9 @@
 	<title>Courses</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel='stylesheet' href='/static/css/bootstrap.min.css'>
-	<link rel='stylesheet' href='/static/css/magnific-popup.css'>
-	<link rel="stylesheet" href="/static/css/style.css">
+	<link rel='stylesheet' href='../static/css/bootstrap.min.css'>
+	<link rel='stylesheet' href='../static/css/magnific-popup.css'>
+	<link rel="stylesheet" href="../static/css/style.css">
 
 </head>
 <body>
@@ -32,7 +32,11 @@
 				<li><a href="#">My courses</a></li>
 				<li><a href="#">Profile</a></li>
 				<li><a href="/company/logout"><i class="glyphicon glyphicon-log-out"></i> Log out</a></li>
-				<li><a href="/">New course</a></li>
+				<li class="button-container" style="margin: 5px; text-align: center">
+					<button type="button" data-toggle="modal" data-target="#new-course">
+						<span>New course</span>
+					</button>
+				</li>
 			</ul>
 		</div>
 	</div>
@@ -45,6 +49,63 @@
 			<div class="well well-sm">
 				<div class="row">
 					<div class="col-md-12">
+
+
+						<!-- Modal -->
+						<div class="modal fade" id="new-course" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+										<h4 class="modal-title" id="myModalLabel">New course</h4>
+									</div>
+									<div class="modal-body">
+										<div class="form-group row">
+											<div class="form-group row">
+												<div class="col-md-4"><label for="name">Course name</label></div>
+												<div class="col-md-6"><input type="text" id="name" class="form-control"/></div>
+											</div>
+											<hr>
+											<div class="form-group row">
+												<div class="col-md-4"><label for="amount">Licensed amount</label></div>
+												<div class="col-md-6"><input type="text" id="amount" class="form-control"/></div>
+											</div>
+											<hr>
+											<div class="form-group row">
+												<div class="col-md-4"><label for="city">City</label></div>
+												<div class="col-md-6"><input type="text" id="city" class="form-control"/></div>
+											</div>
+											<hr>
+											<div class="form-group row">
+												<div class="col-md-4"><label for="country">Country</label></div>
+												<div class="col-md-6"><input type="text" id="country" class="form-control"/></div>
+											</div>
+											<hr>
+											<div class="form-group row">
+												<div class="col-md-4"><label for="date-of-start">Date of course start</label></div>
+												<div class="col-md-6"><input type="date" id="date-of-start" class="form-control"></div>
+											</div>
+											<hr>
+											<div class="form-group row">
+												<div class="col-md-4"><label for="date-of-end">Date of course end</label></div>
+												<div class="col-md-6"><input type="date" id="date-of-end" class="form-control"></div>
+											</div>
+
+											<hr>
+											<div class="form-group row">
+												<div class="col-md-4"><label for="info">About course</label></div>
+												<div class="col-md-6"><textarea type="text" id="info" class="form-control" rows="10"></textarea></div>
+											</div>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+										<button type="button" class="btn btn-primary">Send</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
 						<div class="card container">
 							<div class="col-md-11">
 							<h4 id="course-name">Course name</h4></div>
@@ -55,8 +116,7 @@
 							</div>
 
 							<div class="col-md-3">
-								<p><i class="glyphicon glyphicon-calendar"></i> <cite id="time">Course start -
-									end</cite></p>
+								<p><i class="glyphicon glyphicon-calendar"></i> <cite id="start">start</cite> - <cite id="end">end</cite></p>
 							</div>
 							<div class="col-md-3">
 								<p><i class="glyphicon glyphicon-map-marker"></i> <cite id="geolocation">Lviv, UA</cite>
@@ -74,9 +134,12 @@
 								<p><i class="glyphicon glyphicon-info-sign"></i> <span id="course-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
 								</p>
 							</div>
-							<div class="button-container" style="margin: 20px; text-align: right; margin: 0">
+
+							<!--
+					        <div class="button-container" style="margin: 20px; text-align: right; margin: 0">
 								<a href="/"><button type="button"><span>Edit course</span></button></a>
 							</div>
+							-->
 						</div>
 					</div>
 
@@ -102,10 +165,10 @@
 	</div>
 </footer>
 
-<script src='/static/js/jquery.min.js'></script>
-<script src='/static/js/scroolreveal.js'></script>
-<script src='/static/js/bootstrap.min.js'></script>
-<script src='/static/js/magnific-popup.js'></script>
+<script src='../static/js/jquery.min.js'></script>
+<script src='../static/js/scroolreveal.js'></script>
+<script src='../static/js/bootstrap.min.js'></script>
+<script src='../static/js/magnific-popup.js'></script>
 
 </body>
 </html>
