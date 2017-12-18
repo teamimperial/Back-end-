@@ -25,8 +25,10 @@ $('#create-course').click(function() {
         contentType: 'application/json',
         data: JSON.stringify(data),
         type: 'POST',
-        success: function() {
-            console.log('info changed');
+        success: function(response) {
+            if (response.redirect == 'true'){
+                window.location.href = response.redirect_url;
+            }
         },
         error: function() {
             console.log('error');

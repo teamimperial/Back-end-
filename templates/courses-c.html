@@ -27,10 +27,10 @@
 		</div>
 		<div class="collapse navbar-collapse navHeaderCollapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">Praxis</a></li>
+				<li><a href="/praxis">Praxis</a></li>
 				<li><a href="/about_us">About praxis</a></li>
-				<li><a href="#">My courses</a></li>
-				<li><a href="#">Profile</a></li>
+				<li><a href="/company/course">My courses</a></li>
+				<li><a href="/returnToProfile">Profile</a></li>
 				<li><a href="/company/logout"><i class="glyphicon glyphicon-log-out"></i> Log out</a></li>
 				<li class="button-container" style="margin: 5px; text-align: center">
 					<button type="button" data-toggle="modal" data-target="#new-course">
@@ -106,9 +106,10 @@
 							</div>
 						</div>
 
+{% for course in courses %}
 						<div class="card container">
 							<div class="col-md-11">
-							<h4 id="course-name">Course name</h4></div>
+							<h4 id="course-name">{{ course.name }}</h4></div>
 							<div class="col-md-1">
 							<button type="button" class="close" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
@@ -116,22 +117,22 @@
 							</div>
 
 							<div class="col-md-3">
-								<p><i class="glyphicon glyphicon-calendar"></i> <cite id="start">start</cite> - <cite id="end">end</cite></p>
+								<p><i class="glyphicon glyphicon-calendar"></i> <cite id="start">{{ course.date_of_start }}</cite> - <cite id="end">{{ course.date_of_end }}</cite></p>
 							</div>
 							<div class="col-md-3">
-								<p><i class="glyphicon glyphicon-map-marker"></i> <cite id="geolocation">Lviv, UA</cite>
+								<p><i class="glyphicon glyphicon-map-marker"></i> <cite id="geolocation">{{ course.city }}, {{ course.country }}</cite>
 								</p>
 							</div>
 							<div class="col-md-3">
 								<p><i class="glyphicon glyphicon-list-alt"></i> <span
-										id="full-amount">Licensed amount</span></p>
+										id="full-amount">Licensed amount: {{ course.amount }}</span></p>
 							</div>
 							<div class="col-md-3">
 								<p><i class="glyphicon glyphicon-user"></i> <span
 										id="apply-amount">Number of applys</span></p>
 							</div>
 							<div class="col-md-12">
-								<p><i class="glyphicon glyphicon-info-sign"></i> <span id="course-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+								<p><i class="glyphicon glyphicon-info-sign"></i> <span id="course-info">{{ course.info }}</span>
 								</p>
 							</div>
 
@@ -141,6 +142,7 @@
 							</div>
 							-->
 						</div>
+						{% endfor %}
 					</div>
 
 				</div>
@@ -169,6 +171,7 @@
 <script src='/static/js/scroolreveal.js'></script>
 <script src='/static/js/bootstrap.min.js'></script>
 <script src='/static/js/magnific-popup.js'></script>
+<script src='/static/js/course.js'></script>
 
 </body>
 </html>

@@ -10,6 +10,7 @@ from security.session_student import StudentSession
 from security.session_company import CompanySession
 from reviews.edit_redirect import GetSessionStudent, GetSessionCompany
 from courses.create_courses import create_course
+from courses.get_courses import get_courses
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -128,6 +129,7 @@ app.register_blueprint(update_company)
 app.register_blueprint(get_info_about_company)
 app.register_blueprint(update_students)
 app.register_blueprint(create_course)
+app.register_blueprint(get_courses)
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 

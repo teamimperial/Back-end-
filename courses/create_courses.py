@@ -1,5 +1,5 @@
 from setting.config import mysql
-from flask import Blueprint, request, abort, session
+from flask import Blueprint, request, abort, session, jsonify
 from users.get_company import GetCompany
 
 
@@ -22,8 +22,7 @@ create_course = Blueprint('create_course', __name__)
 
 @create_course.route('/create_course', methods=['POST'])
 def api_create_courses():
-    if not request.json:
-        abort(404)
+    if request.json:
         if 'company' in session:
             if 'name' not in request.json and 'amount' not in request.json and 'city' not in request.json and 'country' not in request.json and 'date_of_start' not in request.json and 'date_of_end' not in request.json and 'info' not in request.json:
                 abort(404)
@@ -36,9 +35,10 @@ def api_create_courses():
             date_of_end = request.json['date_of_end']
             info = request.json['info']
             id_company = GetCompany.get_company_id_from_db(login)
-            #CreateCourses.create_course(id_company,name,amount,city,country,date_of_start,date_of_end,info)
-            print(name, amount, city, country, date_of_start, date_of_end, info,id_company)
+            CreateCourses.create_course(id_company,name,amount,city,country,date_of_start,date_of_end,info)
+            print(login, name, amount, city, country, date_of_start, date_of_end, info,id_company)
+            return jsonify(redirect='true', redirect_url='/company/course')
         else:
-            return 'please login as company'
-    else:
-        return 'wrong'
+            return 'please log in'
+    if not request.json:
+        return 'something wrong with you request'

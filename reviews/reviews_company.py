@@ -15,7 +15,6 @@ def api_info_about_company(login):
             return 'Not such User in db'
         else:
             result = CompanySession.check_in_session_company()
-            print(result)
             if result == 0:
                 return "Please log in"
             if result == login:
