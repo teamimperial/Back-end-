@@ -9,6 +9,7 @@ from users.update_student import update_students
 from security.session_student import StudentSession
 from security.session_company import CompanySession
 from reviews.edit_redirect import GetSessionStudent, GetSessionCompany
+from courses.create_courses import create_course
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -104,6 +105,21 @@ def api_error(message):
     return render_template('error.html',message=message)
 
 
+@app.route('/praxis')
+def api_praxis():
+    return render_template('praxis.html')
+
+
+@app.route('/courses-c')
+def api_courses_company():
+    return render_template('courses-c.html')
+
+
+@app.route('/courses-s')
+def api_courses_student():
+    return render_template('courses-s.html')
+
+
 app.register_blueprint(register_student)
 app.register_blueprint(login_api)
 app.register_blueprint(register_company)
@@ -111,6 +127,7 @@ app.register_blueprint(get_info_about_student)
 app.register_blueprint(update_company)
 app.register_blueprint(get_info_about_company)
 app.register_blueprint(update_students)
+app.register_blueprint(create_course)
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 

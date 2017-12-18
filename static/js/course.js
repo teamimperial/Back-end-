@@ -20,7 +20,7 @@ $('#create-course').click(function() {
         "info": info
     };
     $.ajax({
-        url: '/', //the page containing python script
+        url: '/create_course', //the page containing python script
         dataType: 'json',
         contentType: 'application/json',
         data: JSON.stringify(data),
