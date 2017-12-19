@@ -36,7 +36,6 @@ def api_create_courses():
             info = request.json['info']
             id_company = GetCompany.get_company_id_from_db(login)
             CreateCourses.create_course(id_company,name,amount,city,country,date_of_start,date_of_end,info)
-            print(login, name, amount, city, country, date_of_start, date_of_end, info,id_company)
             return jsonify(redirect='true', redirect_url='/company/course')
         else:
             return 'please log in'
