@@ -12,7 +12,6 @@ class AllGetCourses:
         cursor.execute(query, param)
 
         result = cursor.fetchall()
-        print(result)
         return result
 
 

@@ -58,11 +58,11 @@
 						<p><i class="glyphicon glyphicon-envelope"></i> <span id="email">{{ student.email }}</span></p>
 						<p><i class="glyphicon glyphicon-gift"></i> <span id="date-of-birth">{{ student.dateOfBirth }}</span></p>
 						<p><i class="glyphicon glyphicon-education"></i> <span id="university">{{ student.university }}</span>, <span
-								id="time-of-studing">2016 - now</span></p>
+								id="time-of-studing">{{ student.timeOfStudy }}</span></p>
 						<p><i class="glyphicon glyphicon-info-sign"></i> <span id="bio"> {{ student.about }}</span>
 						</p>
 						<p><i class="glyphicon glyphicon-paperclip"></i> <a><span id="cv">my-cool-cv.pdf</span></a></p>
-						<p><i class="glyphicon glyphicon-globe"></i> <a><span id="link">{{ student.link }}</span></a></p>
+						<p><i class="glyphicon glyphicon-globe"></i> <a href={{ student.link }}><span id="link">{{ student.link }}</span></a></p>
 					</div>
 
 					<div class="col-md-12">

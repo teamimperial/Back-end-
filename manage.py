@@ -118,6 +118,13 @@ def api_courses_student():
     return render_template('courses-s.html')
 
 
+@app.route('/courses')
+def api_redirect_courses():
+    if 'student' in session:
+        return redirect('/courses-s')
+    if 'company' in session:
+        return redirect('/courses-c')
+
 app.register_blueprint(register_student)
 app.register_blueprint(login_api)
 app.register_blueprint(register_company)

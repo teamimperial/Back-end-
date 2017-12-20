@@ -35,8 +35,14 @@ $('#save-button').click(function() {
         contentType: 'application/json',
         data: JSON.stringify(data),
         type: 'POST',
-        success: function() {
-            console.log('info changed');
+        success: function(response) {
+            if(response.redirect=='true'){
+            alert(response.message)
+            window.location.href = response.redirect_url;
+            }
+            if(response.redirect=='false'){
+            alert(response.message);
+            }
         },
         error: function() {
             console.log('error');
