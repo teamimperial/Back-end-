@@ -157,3 +157,21 @@ class GetCompany:
         cursor.close()
 
         return password
+
+    @classmethod
+    def check_such_user_company(cls, login):
+        connect = mysql.connect()
+        cursor = connect.cursor()
+
+        query = 'select exists(select * from company where CompanyName = %s)'
+        param = (login)
+        cursor.execute(query,param)
+        check = cursor.fetchone()[0]
+        if check == 1:
+            login = 1
+        else:
+            login = 0
+        connect.commit()
+        cursor.close()
+
+        return login

@@ -108,6 +108,7 @@
 
 {% for course in courses %}
 						<div class="card container">
+							<a href={{ course.link }}>
 							<div class="col-md-11">
 							<h4 id="course-name">{{ course.name }}</h4></div>
 							<div class="col-md-1">
@@ -141,6 +142,7 @@
 								<a href="/"><button type="button"><span>Edit course</span></button></a>
 							</div>
 							-->
+								</a>
 						</div>
 						{% endfor %}
 					</div>

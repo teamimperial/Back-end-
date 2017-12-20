@@ -30,6 +30,8 @@ def api_get_courses():
         results = GetCourses.api_get_courses(id_company)
         courses = []
         for result in results:
+            id_course = str(result[0])
+            id_company = str(result[1])
             name = result[2]
             amount = result[3]
             city = result[4]
@@ -44,7 +46,8 @@ def api_get_courses():
                 "country": country,
                 "date_of_start": date_of_start,
                 "date_of_end": date_of_end,
-                "info": info
+                "info": info,
+                "link": '/course/' + id_course + '/' + id_company
             }
             courses.append(course)
         return render_template('courses-c.html', courses=courses)

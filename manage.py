@@ -12,6 +12,7 @@ from reviews.edit_redirect import GetSessionStudent, GetSessionCompany
 from courses.create_courses import create_course
 from courses.get_courses import get_courses
 from courses.get_courses_all import get_all_courses
+from courses.get_one_course import get_one_course
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -127,6 +128,7 @@ app.register_blueprint(update_students)
 app.register_blueprint(create_course)
 app.register_blueprint(get_courses)
 app.register_blueprint(get_all_courses)
+app.register_blueprint(get_one_course)
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
