@@ -51,17 +51,14 @@
 						</div>
 					</div>
 					<div class="col-sm-6 col-md-8">
-						<h4 id="user-name">{{ company.name }} <span id="check">{{ company.check }}</span></h4>
+						<h4 id="user-name">{{ company.name }} <span id="check" style={{company.check}} class='glyphicon glyphicon-ok'></span></h4>
 						<p><i class="glyphicon glyphicon-map-marker"></i> <cite id="geolocation">{{ company.country }}, {{ company.city }}</cite></p>
 						<p><i class="glyphicon glyphicon-envelope"></i> <span id="email">{{ company.email }}</span></p>
 						<p><i class="glyphicon glyphicon-info-sign"></i> <span id="bio">{{ company.about_company }}</span>
 						</p>
 						<p><i class="glyphicon glyphicon-globe"></i> <a href={{ company.website }}><span id="link">{{ company.website }}</span></a></p>
 					</div>
-
-
-				</div>
-				<div class="col-md-12">
+<div class="col-md-12">
 						<h4 style="text-align: center">Reviews</h4>
 						<div class="reviews-list">
 							<div class="container card">
@@ -85,6 +82,9 @@
 
 						</div>
 					</div>
+
+
+				</div>
 
 			</div>
 

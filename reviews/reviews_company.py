@@ -27,9 +27,16 @@ def api_info_about_company(login):
                 about_company = GetCompany.get_about_company(id_company)
                 photo = GetCompany.get_photo_company(id_company)
                 check = GetCompany.get_check_company(login)
-                company = {'name': name, 'email': email, 'website': web_site, 'city': city, 'country': country,
-                           'about_company': about_company, 'check': check}
-                return render_template("profile-c.html", company=company)
+                if check == 0:
+                    check = "color:transparent"
+                    company = {'name': name, 'email': email, 'website': web_site, 'city': city, 'country': country,
+                            'about_company': about_company, 'check': check}
+                    return render_template("profile-c.html", company=company)
+                if check == 1:
+                    check = "color:grey"
+                    company = {'name': name, 'email': email, 'website': web_site, 'city': city, 'country': country,
+                               'about_company': about_company, 'check': check}
+                    return render_template("profile-c.html", company=company)
             else:
                 return 'Please log in'
 
