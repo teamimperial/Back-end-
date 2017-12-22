@@ -9,6 +9,7 @@ $('#create-course').click(function() {
     var country = $('#country').val();
     var date_of_start = $('#date-of-start').val();
     var date_of_end = $('#date-of-end').val();
+    var status = $('#status').val();
     var info = $('#info').val();
     var data = {
         "name": name,
@@ -17,6 +18,7 @@ $('#create-course').click(function() {
         "country": country,
         "date_of_start": date_of_start,
         "date_of_end": date_of_end,
+        "status": status,
         "info": info
     };
     $.ajax({
