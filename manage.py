@@ -18,7 +18,7 @@ from courses.search_courses import search_courses
 app = Flask(__name__, static_url_path='/static')
 
 
-@app.route('/', methods=['POST','GET'])
+@app.route('/', methods=['POST', 'GET'])
 def index():
     return render_template('index.html')
 
@@ -106,7 +106,7 @@ def api_return_to_profile():
 
 @app.route('/error/<message>')
 def api_error(message):
-    return render_template('error.html',message=message)
+    return render_template('error.html', message=message)
 
 
 @app.route('/courses-c')
@@ -124,7 +124,8 @@ def api_redirect_courses():
     if 'student' in session:
         return redirect('/courses-s')
     if 'company' in session:
-        return redirect('/courses-c')
+        return redirect('/company/course')
+
 
 app.register_blueprint(register_student)
 app.register_blueprint(login_api)

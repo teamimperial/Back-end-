@@ -26,11 +26,11 @@
 		</div>
 		<div class="collapse navbar-collapse navHeaderCollapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">Praxis</a></li>
+				<li><a href="/praxis">Praxis</a></li>
 				<li><a href="/about_us">About praxis</a></li>
-				<li><a href="#">My courses</a></li>
+				<li><a href="/courses">My courses</a></li>
 				<li><a href="/returnToProfile">Profile</a></li>
-				<li><a href="#"><i class="glyphicon glyphicon-log-out"></i> Log out</a></li>
+				<li><a href="/logout"><i class="glyphicon glyphicon-log-out"></i> Log out</a></li>
 			</ul>
 		</div>
 	</div>
@@ -49,13 +49,18 @@
 						</div>
 					</div>
 					<div class="col-sm-6 col-md-8">
-						<h4 id="course-name">Course name</h4>
-						<p><i class="glyphicon glyphicon-calendar"></i> <cite id="time">Course start - end</cite></p>
-						<p><i class="glyphicon glyphicon-map-marker"></i> <cite id="geolocation">Lviv, UA</cite></p>
-						<p><i class="glyphicon glyphicon-briefcase"></i> <a><span id="company-name">Company name</span></a></p>
-						<p><i class="glyphicon glyphicon-list-alt"></i> <span id="full-amount">Licensed amount</span></p>
+						<div class="col-sm-8" style="padding-left: 0">
+								<h4 id="course-name">{{ course.course_name }}</h4>
+							</div>
+						<div class="'col-sm-4">
+							<h4>Status: {{ course.status }}</h4>
+						</div>
+						<p><i class="glyphicon glyphicon-calendar"></i> <cite id="time">{{ course.date_of_start }}-{{course.date_of_end}}</cite></p>
+						<p><i class="glyphicon glyphicon-map-marker"></i> <cite id="geolocation">{{course.city}}, {{course.country}}</cite></p>
+						<p><i class="glyphicon glyphicon-briefcase"></i> <a href={{course.link}}><span id="company-name">{{course.company_name}}</span></a></p>
+						<p><i class="glyphicon glyphicon-list-alt"></i> <span id="full-amount">Licensed amount: {{course.amount}}</span></p>
 						<p><i class="glyphicon glyphicon-user"></i> <span id="apply-amount">Number of applys</span></p>
-						<p><i class="glyphicon glyphicon-info-sign"></i> <span id="course-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span>
+						<p><i class="glyphicon glyphicon-info-sign"></i> <span id="course-info">{{course.info}}</span>
 						</p>
 					</div>
 

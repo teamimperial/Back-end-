@@ -5,12 +5,12 @@ from users.get_company import GetCompany
 
 class CreateCourses:
     @classmethod
-    def create_course(cls, id_company, course_name, amount, city, country, date_of_start, date_of_end, info):
+    def create_course(cls, id_company, course_name, amount, city, country, date_of_start, date_of_end, info, status):
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'insert into courses(idCompany,CoursesName,CoursesAmount,CoursesCity,CoursesCountry,CoursesStart,CoursesEnd,CoursesInfo) values(%s,%s,%s,%s,%s,%s,%s,%s)'
-        param = (id_company, course_name, amount, city, country, date_of_start, date_of_end, info)
+        query = 'insert into courses(idCompany,CoursesName,CoursesAmount,CoursesCity,CoursesCountry,CoursesStart,CoursesEnd,CoursesInfo,CoursesStatus) values(%s,%s,%s,%s,%s,%s,%s,%s,%s)'
+        param = (id_company, course_name, amount, city, country, date_of_start, date_of_end, info, status)
         cursor.execute(query, param)
 
         connect.commit()
@@ -34,8 +34,9 @@ def api_create_courses():
             date_of_start = request.json['date_of_start']
             date_of_end = request.json['date_of_end']
             info = request.json['info']
+            status = request.json['status']
             id_company = GetCompany.get_company_id_from_db(login)
-            CreateCourses.create_course(id_company,name,amount,city,country,date_of_start,date_of_end,info)
+            CreateCourses.create_course(id_company,name,amount,city,country,date_of_start,date_of_end,info,status)
             return jsonify(redirect='true', redirect_url='/company/course')
         else:
             return 'please log in'

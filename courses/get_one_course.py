@@ -35,13 +35,30 @@ class OneCourse:
             "date_of_start": result_course[6],
             "date_of_end": result_course[7],
             "info": result_course[8],
+            "status": result_course[9],
             "link": '/company/review/' + login
         }
         connect.commit()
         cursor.close()
-
+        print(result_course)
         return course
 
+    @classmethod
+    def api_get_status_course(cls, id_course, id_company):
+        connect = mysql.connect()
+        cursor = connect.cursor()
+
+        query = 'select CoursesStatus from courses where idCourse = %s and idCompany = %s'
+        param = (id_course, id_company)
+
+        cursor.execute(query, param)
+
+        status = cursor.fetchone()[0]
+
+        connect.commit()
+        cursor.close()
+
+        return status
 
 get_one_course = Blueprint('get_one_course', __name__)
 
@@ -49,7 +66,13 @@ get_one_course = Blueprint('get_one_course', __name__)
 @get_one_course.route('/course/<id_course>/<id_company>', methods=['GET'])
 def api_get_one_course(id_course, id_company):
     if 'student' in session or 'company' in session:
-        course = OneCourse.api_get_one_course(id_course, id_company)
-        return render_template('course-reviews.html', course=course)
+        status = OneCourse.api_get_status_course(id_course,id_company)
+        print(status)
+        if status == "Started":
+            course = OneCourse.api_get_one_course(id_course, id_company)
+            return render_template('course-apply.html', course=course)
+        if status == "Finished":
+            course = OneCourse.api_get_one_course(id_course, id_company)
+            return render_template('course-reviews.html', course=course)
     else:
         return 'Please login'

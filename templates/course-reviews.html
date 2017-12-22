@@ -73,7 +73,12 @@
 						</div>
 					</div>
 					<div class="col-sm-6 col-md-8">
-						<h4 id="course-name">{{ course.course_name }}</h4>
+						<div class="col-sm-8" style="padding-left: 0">
+								<h4 id="course-name">{{ course.course_name }}</h4>
+							</div>
+						<div class="'col-sm-4">
+							<h4>Status: {{ course.status }}</h4>
+						</div>
 						<p><i class="glyphicon glyphicon-calendar"></i> <cite id="time">{{ course.date_of_start }}-{{course.date_of_end}}</cite></p>
 						<p><i class="glyphicon glyphicon-map-marker"></i> <cite id="geolocation">{{course.city}}, {{course.country}}</cite></p>
 						<p><i class="glyphicon glyphicon-briefcase"></i> <a href={{course.link}}><span id="company-name">{{course.company_name}}</span></a></p>

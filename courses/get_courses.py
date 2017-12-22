@@ -39,6 +39,7 @@ def api_get_courses():
             date_of_start = result[6]
             date_of_end = result[7]
             info = result[8]
+            status = result[9]
             course = {
                 "name": name,
                 "amount": amount,
@@ -47,6 +48,7 @@ def api_get_courses():
                 "date_of_start": date_of_start,
                 "date_of_end": date_of_end,
                 "info": info,
+                "status": status,
                 "link": '/course/' + id_course + '/' + id_company
             }
             courses.append(course)

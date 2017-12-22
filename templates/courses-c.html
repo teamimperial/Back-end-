@@ -118,8 +118,11 @@
 						<div class="card container">
 							<a href={{ course.link }}>
 
-								<div class="col-md-11">
-									<h4 id="course-name">{{ course.course_name }}</h4>
+								<div class="col-md-6">
+									<h4 id="course-name">{{ course.name }}</h4>
+								</div>
+								<div class="col-md-5">
+									<h4>Status: {{ course.status }}</h4>
 								</div>
 								<div class="col-md-1">
 									<button type="button" class="close" aria-label="Close">
