@@ -47,7 +47,7 @@ def api_search(courses_name):
                 "date_of_start": date_of_start,
                 "date_of_end": date_of_end,
                 "info": info,
-                "link": '/course/' + id_course + '/' + id_company
+                "link": '/course/!' + id_course + '/!' + id_company
             }
             courses.append(course)
         return render_template('praxis.html',courses=courses), 200

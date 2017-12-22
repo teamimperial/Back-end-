@@ -49,7 +49,7 @@ def api_get_courses():
                 "date_of_end": date_of_end,
                 "info": info,
                 "status": status,
-                "link": '/course/' + id_course + '/' + id_company
+                "link": '/course/!' + id_course + '/!' + id_company
             }
             courses.append(course)
         return render_template('courses-c.html', courses=courses)

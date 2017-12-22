@@ -63,16 +63,19 @@ class OneCourse:
 get_one_course = Blueprint('get_one_course', __name__)
 
 
-@get_one_course.route('/course/<id_course>/<id_company>', methods=['GET'])
+@get_one_course.route('/course/!<id_course>/!<id_company>', methods=['GET'])
 def api_get_one_course(id_course, id_company):
     if 'student' in session or 'company' in session:
         status = OneCourse.api_get_status_course(id_course,id_company)
         print(status)
-        if status == "Started":
+        if 'student' in session and status == "Started":
             course = OneCourse.api_get_one_course(id_course, id_company)
             return render_template('course-apply.html', course=course)
-        if status == "Finished":
+        if 'student' in session and status == "Finished":
             course = OneCourse.api_get_one_course(id_course, id_company)
             return render_template('course-reviews.html', course=course)
+        if 'company' in session:
+            course = OneCourse.api_get_one_course(id_course, id_company)
+            return render_template('course-company-review.html', course=course)
     else:
         return 'Please login'

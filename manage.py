@@ -14,6 +14,7 @@ from courses.get_courses import get_courses
 from courses.get_courses_all import get_all_courses
 from courses.get_one_course import get_one_course
 from courses.search_courses import search_courses
+from courses.courses_apply import apply_on_course
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -139,6 +140,7 @@ app.register_blueprint(get_courses)
 app.register_blueprint(get_all_courses)
 app.register_blueprint(get_one_course)
 app.register_blueprint(search_courses)
+app.register_blueprint(apply_on_course)
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
