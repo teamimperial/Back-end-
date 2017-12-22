@@ -47,14 +47,17 @@
 						<div class="container">
 							<div class="row">
 								<div id="custom-search-input">
+
 									<div class="input-group col-md-12">
-										<input type="text" class="  search-query form-control" placeholder="Search"/>
+
+										<input type="text" class="search-query form-control" placeholder="Search" id="search" oninput="save-button"/>
 										<span class="input-group-btn">
-                                    <button class="btn btn-danger" type="button">
+                                    <button class="btn btn-danger" type="button" id="save-button">
                                         <span class=" glyphicon glyphicon-search"></span>
                                     </button>
                                 </span>
 									</div>
+
 								</div>
 							</div>
 							<br>
@@ -122,6 +125,7 @@
 <script src='/static/js/scroolreveal.js'></script>
 <script src='/static/js/bootstrap.min.js'></script>
 <script src='/static/js/magnific-popup.js'></script>
+<script src='/static/js/search-courses.js'></script>
 
 </body>
 </html>
