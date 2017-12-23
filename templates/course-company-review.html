@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>{{ course.course_name }}</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{{ course.course_name }}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link rel='stylesheet' href='/static/css/bootstrap.min.css'>
 	<link rel='stylesheet' href='/static/css/magnific-popup.css'>
@@ -44,19 +45,26 @@
 				<div class="row">
 					<div class="col-sm-6 col-md-4">
 						<img src="http://placehold.it/500x500" alt="" class="img-rounded img-responsive"/>
-						</div>
 					</div>
-					<div class="col-sm-6 col-md-5">
-						<div class="col-sm-7" style="padding-left: 0">
+
+					<div class="col-sm-6 col-md-8">
+						<div class="col-md-12">
+							<div class="col-sm-7" style="padding-left: 0">
 								<h4 id="course-name">{{ course.course_name }}</h4>
 							</div>
-						<div class="'col-sm-4">
-							<h4>Status: {{ course.status }}</h4>
+							<div class="'col-sm-4">
+								<h5>Status: {{ course.status }}</h5>
+							</div>
 						</div>
-						<p><i class="glyphicon glyphicon-calendar"></i> <cite id="time">{{ course.date_of_start }}-{{course.date_of_end}}</cite></p>
-						<p><i class="glyphicon glyphicon-map-marker"></i> <cite id="geolocation">{{course.city}}, {{course.country}}</cite></p>
-						<p><i class="glyphicon glyphicon-briefcase"></i> <a href={{course.link}}><span id="company-name">{{course.company_name}}</span></a></p>
-						<p><i class="glyphicon glyphicon-list-alt"></i> <span id="full-amount">Licensed amount: {{course.amount}}</span></p>
+						<p><i class="glyphicon glyphicon-calendar"></i> <cite id="time">{{ course.date_of_start
+							}}-{{course.date_of_end}}</cite></p>
+						<p><i class="glyphicon glyphicon-map-marker"></i> <cite id="geolocation">{{course.city}},
+							{{course.country}}</cite></p>
+						<p><i class="glyphicon glyphicon-briefcase"></i> <a href={{course.link}}><span
+								id="company-name">{{course.company_name}}</span></a>
+						</p>
+						<p><i class="glyphicon glyphicon-list-alt"></i> <span id="full-amount">Licensed amount: {{course.amount}}</span>
+						</p>
 						<p><i class="glyphicon glyphicon-user"></i> <span id="apply-amount">Number of applys</span></p>
 						<p><i class="glyphicon glyphicon-info-sign"></i> <span id="course-info">{{course.info}}</span>
 						</p>
@@ -69,8 +77,12 @@
 								<br>
 								<span class="review-author">Nazar Kulyk</span>
 								<span class="review-date">11.11.2017, 14:00</span>
-								<p><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla luctus eget ipsum nec vulputate.
-									Sed vestibulum augue vel dictum imperdiet. Duis sed augue posuere, tempus diam vitae, efficitur
+								<p><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla luctus eget ipsum
+									nec
+									vulputate.
+									Sed vestibulum augue vel dictum imperdiet. Duis sed augue posuere, tempus diam
+									vitae,
+									efficitur
 									ligula.
 								</p><br>
 							</div>
@@ -78,12 +90,15 @@
 								<br>
 								<span class="review-author">Roman Vit</span>
 								<span class="review-date">11.11.2017, 12:37</span>
-								<p><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla luctus eget ipsum nec vulputate.
-									Sed vestibulum augue vel dictum imperdiet. Duis sed augue posuere, tempus diam vitae, efficitur
+								<p><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla luctus eget ipsum
+									nec
+									vulputate.
+									Sed vestibulum augue vel dictum imperdiet. Duis sed augue posuere, tempus diam
+									vitae,
+									efficitur
 									ligula.
 								</p><br>
 							</div>
-
 						</div>
 					</div>
 				</div>
