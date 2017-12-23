@@ -3,31 +3,19 @@
  */
 
 $('#save-button').click(function() {
-    var img = $('#profile-img').src;
-    var first_name = $('#first-name').val();
-    var last_name = $('#last-name').val();
-    var city = $('#city').val();
-    var country = $('#country').val();
-    var date_of_birth = $('#date-of-birth').val();
-    var university = $('#university').val();
-    var time_of_studing = $('#time-of-studing').val();
-    var link = $('#link').val();
-    var bio = $('#bio').val();
-    var email = $('#email-sign-up').val();
-    var password = $('#new-password').val();
     var data = {
-        "img": img,
-        "first_name": first_name,
-        "last_name": last_name,
-        "city": city,
-        "country": country,
-        "date_of_birth": date_of_birth,
-        "university": university,
-        "time_of_studing": time_of_studing,
-        "link": link,
-        "bio": bio,
-        "email": email,
-        "password": password
+        "img": $('#profile-img').attr('src'),
+        "first_name": $('#first-name').val(),
+        "last_name": $('#last-name').val(),
+        "city": $('#city').val(),
+        "country": $('#country').val(),
+        "date_of_birth": $('#date-of-birth').val(),
+        "university": $('#university').val(),
+        "time_of_studing": $('#time-of-studing').val(),
+        "link": $('#link').val(),
+        "bio": $('#bio').val(),
+        "email": $('#email').val(),
+        "password":  $('#new-password').val()
     };
     $.ajax({
         url: '/student/update', //the page containing python script

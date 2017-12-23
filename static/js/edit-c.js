@@ -3,27 +3,17 @@
  */
 
 $('#save-button').click(function() {
-    var img = $('#profile-img').src;
-    var company_name = $('#company-name').val();
-    var city = $('#city').val();
-    var country = $('#country').val();
-    var link = $('#link').val();
-    var bio = $('#bio').val();
-    var email = $('#email-sign-up').val();
-    var confirm_password =$('#confirm-new-password').val();
-    var new_password = $('#new-password').val();
-    var password = $('#password').val();
     var data = {
-        "Photo": img,
-        "CompanyName": company_name,
-        "City": city,
-        "Country": country,
-        "webSite": link,
-        "AboutCompany": bio,
-        "Email": email,
-        "OldPassword": password,
-        "NewPassword": new_password,
-        "ConfirmPassword": confirm_password
+        "Photo": $('#profile-img').attr('src'),
+        "CompanyName": $('#company-name').val(),
+        "City": $('#city').val(),
+        "Country": $('#country').val(),
+        "webSite": $('#link').val(),
+        "AboutCompany": $('#bio').val(),
+        "Email": $('#email').val(),
+        "OldPassword": $('#password').val(),
+        "NewPassword": $('#new-password').val(),
+        "ConfirmPassword": $('#confirm-new-password').val()
     };
     $.ajax({
         url: '/company/update', //the page containing python script
