@@ -15,6 +15,7 @@ from courses.get_courses_all import get_all_courses
 from courses.get_one_course import get_one_course
 from courses.search_courses import search_courses
 from courses.courses_apply import apply_on_course
+from courses.courses_studnet import courses_student
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -110,20 +111,10 @@ def api_error(message):
     return render_template('error.html', message=message)
 
 
-@app.route('/courses-c')
-def api_courses_company():
-    return render_template('courses-c.html')
-
-
-@app.route('/courses-s')
-def api_courses_student():
-    return render_template('courses-s.html')
-
-
 @app.route('/courses')
 def api_redirect_courses():
     if 'student' in session:
-        return redirect('/courses-s')
+        return redirect('/student/course')
     if 'company' in session:
         return redirect('/company/course')
 
@@ -141,6 +132,7 @@ app.register_blueprint(get_all_courses)
 app.register_blueprint(get_one_course)
 app.register_blueprint(search_courses)
 app.register_blueprint(apply_on_course)
+app.register_blueprint(courses_student)
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 

@@ -14,12 +14,14 @@ $('#save-button').click(function() {
             data: JSON.stringify(data),
             type: 'POST',
             success: function(response) {
-                if (response.redirect=="true"){
-                    window.location.href = response.redirect_url;
-                }if(response.redirect=="false"){
+                if (response.redirect=="false"){
                     var msg = response.message;
                     alert(msg);
                 }
+                if (response.redirect=="true"){
+                    }
+                var redirect_url = response.redirect_url
+                window.location.href = redirect_url;
             },
             error: function() {
                 console.log('error');
