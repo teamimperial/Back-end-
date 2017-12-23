@@ -1,6 +1,5 @@
 from setting.config import mysql
-from flask import Blueprint, render_template, session
-from users.get_company import GetCompany
+from flask import Blueprint, render_template, session, redirect
 
 
 class OneCourse:
@@ -40,7 +39,6 @@ class OneCourse:
         }
         connect.commit()
         cursor.close()
-        print(result_course)
         return course
 
     @classmethod
@@ -67,7 +65,6 @@ get_one_course = Blueprint('get_one_course', __name__)
 def api_get_one_course(id_course, id_company):
     if 'student' in session or 'company' in session:
         status = OneCourse.api_get_status_course(id_course,id_company)
-        print(status)
         if 'student' in session and status == "Started":
             course = OneCourse.api_get_one_course(id_course, id_company)
             return render_template('course-apply.html', course=course)
@@ -78,4 +75,4 @@ def api_get_one_course(id_course, id_company):
             course = OneCourse.api_get_one_course(id_course, id_company)
             return render_template('course-company-review.html', course=course)
     else:
-        return 'Please login'
+        return redirect('/'), 200

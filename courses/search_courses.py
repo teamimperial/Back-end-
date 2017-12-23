@@ -8,7 +8,10 @@ class CourseSearch:
         connect = mysql.connect()
         cursor = connect.cursor()
         request_form = '%' + courses_name + '%'
-        query = 'select company.CompanyName, courses.CoursesName, courses.CoursesAmount, courses.CoursesCity, courses.CoursesCountry, courses.CoursesStart, courses.CoursesEnd, courses.CoursesInfo, company.idCompany, courses.idCourse from courses, company where courses.idCompany=company.idCompany and CoursesName like %s order by idCourse DESC'
+        query = 'select company.CompanyName, courses.CoursesName, courses.CoursesAmount, courses.CoursesCity, ' \
+                'courses.CoursesCountry, courses.CoursesStart, courses.CoursesEnd, courses.CoursesInfo, ' \
+                'company.idCompany, courses.idCourse, courses.CoursesStatus from courses, company where courses.idCompany=company.idCompany ' \
+                'and CoursesName like %s order by idCourse DESC'
         param = (request_form)
 
         cursor.execute(query, param)
@@ -38,6 +41,7 @@ def api_search(courses_name):
             info = result[7]
             id_company = str(result[8])
             id_course = str(result[9])
+            status = result[10]
             course = {
                 "company_name": company_name,
                 "course_name": course_name,
@@ -47,7 +51,8 @@ def api_search(courses_name):
                 "date_of_start": date_of_start,
                 "date_of_end": date_of_end,
                 "info": info,
-                "link": '/course/!' + id_course + '/!' + id_company
+                "link": '/course/!' + id_course + '/!' + id_company,
+                'status': status
             }
             courses.append(course)
         return render_template('praxis.html',courses=courses), 200

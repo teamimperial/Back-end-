@@ -43,7 +43,6 @@ def api_student_courses():
                 'info': course[10], 'status': course[11], 'link': '/course/!' + str(course[2]) + '/!' + str(course[3])
             }
             result.append(student_courses)
-        print(result)
         return render_template('courses-s.html', courses=result), 200
     else:
         return redirect('/'), 200
