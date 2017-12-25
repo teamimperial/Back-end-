@@ -65,7 +65,7 @@ get_one_course = Blueprint('get_one_course', __name__)
 def api_get_one_course(id_course, id_company):
     if 'student' in session or 'company' in session:
         status = OneCourse.api_get_status_course(id_course,id_company)
-        if 'student' in session and status == "Started":
+        if 'student' in session and status == "Started" or status == "Not started":
             course = OneCourse.api_get_one_course(id_course, id_company)
             return render_template('course-apply.html', course=course)
         if 'student' in session and status == "Finished":
