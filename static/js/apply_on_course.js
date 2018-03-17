@@ -28,3 +28,49 @@ $('#save-button').click(function() {
             }
         });
 });
+
+$('#confirm').click(function() {
+    var data = 1;
+    $.ajax({
+        url: '###',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        type: 'POST',
+        success: function(response) {
+            if(response.redirect=='true'){
+                alert(response.message)
+                window.location.href = response.redirect_url;
+            }
+            if(response.redirect=='false'){
+                alert(response.message);
+            }
+        },
+        error: function() {
+            console.log('error');
+        }
+    })
+});
+
+$('#delete').click(function() {
+    var data = 0;
+    $.ajax({
+        url: '###',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        type: 'POST',
+        success: function(response) {
+            if(response.redirect=='true'){
+                alert(response.message)
+                window.location.href = response.redirect_url;
+            }
+            if(response.redirect=='false'){
+                alert(response.message);
+            }
+        },
+        error: function() {
+            console.log('error');
+        }
+    })
+});
