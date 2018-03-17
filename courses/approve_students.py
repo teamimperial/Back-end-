@@ -42,3 +42,49 @@ def list_of_statement(id_course):
         list_of_students.append(student)
 
     return render_template('applications-c.html', students=list_of_students)
+
+
+class StudentApplication:
+    def __init__(self):
+        pass
+
+    @classmethod
+    def set_apply_status_DB(id_apply, status):
+        connect = mysql.connect()
+        cursor = connect.cursor()
+
+        query = 'insert into student_apply(Apply_Status) values(%s) where idStudent_Apply = %s'
+        param = (int(status), int(id_apply))
+
+        cursor.execute(query, param)
+
+        connect.commit()
+        cursor.close()
+
+    @classmethod
+    def api_check_status(id_apply):
+        connect = mysql.connect()
+        cursor = connect.cursor()
+
+        #перевірка, що ще немає статусу; має повернути 1
+        query = 'select exists(select * from student_apply where idStudent_Apply = %s and Apply_Status is null)'
+        param = int(id_apply)
+
+        cursor.execute(query, param)
+
+        check = cursor.fetchone()[0]
+
+        return check
+
+@set_status_on_apply.route('/set_status', methods=['POST'])
+def api_approve_student():
+    if 'company' in session and request.json:
+        id_apply = request.json['id_apply']
+        status = request.json['status']
+        check_status = StudentApplication.api_check_status(id_apply)
+        if check_status != 1:
+            print('bad')
+            return 'hello'
+        else:
+            StudentApplication.set_apply_status_DB(id_apply, status)
+            return jsonify(redirect='true', redirect_url='/courses'), 200

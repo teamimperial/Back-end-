@@ -30,9 +30,10 @@ $('#save-button').click(function() {
 });
 
 $('#confirm').click(function() {
-    var data = 1;
+    //input для id_apply (idStudent_Apply)
+    var data = {"id_apply" : id_apply, "status" : 1};
     $.ajax({
-        url: '###',
+        url: '/set_status',
         dataType: 'json',
         contentType: 'application/json',
         data: JSON.stringify(data),
@@ -53,9 +54,10 @@ $('#confirm').click(function() {
 });
 
 $('#delete').click(function() {
-    var data = 0;
+    //input для id_apply (idStudent_Apply)
+    var data = {"id_apply" : id_apply, "status" : 0};
     $.ajax({
-        url: '###',
+        url: '/set_status',
         dataType: 'json',
         contentType: 'application/json',
         data: JSON.stringify(data),
