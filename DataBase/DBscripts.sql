@@ -176,6 +176,7 @@ CREATE TABLE IF NOT EXISTS `webproject`.`student_apply` (
   `idStudent_Apply` INT(11) NOT NULL AUTO_INCREMENT,
   `idStudents` INT(11) NOT NULL,
   `idCourse` INT(11) NOT NULL,
+  `Apply_Status` BIT(1) NULL,
   PRIMARY KEY (`idStudent_Apply`),
   INDEX `fk_students_21231_idx` (`idStudents` ASC),
   INDEX `fk_courses_12312_idx` (`idCourse` ASC),
@@ -187,25 +188,6 @@ CREATE TABLE IF NOT EXISTS `webproject`.`student_apply` (
   CONSTRAINT `fk_students_21231`
     FOREIGN KEY (`idStudents`)
     REFERENCES `webproject`.`students` (`idStudents`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-AUTO_INCREMENT = 23
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `webproject`.`student_apply_status`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS`webproject`.`student_apply_status` (
-  `idStudent_Apply_Status` INT(11) NOT NULL AUTO_INCREMENT,
-  `idStudent_Apply` INT(11) NOT NULL,
-  `Status` BIT(1) NOT NULL,
-  PRIMARY KEY (`idStudent_Apply_Status`),
-  INDEX `fk_student_apply_idx` (`idStudent_Apply` ASC),
-  CONSTRAINT `fk_student_apply`
-    FOREIGN KEY (`idStudent_Apply`)
-    REFERENCES `webproject`.`student_apply` (`idStudent_Apply`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
