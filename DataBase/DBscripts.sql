@@ -195,6 +195,25 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
+-- Table `webproject`.`student_apply_status`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS`webproject`.`student_apply_status` (
+  `idStudent_Apply_Status` INT(11) NOT NULL AUTO_INCREMENT,
+  `idStudent_Apply` INT(11) NOT NULL,
+  `Status` BIT(1) NOT NULL,
+  PRIMARY KEY (`idStudent_Apply_Status`),
+  INDEX `fk_student_apply_idx` (`idStudent_Apply` ASC),
+  CONSTRAINT `fk_student_apply`
+    FOREIGN KEY (`idStudent_Apply`)
+    REFERENCES `webproject`.`student_apply` (`idStudent_Apply`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 23
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
 -- Table `webproject`.`studentscompanyreviews`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `webproject`.`studentscompanyreviews` (
