@@ -70,13 +70,13 @@ class Login:
 
         return password
 
-    @classmethod  # метод не працює
+    @classmethod
     def check_password(cls, password, password_from_db):
         if check_password_hash(password_from_db, password):
             check = 1
             return check
 
-    @classmethod  # метод для перевірки паролю
+    @classmethod
     def equals_password(cls, password, password_from_db):
         if password == password_from_db:
             check = 1

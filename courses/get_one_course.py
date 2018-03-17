@@ -73,6 +73,7 @@ def api_get_one_course(id_course, id_company):
             return render_template('course-reviews.html', course=course)
         if 'company' in session:
             course = OneCourse.api_get_one_course(id_course, id_company)
-            return render_template('course-company-review.html', course=course)
+            list_link = '/list_of_statement/' + id_course
+            return render_template('course-company-review.html', course=course, list_link=list_link)
     else:
         return redirect('/'), 200

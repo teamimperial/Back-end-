@@ -171,7 +171,7 @@ def api_update_students():
         if 'img' in request.json:
             photo = request.json['img']
             if photo != "":
-                UpdateStudent.update_students_photo(photo,id_student)
+                UpdateStudent.update_students_photo(photo, id_student)
                 value = 1
 
         if 'city' in request.json:

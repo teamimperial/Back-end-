@@ -28,6 +28,11 @@ def api_info_about_students(login):
                 time_of_study = GetStudent.get_student_time_of_study_from_db(id_student)
                 link = GetStudent.get_student_linked_in_from_db(id_student)
                 about = GetStudent.get_student_about_from_db(id_student)
+                photo = GetStudent.get_student_photo_from_db(id_student)
+                if photo is None:
+                    photo = 'http://placehold.it/500x500'
+                else:
+                    photo = photo
                 student = {
                     "first_name": first_name,
                     "last_name": last_name,
@@ -38,7 +43,8 @@ def api_info_about_students(login):
                     "university": university,
                     "timeOfStudy": time_of_study,
                     "link": link,
-                    "about": about
+                    "about": about,
+                    "photo": photo
                 }
                 return render_template("profile-s.html", student=student)
 
