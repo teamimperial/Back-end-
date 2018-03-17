@@ -2,8 +2,8 @@ from setting.config import mysql
 
 
 class GetStudent:
-    def __int__(self, login):
-        self.login = login
+    def __init__(self):
+        pass
 
     @classmethod
     def get_students_id_from_db(cls, login):
@@ -217,3 +217,25 @@ class GetStudent:
         cursor.close()
 
         return password
+
+    @classmethod
+    def get_info_about_student_for_review(cls, login):
+        connect = mysql.connect()
+        cursor = connect.cursor()
+
+        query = 'SELECT students.StudentsName, students.StudentsLastName, students.StudentsEmail, ' \
+                'infoaboutstudent.Photo, infoaboutstudent.City, infoaboutstudent.Country, ' \
+                'infoaboutstudent.DateOfBirth, infoaboutstudent.University, ' \
+                'infoaboutstudent.TimeOfStyding, infoaboutstudent.LinktoLinkedIN, ' \
+                'infoaboutstudent.AboutStudent, infoaboutstudent.CV from students, ' \
+                'infoaboutstudent where infoaboutstudent.idStudents=students.idStudents ' \
+                'and students.StudentsLogin = %s'
+
+        param = login
+        cursor.execute(query, param)
+        student = cursor.fetchone()
+
+        connect.commit()
+        cursor.close()
+
+        return student

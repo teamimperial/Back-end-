@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>{{ student.first_name }} {{ student.last_name }}</title>
+	<title>{{ student.name }} {{ student.last_name }}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link rel='stylesheet' href='/static/css/bootstrap.min.css'>
@@ -64,7 +64,7 @@
 									</div>
 									<div class="modal-body">
 										<div class="form-group row">
-											<div class="col-md-12"><label for="review">about {{ student.first_name }} {{ student.last_name }}</label></div>
+											<div class="col-md-12"><label for="review">about {{ student.name }} {{ student.last_name }}</label></div>
 											<div class="col-md-12"><textarea type="text" id="review" class="form-control" rows="10"></textarea></div>
 										</div>
 									</div>
@@ -78,10 +78,10 @@
 
 					</div>
 					<div class="col-sm-6 col-md-8">
-						<h4 id="user-name">{{ student.first_name}} {{ student.last_name }}</h4>
+						<h4 id="user-name">{{ student.name}} {{ student.last_name }}</h4>
 						<p><i class="glyphicon glyphicon-map-marker"></i> <cite id="geolocation">{{ student.city }} , {{ student.country}}</cite></p>
 						<p><i class="glyphicon glyphicon-envelope"></i> <span id="email">{{ student.email }}</span></p>
-						<p><i class="glyphicon glyphicon-gift"></i> <span id="date-of-birth">{{ student.dateOfBirth }}</span></p>
+						<p><i class="glyphicon glyphicon-gift"></i> <span id="date-of-birth">{{ student.date_of_birth }}</span></p>
 						<p><i class="glyphicon glyphicon-education"></i> <span id="university">{{ student.university }}</span>, <span
 								id="time-of-studing">2016 - now</span></p>
 						<p><i class="glyphicon glyphicon-info-sign"></i> <span id="bio"> {{ student.about }}</span>

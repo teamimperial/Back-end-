@@ -51,3 +51,23 @@ def api_info_about_students(login):
             else:
                 return 'Please log in'
 
+
+@get_info_about_student.route('/student/review/<login>')
+def get_info_about_student_for_review(login):
+    student_for_db = GetStudent.get_info_about_student_for_review(login)
+    student = {
+        'name': student_for_db[0],
+        'last_name': student_for_db[1],
+        'email': student_for_db[2],
+        'photo': student_for_db[3],
+        'city': student_for_db[4],
+        'country': student_for_db[5],
+        'date_of_birth': student_for_db[6],
+        'university': student_for_db[7],
+        'time_of_styding': student_for_db[8],
+        'linkedIn': student_for_db[9],
+        'about': student_for_db[10],
+        'cv': student_for_db[11]
+    }
+    return render_template('profile-s-reviews.html', student=student)
+
