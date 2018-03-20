@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect, Markup
 from setting.config import mysql
 
 
@@ -11,10 +11,10 @@ class GetStudentStatement:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'Select students.idStudents, students.StudentsName, students.StudentsLastName, ' \
-                'students.StudentsLogin from students, student_apply where ' \
+        query = 'SELECT students.idStudents, students.StudentsName, students.StudentsLastName, ' \
+                'students.StudentsLogin, student_apply.status FROM students, student_apply WHERE ' \
                 'students.idStudents=student_apply.idStudents ' \
-                'and student_apply.idCourse = %s;'
+                'AND student_apply.idCourse = %s;'
 
         param = id_course
         cursor.execute(query, param)
@@ -22,69 +22,73 @@ class GetStudentStatement:
         result = cursor.fetchall()
         return result
 
+    @classmethod
+    def set_status_in_db(cls, id_course, id_student, status):
+        connect = mysql.connect()
+        cursor = connect.cursor()
+
+        query = 'UPDATE student_apply SET student_apply.status = %s WHERE student_apply.idStudents = %s ' \
+                'AND student_apply.idCourse = %s'
+
+        param = (status, id_student, id_course)
+        cursor.execute(query, param)
+
+        connect.commit()
+        cursor.close()
+
 
 approve_student = Blueprint('approve_student', __name__)
 
 
 @approve_student.route('/list_of_statement/<id_course>')
 def list_of_statement(id_course):
+    global status_view
     students = GetStudentStatement.get_student_statement(id_course)
     list_of_students = []
     for student in students:
+        student_id = student[0]
         student_name = student[1]
         student_last_name = student[2]
         student_login = student[3]
+        student_status = student[4]
+        confirm = '/confirm/' + str(id_course) + "/" + str(student_id)
+        delete = '/delete/' + str(id_course) + "/" + str(student_id)
+        if student_status is None:
+            status_view = Markup('<div class="col-md-7 button-container " style="text-align: center;">'
+                                 '<a href=' + confirm + '><button type="button"><span>Confirm</span>'
+                                                        '</button></a> <a href=' + delete + '><button type="button">'
+                                                                                            '<span>Delete</span'
+                                                                                            '></button></a></div>')
+        if student_status == 1:
+            status_view = Markup('<div class="col-md-7" style="text-align: center;">'
+                                 '<span>ACCEPT</span></div>')
+        if student_status == 0:
+            continue
         student = {
             'student_name': student_name,
             'student_last_name': student_last_name,
-            'student_login': "/student/review/" + student_login
+            'student_login': "/student/review/" + student_login,
+            'status_view': status_view
         }
         list_of_students.append(student)
 
     return render_template('applications-c.html', students=list_of_students)
 
 
-class StudentApplication:
-    def __init__(self):
-        pass
+set_status_students_on_course = Blueprint('set_status_students_on_course', __name__)
 
-    @classmethod
-    def set_apply_status_DB(id_apply, status):
-        connect = mysql.connect()
-        cursor = connect.cursor()
 
-        query = 'insert into student_apply(Apply_Status) values(%s) where idStudent_Apply = %s'
-        param = (int(status), int(id_apply))
+@set_status_students_on_course.route('/confirm/<id_course>/<id_student>')
+def confirm_students_on_course(id_course, id_student):
+    status = 1
+    GetStudentStatement.set_status_in_db(id_course, id_student, int(status))
+    link = '/list_of_statement/' + str(id_course)
+    return redirect(link)
 
-        cursor.execute(query, param)
 
-        connect.commit()
-        cursor.close()
-
-    @classmethod
-    def api_check_status(id_apply):
-        connect = mysql.connect()
-        cursor = connect.cursor()
-
-        #перевірка, що ще немає статусу; має повернути 1
-        query = 'select exists(select * from student_apply where idStudent_Apply = %s and Apply_Status is null)'
-        param = int(id_apply)
-
-        cursor.execute(query, param)
-
-        check = cursor.fetchone()[0]
-
-        return check
-
-@set_status_on_apply.route('/set_status', methods=['POST'])
-def api_approve_student():
-    if 'company' in session and request.json:
-        id_apply = request.json['id_apply']
-        status = request.json['status']
-        check_status = StudentApplication.api_check_status(id_apply)
-        if check_status != 1:
-            print('bad')
-            return 'hello'
-        else:
-            StudentApplication.set_apply_status_DB(id_apply, status)
-            return jsonify(redirect='true', redirect_url='/courses'), 200
+@set_status_students_on_course.route('/delete/<id_course>/<id_student>')
+def delete_student_on_course(id_course, id_student):
+    status = 0
+    GetStudentStatement.set_status_in_db(id_course, id_student, int(status))
+    link = '/list_of_statement/' + str(id_course)
+    return redirect(link)
