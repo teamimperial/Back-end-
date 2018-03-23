@@ -47,11 +47,14 @@
 						{% for course in courses %}
 						<a href={{course.link}}>
 						<div class="card container">
-							<div class="col-md-10">
+							<div class="col-md-6">
 								<h4 id="course-name">{{ course.course_name }}</h4></div>
-							<div class="col-md-2">
+							<div class="col-md-3">
 								<p>Status: <span>{{course.status}}</span></p>
 							</div>
+                            <div class="col-md-3">
+                                <p><span>{{ course.status_student }}</span></p>
+                            </div>
 
 							<div class="col-md-3">
 								<p><i class="glyphicon glyphicon-calendar"></i> <cite id="time">{{course.date_of_start}} -

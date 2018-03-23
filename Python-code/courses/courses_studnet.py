@@ -14,7 +14,7 @@ class GetApplyStudentCourse:
         query = 'select company.CompanyName, company.CompanyLogin, courses.idCourse, ' \
                 'courses.idCompany, courses.CoursesName, courses.CoursesAmount, courses.CoursesCity, ' \
                 'courses.CoursesCountry, courses.CoursesStart, courses.CoursesEnd, courses.CoursesInfo, ' \
-                'courses.CoursesStatus from courses, company, student_apply where ' \
+                'courses.CoursesStatus, student_apply.status from courses, company, student_apply where ' \
                 'student_apply.idCourse=courses.idCourse and courses.idCompany=company.idCompany and ' \
                 'student_apply.idStudents=%s order by idStudent_Apply DESC'
         param = (id_student)
@@ -31,16 +31,25 @@ class GetApplyStudentCourse:
 
 @courses_student.route('/student/course', methods=['GET'])
 def api_student_courses():
+    global student_approve_status
     if 'student' in session:
         student_login = session['student']
         id_student = GetStudent.get_students_id_from_db(student_login)
         courses = GetApplyStudentCourse.get_courses_student(id_student)
         result = []
         for course in courses:
+            status_student = course[12]
+            if status_student == 0:
+                student_approve_status = 'DELETE'
+            if status_student == 1:
+                student_approve_status = 'ACCEPT'
+            if status_student is None:
+                student_approve_status = 'IN PROGRESS'
             student_courses = {
                 'company_name': course[0], 'company_login': course[1], 'course_name': course[4], 'amount': course[5],
                 'city': course[6], 'country': course[7], 'date_of_start': course[8], 'date_of_end': course[9],
-                'info': course[10], 'status': course[11], 'link': '/course/!' + str(course[2]) + '/!' + str(course[3])
+                'info': course[10], 'status': course[11], 'link': '/course/!' + str(course[2]) + '/!' + str(course[3]),
+                'status_student': student_approve_status
             }
             result.append(student_courses)
         return render_template('courses-s.html', courses=result), 200
