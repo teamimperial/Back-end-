@@ -46,6 +46,33 @@
 				<div class="row">
 					<div class="col-sm-6 col-md-4">
 						<img src="http://placehold.it/500x500" alt="" class="img-rounded img-responsive" style="max-width: 100%"/>
+						<div class="button-container" style="margin: 20px; text-align: center">
+							<button type="button" data-toggle="modal" data-target="#myModal">
+								<span>Rewiev</span>
+							</button>
+						</div>
+
+						<!-- Modal -->
+						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+										<h4 class="modal-title" id="myModalLabel">Write review</h4>
+									</div>
+									<div class="modal-body">
+										<div class="form-group row">
+											<div class="col-md-12"><label for="review-c">about {{ company.name }}</label></div>
+											<div class="col-md-12"><textarea type="text" id="review-c" class="form-control" rows="10"></textarea></div>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+										<button type="button" class="btn btn-primary" id="send-review-c">Send</button>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="col-sm-6 col-md-8">
 						<h4 id="user-name">{{ company.name }} <span id="check">{{ company.check }}</span></h4>
@@ -109,6 +136,7 @@
 <script src='/static/js/bootstrap.min.js'></script>
 <script src='/static/js/magnific-popup.js'></script>
 <script src='/static/js/authentification-c.js'></script>
+<script src='/static/js/reviews.js'></script>
 
 </body>
 </html>
