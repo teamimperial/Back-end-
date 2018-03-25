@@ -50,7 +50,7 @@
 						<img src="http://placehold.it/500x500" alt="" class="img-rounded img-responsive"/>
 						<div class="button-container" style="margin: 20px; text-align: center">
 							<button type="button" data-toggle="modal" data-target="#myModal">
-								<span>Rewiev</span>
+								<span>Review</span>
 							</button>
 						</div>
 
@@ -58,20 +58,22 @@
 						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 							<div class="modal-dialog">
 								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-										<h4 class="modal-title" id="myModalLabel">Write review</h4>
-									</div>
-									<div class="modal-body">
-										<div class="form-group row">
-											<div class="col-md-12"><label for="review">about {{ student.name }} {{ student.last_name }}</label></div>
-											<div class="col-md-12"><textarea type="text" id="review" class="form-control" rows="10"></textarea></div>
-										</div>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-										<button type="button" class="btn btn-primary">Send</button>
-									</div>
+                                    <form action="#" class="form" method="post">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">Write review</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group row">
+                                                <div class="col-md-12"><label for="review">about {{ student.name }} {{ student.last_name }}</label></div>
+                                                <div class="col-md-12"><textarea type="text" id="review" class="form-control" rows="10"></textarea></div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button type="submit" id="comment-student" class="btn btn-primary">Send</button>
+                                        </div>
+                                    </form>
 								</div>
 							</div>
 						</div>
@@ -141,6 +143,7 @@
 <script src='/static/js/scroolreveal.js'></script>
 <script src='/static/js/bootstrap.min.js'></script>
 <script src='/static/js/magnific-popup.js'></script>
+<script src='/static/js/comment.js'></script>
 
 </body>
 </html>

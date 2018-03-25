@@ -37,3 +37,4 @@ $('#create-course').click(function() {
         }
     });
 });
+

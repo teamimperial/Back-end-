@@ -17,6 +17,7 @@ from courses.search_courses import search_courses
 from courses.courses_apply import apply_on_course
 from courses.courses_studnet import courses_student
 from courses.approve_students import approve_student, set_status_students_on_course
+from reviews.comment_about_student import comment_about_student
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -136,6 +137,7 @@ app.register_blueprint(apply_on_course)
 app.register_blueprint(courses_student)
 app.register_blueprint(approve_student)
 app.register_blueprint(set_status_students_on_course)
+app.register_blueprint(comment_about_student)
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
