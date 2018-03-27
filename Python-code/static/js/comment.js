@@ -1,12 +1,12 @@
 $('#comment-student').click(function() {
-    var name_student = $('#name_student').val();
-    var comment = $('#comment').val();
+    var student_login = document.getElementById('student_login').innerHTML;
+    var review = $('#review').val();
     var data = {
-        "name_student": name_student,
-        "comment": comment
+        "student_login": student_login,
+        "review": review
     };
     $.ajax({
-        url: '/comment_about_student', //the page containing python script
+        url: '/comment/student', //the page containing python script
         dataType: 'json',
         contentType: 'application/json',
         data: JSON.stringify(data),
@@ -14,6 +14,9 @@ $('#comment-student').click(function() {
         success: function(response) {
             if (response.redirect == 'true'){
                 window.location.href = response.redirect_url;
+            }
+            if (response.redirect == 'false'){
+                alert(response.message)
             }
         },
         error: function() {

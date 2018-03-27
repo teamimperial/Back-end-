@@ -56,6 +56,7 @@ def api_info_about_students(login):
 def get_info_about_student_for_review(login):
     student_for_db = GetStudent.get_info_about_student_for_review(login)
     student = {
+        'login': login,
         'name': student_for_db[0],
         'last_name': student_for_db[1],
         'email': student_for_db[2],
