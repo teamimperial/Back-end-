@@ -54,7 +54,9 @@ def api_info_about_students(login):
 
 @get_info_about_student.route('/student/review/<login>')
 def get_info_about_student_for_review(login):
+    global comment
     student_for_db = GetStudent.get_info_about_student_for_review(login)
+    reviews = GetStudent.get_comment_about_student(login)
     student = {
         'login': login,
         'name': student_for_db[0],
@@ -70,5 +72,13 @@ def get_info_about_student_for_review(login):
         'about': student_for_db[10],
         'cv': student_for_db[11]
     }
-    return render_template('profile-s-reviews.html', student=student)
+    comments = []
+    for review in reviews:
+        comment = {
+             'review': review[0],
+             'time': review[1],
+             'company_name': review[2]
+        }
+        comments.append(comment)
+    return render_template('profile-s-reviews.html', student=student, reviews=comments)
 

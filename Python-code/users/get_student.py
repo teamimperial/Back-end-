@@ -27,7 +27,7 @@ class GetStudent:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query_get_first_name = 'select StudentsName from students where StudentsLogin=%s'
+        query_get_first_name = 'SELECT StudentsName FROM students WHERE StudentsLogin=%s'
         param_get_first_name = (login)
         cursor.execute(query_get_first_name, param_get_first_name)
         firstName = cursor.fetchone()[0]
@@ -42,7 +42,7 @@ class GetStudent:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query_get_last_name = 'select StudentsLastName from students where StudentsLogin=%s'
+        query_get_last_name = 'SELECT StudentsLastName FROM students WHERE StudentsLogin=%s'
         param_get_last_name = (login)
         cursor.execute(query_get_last_name, param_get_last_name)
         last_name = cursor.fetchone()[0]
@@ -57,7 +57,7 @@ class GetStudent:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query_get_email = 'select StudentsEmail from students where StudentsLogin=%s'
+        query_get_email = 'SELECT StudentsEmail FROM students WHERE StudentsLogin=%s'
         param_get_email = (login)
         cursor.execute(query_get_email, param_get_email)
         email = cursor.fetchone()[0]
@@ -72,7 +72,7 @@ class GetStudent:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'select City from infoaboutstudent where idStudents=%s'
+        query = 'SELECT City FROM infoaboutstudent WHERE idStudents=%s'
         param = (id_student)
         cursor.execute(query, param)
         city = cursor.fetchone()[0]
@@ -87,7 +87,7 @@ class GetStudent:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'select Country from infoaboutstudent where idStudents=%s'
+        query = 'SELECT Country FROM infoaboutstudent WHERE idStudents=%s'
         param = (id_student)
         cursor.execute(query, param)
         country = cursor.fetchone()[0]
@@ -102,7 +102,7 @@ class GetStudent:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'select DateOfBirth from infoaboutstudent where idStudents=%s'
+        query = 'SELECT DateOfBirth FROM infoaboutstudent WHERE idStudents=%s'
         param = (id_student)
         cursor.execute(query, param)
         date_of_birth = cursor.fetchone()[0]
@@ -117,7 +117,7 @@ class GetStudent:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'select University from infoaboutstudent where idStudents=%s'
+        query = 'SELECT University FROM infoaboutstudent WHERE idStudents=%s'
         param = (id_student)
         cursor.execute(query, param)
         university = cursor.fetchone()[0]
@@ -132,7 +132,7 @@ class GetStudent:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'select TimeOfStyding from infoaboutstudent where idStudents=%s'
+        query = 'SELECT TimeOfStyding FROM infoaboutstudent WHERE idStudents=%s'
         param = (id_student)
         cursor.execute(query, param)
         time_of_study = cursor.fetchone()[0]
@@ -147,7 +147,7 @@ class GetStudent:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'select LinkToLinkedIn from infoaboutstudent where idStudents=%s'
+        query = 'SELECT LinkToLinkedIn FROM infoaboutstudent WHERE idStudents=%s'
         param = (id_student)
         cursor.execute(query, param)
         link = cursor.fetchone()[0]
@@ -162,7 +162,7 @@ class GetStudent:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'select AboutStudent from infoaboutstudent where idStudents=%s'
+        query = 'SELECT AboutStudent FROM infoaboutstudent WHERE idStudents=%s'
         param = (id_student)
         cursor.execute(query, param)
         about = cursor.fetchone()[0]
@@ -177,7 +177,7 @@ class GetStudent:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'select Photo from infoaboutstudent where idStudents=%s'
+        query = 'SELECT Photo FROM infoaboutstudent WHERE idStudents=%s'
         param = (id_student)
         cursor.execute(query, param)
         photo = cursor.fetchone()[0]
@@ -192,7 +192,7 @@ class GetStudent:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'select CV from infoaboutstudent where idStudents=%s'
+        query = 'SELECT CV FROM infoaboutstudent WHERE idStudents=%s'
         param = (id_student)
         cursor.execute(query, param)
         cv = cursor.fetchone()[0]
@@ -227,9 +227,9 @@ class GetStudent:
                 'infoaboutstudent.Photo, infoaboutstudent.City, infoaboutstudent.Country, ' \
                 'infoaboutstudent.DateOfBirth, infoaboutstudent.University, ' \
                 'infoaboutstudent.TimeOfStyding, infoaboutstudent.LinktoLinkedIN, ' \
-                'infoaboutstudent.AboutStudent, infoaboutstudent.CV from students, ' \
-                'infoaboutstudent where infoaboutstudent.idStudents=students.idStudents ' \
-                'and students.StudentsLogin = %s'
+                'infoaboutstudent.AboutStudent, infoaboutstudent.CV FROM students, ' \
+                'infoaboutstudent WHERE infoaboutstudent.idStudents=students.idStudents ' \
+                'AND students.StudentsLogin = %s'
 
         param = login
         cursor.execute(query, param)
@@ -239,3 +239,18 @@ class GetStudent:
         cursor.close()
 
         return student
+
+    @classmethod
+    def get_comment_about_student(cls, login):
+        connect = mysql.connect()
+        cursor = connect.cursor()
+
+        query = 'SELECT studentsreviews.review, studentsreviews.time, company.CompanyName FROM company, students, studentsreviews WHERE studentsreviews.idCompany = company.idCompany AND students.idStudents= studentsreviews.idStudents AND students.StudentsLogin = %s'
+        param = login
+        cursor.execute(query, param)
+        reviews = cursor.fetchall()
+
+        connect.commit()
+        cursor.close()
+
+        return reviews

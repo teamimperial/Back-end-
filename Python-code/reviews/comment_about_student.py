@@ -2,18 +2,19 @@ from flask import Blueprint, request, abort, session, jsonify, redirect
 from users.get_company import GetCompany
 from users.get_student import GetStudent
 from setting.config import mysql
+from datetime import datetime
 
 comment_about_student = Blueprint('comment_about_student', __name__)
 
 
 class CommentAboutStudent:
     @classmethod
-    def comment_about_student(cls, student_id, company_id, comment):
+    def comment_about_student(cls, student_id, company_id, comment, time):
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'INSERT INTO studentsreviews (idCompany, idStudents, review) VALUE (%s,%s,%s)'
-        param = (company_id, student_id, comment)
+        query = 'INSERT INTO studentsreviews (idCompany, idStudents, review, time) VALUE (%s,%s,%s,%s)'
+        param = (company_id, student_id, comment, time)
 
         cursor.execute(query, param)
 
@@ -53,7 +54,8 @@ def comment_about_student_request():
         if CommentAboutStudent.check_student_course(student_login, company_login) == 1:
             company_id = GetCompany.get_company_id_from_db(company_login)
             student_id = GetStudent.get_students_id_from_db(student_login)
-            CommentAboutStudent.comment_about_student(student_id, company_id, review)
+            time = str(datetime.now().strftime('%H:%M, %d.%m.%Y'))
+            CommentAboutStudent.comment_about_student(student_id, company_id, review, time)
             return jsonify(redirect="true", redirect_url=student_login), 200
         else:
             return jsonify(redirect="false", message="This user does not finished your course or "
