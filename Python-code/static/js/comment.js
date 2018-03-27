@@ -1,9 +1,7 @@
-$('#comment-student').click(function() {
-    var student_login = document.getElementById('student_login').innerHTML;
-    var review = $('#review').val();
+$('#send-review-s').click(function() {
     var data = {
-        "student_login": student_login,
-        "review": review
+        "login": $('#student_login').innerHTML,
+        "review": $('#review').val()
     };
     $.ajax({
         url: '/comment/student', //the page containing python script
@@ -12,11 +10,68 @@ $('#comment-student').click(function() {
         data: JSON.stringify(data),
         type: 'POST',
         success: function(response) {
-            if (response.redirect == 'true'){
+            if (response.redirect=='true'){
+                var msg = response.message;
+                alert(msg);
                 window.location.href = response.redirect_url;
             }
-            if (response.redirect == 'false'){
-                alert(response.message)
+            if (response.redirect=='false'){
+                var msg = response.message;
+                alert(msg);
+            }
+        },
+        error: function() {
+            console.log('error');
+        }
+    });
+});
+
+$('#send-review-c').click(function() {
+    var data = {
+        "review": $('#review-c').val()
+    };
+    $.ajax({
+        url: '/', //the page containing python script
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        type: 'POST',
+        success: function(response) {
+            if (response.redirect=='true'){
+                var msg = response.message;
+                alert(msg);
+                window.location.href = response.redirect_url;
+            }
+            if (response.redirect=='false'){
+                var msg = response.message;
+                alert(msg);
+            }
+        },
+        error: function() {
+            console.log('error');
+        }
+    });
+});
+
+$('#send-review-course').click(function() {
+    var data = {
+        "review": $('#review-course').val()
+    };
+    $.ajax({
+        url: '/', //the page containing python script
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        type: 'POST',
+        success: function(response) {
+            if (response.redirect=='true'){
+                var msg = response.message;
+                alert(msg);
+                window.location.href = response.redirect_url;
+            }
+            if (response.redirect=='false'){
+                var msg = response.message;
+                alert(msg);
             }
         },
         error: function() {

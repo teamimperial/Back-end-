@@ -3,6 +3,7 @@
  */
 $('#send-review-s').click(function() {
     var data = {
+        "login": $('#student_login').innerHTML,
         "review": $('#review').val()
     };
     $.ajax({
@@ -30,6 +31,7 @@ $('#send-review-s').click(function() {
 
 $('#send-review-c').click(function() {
     var data = {
+        "login": $('#student_login').innerHTML,
         "review": $('#review-c').val()
     };
     $.ajax({
