@@ -68,25 +68,15 @@
 					<div class="col-md-12">
 						<h4 style="text-align: center">Reviews</h4>
 						<div class="reviews-list">
+                            {% for review in reviews %}
 							<div class="container card">
 								<br>
-								<span class="review-author">Володимир Федак</span>
-								<span class="review-date">11.11.2017, 14:00</span>
-								<p><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla luctus eget ipsum nec vulputate.
-									Sed vestibulum augue vel dictum imperdiet. Duis sed augue posuere, tempus diam vitae, efficitur
-									ligula.
+								<span class="review-author">{{ review.company_name }}</span>
+								<span class="review-date">{{ review.time }}</span>
+								<p><br>{{ review.review }}
 								</p><br>
 							</div>
-							<div class="container card">
-								<br>
-								<span class="review-author">Зеновій Верес</span>
-								<span class="review-date">11.11.2017, 12:37</span>
-								<p><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla luctus eget ipsum nec vulputate.
-									Sed vestibulum augue vel dictum imperdiet. Duis sed augue posuere, tempus diam vitae, efficitur
-									ligula.
-								</p><br>
-							</div>
-
+                            {% endfor %}
 						</div>
 					</div>
 				</div>

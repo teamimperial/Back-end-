@@ -47,7 +47,7 @@
 			<div class="well well-sm">
 				<div class="row">
 					<div class="col-sm-6 col-md-4">
-						<img src="http://placehold.it/500x500" alt="" class="img-rounded img-responsive"/>
+						<img src={{ student.photo }} alt="" class="img-rounded img-responsive"/>
 						<div class="button-container" style="margin: 20px; text-align: center">
 							<button type="button" data-toggle="modal" data-target="#myModal">
 								<span>Review</span>
@@ -88,7 +88,7 @@
 						<p><i class="glyphicon glyphicon-info-sign"></i> <span id="bio"> {{ student.about }}</span>
 						</p>
 						<p><i class="glyphicon glyphicon-paperclip"></i> <a><span id="cv">my-cool-cv.pdf</span></a></p>
-						<p><i class="glyphicon glyphicon-globe"></i> <a><span id="link">{{ student.link }}</span></a></p>
+						<p><i class="glyphicon glyphicon-globe"></i> <a><span id="link">{{ student.linkedIn }}</span></a></p>
 					</div>
 
 					<div class="col-md-12">
@@ -103,7 +103,6 @@
 								</p><br>
 							</div>
                             {% endfor %}
-
 						</div>
 					</div>
 				</div>

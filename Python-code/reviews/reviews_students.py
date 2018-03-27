@@ -46,7 +46,16 @@ def api_info_about_students(login):
                     "about": about,
                     "photo": photo
                 }
-                return render_template("profile-s.html", student=student)
+                reviews = GetStudent.get_comment_about_student(login)
+                comments = []
+                for review in reviews:
+                    result = {
+                        'review': review[0],
+                        'time': review[1],
+                        'company_name': review[2]
+                    }
+                    comments.append(result)
+                return render_template("profile-s.html", student=student, reviews=comments)
 
             else:
                 return 'Please log in'
