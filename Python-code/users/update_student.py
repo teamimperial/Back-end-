@@ -266,17 +266,17 @@ def api_update_students():
                     UpdateStudent.update_student_email(id_student, email)
                     value = 1
 
-        if 'NewPassword' in request.json and 'OldPassword' in request.json:
-            password = request.json['NewPassword']
-            new_password = request.json['OldPassword']
-            if password != "" and new_password != "":
-                password_from_db = GetStudent.get_students_password_from_db(login)
-                if UpdateStudent.check_equal_password_student(password_from_db, password) == 1:
-                    ChangePasswordStudent.equals_password(new_password, id_student)
-                    value = 1
+        if 'new_password' in request.json and 'old_password' in request.json and 'confirm_password' in request.json:
+            new_password = request.json['new_password']
+            old_password = request.json['old_password']
+            confirm_password = request.json['confirm_password']
+            if new_password != "" and old_password != "" and confirm_password != "":
+                if confirm_password == new_password:
+                    value = ChangePasswordStudent.equals_password(old_password, login, new_password)
+                    if value == 0:
+                        return jsonify(redirect='false', message='Incorrect old password'), 200
                 else:
-                    return 'Passwords doesn`t equals'
-
+                    return jsonify(redirect='false',message='Password don`t match. Try again....'), 200
         if value == 1:
             return jsonify(redirect='true', redirect_url='/user/student/' + login,message='Save changes.'), 201
         else:

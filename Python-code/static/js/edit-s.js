@@ -30,7 +30,9 @@ $('#save-button').click(function() {
         "link": $('#link').val(),
         "bio": $('#bio').val(),
         "email": $('#email').val(),
-        "password":  $('#new-password').val(),
+        "new_password":  $('#new-password').val(),
+        "old_password": $('#password').val(),
+        "confirm_password": $('#confirm-new-password').val(),
         "cv": file_data
     };
     $.ajax({
@@ -40,7 +42,7 @@ $('#save-button').click(function() {
         data: JSON.stringify(data),
         type: 'POST',
         success: function(response) {
-            if(response.redirect=='true'){
+            if(response.redirect==='true'){
                 alert(response.message)
                 window.location.href = response.redirect_url;
             }
