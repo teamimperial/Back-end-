@@ -146,6 +146,34 @@ class UpdateStudent:
         connect.commit()
         cursor.close()
 
+    @classmethod
+    def check_student_email(cls, email):
+        connect = mysql.connect()
+        cursor = connect.cursor()
+
+        query = 'SELECT exists(SELECT * from students, company where students.StudentsEmail = %s or company.CompanyEmail = %s)'
+        param = (email, email)
+        cursor.execute(query, param)
+
+        result = cursor.fetchone()[0]
+
+        connect.commit()
+        cursor.close()
+
+        return result
+
+    @classmethod
+    def update_student_email(cls, id_student, email):
+        connect = mysql.connect()
+        cursor = connect.cursor()
+
+        query = 'UPDATE students SET StudentsEmail = %s where idStudents = %s'
+        param = (email, id_student)
+        cursor.execute(query, param)
+
+        connect.commit()
+        cursor.close()
+
 
 update_students = Blueprint('update_students', __name__)
 
@@ -153,6 +181,7 @@ update_students = Blueprint('update_students', __name__)
 @update_students.route('/student/update', methods=['POST'])
 def api_update_students():
     value = 0
+    print (request.json)
     if 'student' in session:
         login = session['student']
         id_student = GetStudent.get_students_id_from_db(login)
@@ -176,20 +205,24 @@ def api_update_students():
 
         if 'city' in request.json:
             city = request.json['city']
-            if city != "":
+            if city == "Null":
+                value = 0
+            elif city != "":
                 UpdateStudent.update_students_city(city, id_student)
                 value = 1
 
         if 'country' in request.json:
             country = request.json['country']
-            if country != "":
+            if country == "Null":
+                value = 0
+            elif country != "":
                 UpdateStudent.update_students_country(country, id_student)
                 value = 1
 
         if 'date_of_birth' in request.json:
             date_of_birth = request.json['date_of_birth']
             if date_of_birth != "":
-                UpdateStudent.update_students_date_of_birth(date_of_birth,id_student)
+                UpdateStudent.update_students_date_of_birth(date_of_birth, id_student)
                 value = 1
 
         if 'time_of_studing' in request.json:
@@ -222,6 +255,16 @@ def api_update_students():
             if cv != "":
                 UpdateStudent.update_students_cv(cv,id_student)
                 value = 1
+
+        if 'email' in request.json:
+            email = request.json['email']
+            if email != "":
+                check_email = UpdateStudent.check_student_email(email)
+                if check_email == 1:
+                    return jsonify(redirect='false', message='This email is already exist'), 201
+                elif check_email == 0:
+                    UpdateStudent.update_student_email(id_student, email)
+                    value = 1
 
         if 'NewPassword' in request.json and 'OldPassword' in request.json:
             password = request.json['NewPassword']
