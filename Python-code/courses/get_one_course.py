@@ -1,5 +1,6 @@
 from setting.config import mysql
 from flask import Blueprint, render_template, session, redirect
+from users.get_company import GetCompany
 
 
 class OneCourse:
@@ -58,6 +59,7 @@ class OneCourse:
 
         return status
 
+
 get_one_course = Blueprint('get_one_course', __name__)
 
 
@@ -70,7 +72,8 @@ def api_get_one_course(id_course, id_company):
             return render_template('course-apply.html', course=course)
         if 'student' in session and status == "Finished":
             course = OneCourse.api_get_one_course(id_course, id_company)
-            return render_template('course-reviews.html', course=course)
+            company_login = GetCompany.get_company_login(id_company)
+            return render_template('course-reviews.html', course=course, company_login=company_login)
         if 'company' in session:
             course = OneCourse.api_get_one_course(id_course, id_company)
             list_link = '/list_of_statement/' + id_course

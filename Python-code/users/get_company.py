@@ -175,3 +175,18 @@ class GetCompany:
         cursor.close()
 
         return login
+
+    @classmethod
+    def get_company_login(cls, id_company):
+        connect = mysql.connect()
+        cursor = connect.cursor()
+
+        query = 'select CompanyLogin from Company where idCompany = %s'
+        param = (id_company)
+        cursor.execute(query, param)
+        login = cursor.fetchone()[0]
+
+        connect.commit()
+        cursor.close()
+
+        return login

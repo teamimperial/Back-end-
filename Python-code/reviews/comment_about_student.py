@@ -8,6 +8,9 @@ comment_about_student = Blueprint('comment_about_student', __name__)
 
 
 class CommentAboutStudent:
+    def __init__(self):
+        pass
+
     @classmethod
     def comment_about_student(cls, student_id, company_id, comment, time):
         connect = mysql.connect()
