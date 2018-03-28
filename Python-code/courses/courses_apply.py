@@ -66,7 +66,6 @@ def api_apply_on_course():
             student_login = session['student']
             id_student = GetStudent.get_students_id_from_db(student_login)
             check_apply = ApplyOnCourse.api_check_already_applied(id_course, id_student)
-            print(check_apply)
             if check_apply == 1:
                 return jsonify(redirect='false', redirect_url='/course/!' + id_course + '/!' + id_company,
                                message='You are already exists on this course.'), 200

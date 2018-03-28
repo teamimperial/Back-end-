@@ -65,17 +65,14 @@
 					</div>
 
 					<div class="col-md-12">
-						<h4 style="text-align: center">Reviews</h4>
+						<h4 style="text-align: center">Students</h4>
 						<div class="reviews-list">
 							{% for student in list_of_student %}
 					            <div class="col-md-12">
 						            <div class="card container">
 							            <a href={{ student.link }}>
-								            <div class="col-md-1">
-									            <img src={{ student.photo }} alt="" class="img-rounded img-responsive" style="width:100%"/>
-								            </div>
 								        <div class="col-md-4">
-									        <h4 id="name">{{ student.student_name }} {{ student.student_last_name }}</h4>
+									        <span id="name">{{ student.student_name }} {{ student.student_last_name }}</span>
                                         </div>
 							            </a>
 						            </div>

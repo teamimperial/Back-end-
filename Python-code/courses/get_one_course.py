@@ -64,7 +64,7 @@ class OneCourse:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'SELECT students.StudentsName, students.StudentsLastName, coursereviews.review, coursereviews.time FROM students, coursereviews WHERE students.idStudents = coursereviews.idStudents and coursereviews.idCourse = %s'
+        query = 'SELECT students.StudentsName, students.StudentsLastName, coursereviews.review, coursereviews.time FROM students, coursereviews WHERE students.idStudents = coursereviews.idStudents and coursereviews.idCourse = %s ORDER BY coursereviews.id_course_reviews DESC '
         param = (course_id)
 
         cursor.execute(query, param)

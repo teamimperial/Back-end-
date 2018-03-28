@@ -65,7 +65,6 @@ $('#send-review-course').click(function() {
         type: 'POST',
         success: function(response) {
             if (response.redirect=='true'){
-                var msg = response.message;
                 window.location.href = response.redirect_url;
             }
             if (response.redirect=='false'){
