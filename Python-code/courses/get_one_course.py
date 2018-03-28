@@ -76,16 +76,44 @@ class OneCourse:
 
         return result
 
+    @classmethod
+    def get_students_list_on_course(cls, course_id):
+        connect = mysql.connect()
+        cursor = connect.cursor()
+
+        query = 'SELECT students.StudentsName, students.StudentsLastName, students.StudentsLogin FROM student_apply, students WHERE students.idStudents = student_apply.idStudents and student_apply.idCourse = %s'
+        param = (course_id)
+
+        cursor.execute(query, param)
+
+        result = cursor.fetchall()
+
+        connect.commit()
+        cursor.close()
+
+        return result
+
+
 get_one_course = Blueprint('get_one_course', __name__)
 
 
 @get_one_course.route('/course/!<id_course>/!<id_company>', methods=['GET'])
 def api_get_one_course(id_course, id_company):
     if 'student' in session or 'company' in session:
-        status = OneCourse.api_get_status_course(id_course,id_company)
+        status = OneCourse.api_get_status_course(id_course, id_company)
         if 'student' in session and status == "Started" or status == "Not started":
+            global list_of_student
             course = OneCourse.api_get_one_course(id_course, id_company)
-            return render_template('course-apply.html', course=course)
+            students = OneCourse.get_students_list_on_course(id_course)
+            list_of_student = []
+            for student in students:
+                student = {
+                    'student_name': student[0],
+                    'student_last_name': student[1],
+                    'link': '/student/review/' + student[2]
+                }
+                list_of_student.append(student)
+            return render_template('course-apply.html', course=course, list_of_student=list_of_student)
         if 'student' in session and status == "Finished":
             global comments
             course = OneCourse.api_get_one_course(id_course, id_company)
