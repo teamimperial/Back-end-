@@ -59,6 +59,22 @@ class OneCourse:
 
         return status
 
+    @classmethod
+    def get_review_about_course(cls, course_id):
+        connect = mysql.connect()
+        cursor = connect.cursor()
+
+        query = 'SELECT students.StudentsName, students.StudentsLastName, coursereviews.review, coursereviews.time FROM students, coursereviews WHERE students.idStudents = coursereviews.idStudents and coursereviews.idCourse = %s'
+        param = (course_id)
+
+        cursor.execute(query, param)
+
+        result = cursor.fetchall()
+
+        connect.commit()
+        cursor.close()
+
+        return result
 
 get_one_course = Blueprint('get_one_course', __name__)
 
@@ -71,9 +87,19 @@ def api_get_one_course(id_course, id_company):
             course = OneCourse.api_get_one_course(id_course, id_company)
             return render_template('course-apply.html', course=course)
         if 'student' in session and status == "Finished":
+            global comments
             course = OneCourse.api_get_one_course(id_course, id_company)
-            company_login = GetCompany.get_company_login(id_company)
-            return render_template('course-reviews.html', course=course, company_login=company_login)
+            reviews = OneCourse.get_review_about_course(id_course)
+            comments = []
+            for review in reviews:
+                comment = {
+                    'student_name': review[0],
+                    'student_last_name': review[1],
+                    'review': review[2],
+                    'time': review[3]
+                }
+                comments.append(comment)
+            return render_template('course-reviews.html', course=course, course_id=id_course, comments=comments)
         if 'company' in session:
             course = OneCourse.api_get_one_course(id_course, id_company)
             list_link = '/list_of_statement/' + id_course

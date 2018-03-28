@@ -54,10 +54,11 @@ $('#send-review-c').click(function() {
 
 $('#send-review-course').click(function() {
     var data = {
-        "review": $('#review-course').val()
+        "course_id": document.getElementById('course_id').innerHTML,
+        "review": $('#review').val()
     };
     $.ajax({
-        url: '/', //the page containing python script
+        url: '/comment/course', //the page containing python script
         dataType: 'json',
         contentType: 'application/json',
         data: JSON.stringify(data),
@@ -65,7 +66,6 @@ $('#send-review-course').click(function() {
         success: function(response) {
             if (response.redirect=='true'){
                 var msg = response.message;
-                alert(msg);
                 window.location.href = response.redirect_url;
             }
             if (response.redirect=='false'){
