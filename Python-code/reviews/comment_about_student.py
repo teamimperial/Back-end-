@@ -44,6 +44,7 @@ class CommentAboutStudent:
 
 @comment_about_student.route('/comment/student', methods=['POST'])
 def comment_about_student_request():
+    print(request.json)
     if not request.json:
         return abort(400)
     if 'student_login' not in request.json:

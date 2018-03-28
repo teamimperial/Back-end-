@@ -55,6 +55,31 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
+-- Table `webproject`.`students`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `webproject`.`students` (
+  `idStudents` INT(11) NOT NULL AUTO_INCREMENT,
+  `StudentsName` VARCHAR(45) NOT NULL,
+  `StudentsLastName` VARCHAR(45) NOT NULL,
+  `StudentsEmail` VARCHAR(45) NOT NULL,
+  `StudentsPassword` VARCHAR(200) NOT NULL,
+  `StudentsLogin` VARCHAR(45) NOT NULL,
+  `idTypeOfUsers` INT(11) NOT NULL,
+  PRIMARY KEY (`idStudents`),
+  UNIQUE INDEX `StudentsLogin_UNIQUE` (`StudentsLogin` ASC),
+  UNIQUE INDEX `StudentsEmail_UNIQUE` (`StudentsEmail` ASC),
+  INDEX `Index` (`idTypeOfUsers` ASC),
+  CONSTRAINT `FK_1`
+    FOREIGN KEY (`idTypeOfUsers`)
+    REFERENCES `webproject`.`typeofusers` (`idTypeOfUsers`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
 -- Table `webproject`.`courses`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `webproject`.`courses` (
@@ -82,6 +107,32 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
+-- Table `webproject`.`coursereviews`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `webproject`.`coursereviews` (
+  `id_course_reviews` INT(11) NOT NULL,
+  `idStudents` INT(11) NOT NULL AUTO_INCREMENT,
+  `idCourse` INT(11) NOT NULL,
+  `review` VARCHAR(2000) NOT NULL,
+  `time` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id_course_reviews`),
+  INDEX `FK_Student` (`idStudents` ASC),
+  INDEX `FK_Course` (`idCourse` ASC),
+  CONSTRAINT `Fk_sdasd`
+    FOREIGN KEY (`idStudents`)
+    REFERENCES `webproject`.`students` (`idStudents`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_sdasdkasd`
+    FOREIGN KEY (`idCourse`)
+    REFERENCES `webproject`.`courses` (`idCourse`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
 -- Table `webproject`.`infoaboutcompany`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `webproject`.`infoaboutcompany` (
@@ -99,31 +150,6 @@ CREATE TABLE IF NOT EXISTS `webproject`.`infoaboutcompany` (
   CONSTRAINT `fk_About_Company`
     FOREIGN KEY (`idCompany`)
     REFERENCES `webproject`.`company` (`idCompany`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-AUTO_INCREMENT = 2
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `webproject`.`students`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `webproject`.`students` (
-  `idStudents` INT(11) NOT NULL AUTO_INCREMENT,
-  `StudentsName` VARCHAR(45) NOT NULL,
-  `StudentsLastName` VARCHAR(45) NOT NULL,
-  `StudentsEmail` VARCHAR(45) NOT NULL,
-  `StudentsPassword` VARCHAR(200) NOT NULL,
-  `StudentsLogin` VARCHAR(45) NOT NULL,
-  `idTypeOfUsers` INT(11) NOT NULL,
-  PRIMARY KEY (`idStudents`),
-  UNIQUE INDEX `StudentsLogin_UNIQUE` (`StudentsLogin` ASC),
-  UNIQUE INDEX `StudentsEmail_UNIQUE` (`StudentsEmail` ASC),
-  INDEX `Index` (`idTypeOfUsers` ASC),
-  CONSTRAINT `FK_1`
-    FOREIGN KEY (`idTypeOfUsers`)
-    REFERENCES `webproject`.`typeofusers` (`idTypeOfUsers`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -207,7 +233,7 @@ CREATE TABLE IF NOT EXISTS `webproject`.`studentsreviews` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8;
 
 

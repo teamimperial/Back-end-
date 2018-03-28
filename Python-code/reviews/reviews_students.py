@@ -66,12 +66,17 @@ def get_info_about_student_for_review(login):
     global comment
     student_for_db = GetStudent.get_info_about_student_for_review(login)
     reviews = GetStudent.get_comment_about_student(login)
+    photo = student_for_db[3]
+    if photo is None:
+        photo = 'http://placehold.it/500x500'
+    else:
+        photo = photo
     student = {
         'login': login,
         'name': student_for_db[0],
         'last_name': student_for_db[1],
         'email': student_for_db[2],
-        'photo': student_for_db[3],
+        'photo': photo,
         'city': student_for_db[4],
         'country': student_for_db[5],
         'date_of_birth': student_for_db[6],

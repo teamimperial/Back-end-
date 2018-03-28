@@ -1,6 +1,6 @@
 $('#send-review-s').click(function() {
     var data = {
-        "login": $('#student_login').innerHTML,
+        "student_login": document.getElementById('student_login').innerHTML,
         "review": $('#review').val()
     };
     $.ajax({
@@ -12,7 +12,6 @@ $('#send-review-s').click(function() {
         success: function(response) {
             if (response.redirect=='true'){
                 var msg = response.message;
-                alert(msg);
                 window.location.href = response.redirect_url;
             }
             if (response.redirect=='false'){
@@ -28,10 +27,11 @@ $('#send-review-s').click(function() {
 
 $('#send-review-c').click(function() {
     var data = {
+        "company_login": $('#company-login').innerHTML,
         "review": $('#review-c').val()
     };
     $.ajax({
-        url: '/', //the page containing python script
+        url: '/comment/course', //the page containing python script
         dataType: 'json',
         contentType: 'application/json',
         data: JSON.stringify(data),
@@ -39,7 +39,6 @@ $('#send-review-c').click(function() {
         success: function(response) {
             if (response.redirect=='true'){
                 var msg = response.message;
-                alert(msg);
                 window.location.href = response.redirect_url;
             }
             if (response.redirect=='false'){
