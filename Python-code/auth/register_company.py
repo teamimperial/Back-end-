@@ -91,19 +91,22 @@ def register_company_api():
     password = request.json['password']
     email = request.json['email']
     confirm = request.json['confirm']
-    if password != confirm:
-        return jsonify(redirect='false', message='Passwords don`t match. Try again....'), 400
-    else:
-        if Company.check_login_for_used(login) == 0:
-            return jsonify(redirect='false', message='Your login already exist. Try again....'), 400
-        if Company.check_email_for_used(email) == 0:
-            return jsonify(redirect='false', message='Your email already exist. Try again....'), 400
-
+    if login != "" and name != "" and password != "" and email != "" and confirm != "":
+        if password != confirm:
+            return jsonify(redirect='false', message='Passwords don`t match. Try again....'), 400
         else:
-            password_enc = generate_password_hash(password)
-            Company.save_company_user(login, name, email, password_enc)
-            id = GetCompany.get_company_id_from_db(login)
-            Company.save_info_about_company(id)
-            session['company'] = login
+            if Company.check_login_for_used(login) == 0:
+                return jsonify(redirect='false', message='Your login already exist. Try again....'), 400
+            if Company.check_email_for_used(email) == 0:
+                return jsonify(redirect='false', message='Your email already exist. Try again....'), 400
 
-        return jsonify(redirect='true',redirect_url='/user/company/'+login), 200
+            else:
+                password_enc = generate_password_hash(password)
+                Company.save_company_user(login, name, email, password_enc)
+                id = GetCompany.get_company_id_from_db(login)
+                Company.save_info_about_company(id)
+                session['company'] = login
+
+            return jsonify(redirect='true',redirect_url='/user/company/'+login), 200
+    else:
+        return jsonify('Bad request'), 405

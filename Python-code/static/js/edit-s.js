@@ -2,14 +2,14 @@
  * Created by Antonina on 09.12.2017.
  */
 
-var files; // змінна з файлами
+/*var files; // змінна з файлами
 
 $('input[type=file]').on('change', function(){
     files = this.files;
 });
-
+*/
 $('#save-button').click(function() {
-    event.stopPropagation();
+   /* event.stopPropagation();
     event.preventDefault();  // зупинка всього,що відбувається
 
     // Создадим данные формы и добавим в них данные файлов из files
@@ -17,7 +17,7 @@ $('#save-button').click(function() {
     $.each( files, function( key, value ){
         file_data.append( key, value );
     });
-
+*/
     var data = {
         "img": $('#profile-img').attr('src'),
         "first_name": $('#first-name').val(),
@@ -32,8 +32,8 @@ $('#save-button').click(function() {
         "email": $('#email').val(),
         "new_password":  $('#new-password').val(),
         "old_password": $('#password').val(),
-        "confirm_password": $('#confirm-new-password').val(),
-        "cv": file_data
+        "confirm_password": $('#confirm-new-password').val()
+        /*"cv": file_date*/
     };
     $.ajax({
         url: '/student/update', //the page containing python script
@@ -43,13 +43,13 @@ $('#save-button').click(function() {
         type: 'POST',
         success: function(response) {
             if(response.redirect==='true'){
-                alert(response.message)
+                alert(response.message);
                 window.location.href = response.redirect_url;
             }
             if(response.redirect=='false'){
                 alert(response.message);
             }
-
+/*
             if( typeof respond.error === 'undefined' ){
                 // Файли успішно завантажені
                 // виводимо в консоль шлях до них
@@ -60,7 +60,7 @@ $('#save-button').click(function() {
             }
             else{
                 console.log('SERVER RESPONSE ERROR: ' + respond.error );
-            }
+            }*/
         },
         error: function() {
             console.log('AJAX error');

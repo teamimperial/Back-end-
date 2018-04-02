@@ -7,6 +7,9 @@ register_student = Blueprint('register_student', __name__)
 
 
 class Student:
+    def __init__(self):
+        pass
+
     def __int__(self, login, email, first_name, last_name, password):
         self.login = login
         self.email = email
@@ -103,20 +106,31 @@ def register_student_api():
     if 'password' not in request.json:
         return jsonify(status='Enter password'), 400
 
+    if 'confirm' not in request.json:
+        return jsonify(status='Enter confirm password'), 400
+
     first_name = request.json['firstName']
     last_name = request.json['lastName']
     password = request.json['password']
     login = request.json['login']
     email = request.json['email']
+    confirm_password = request.json['confirm']
 
-    if Student.check_login_for_used(login) == 0:
-        return jsonify(status='Login already exists'), 400
-    elif Student.check_email_for_used(email) == 0:
-        return jsonify(status='Email already exists'), 400
+    if first_name != "" and last_name != "" and password != "" and login != "" and email != "" and \
+            confirm_password != "":
+        if password == confirm_password:
+            if Student.check_login_for_used(login) == 0:
+                return jsonify(status='Login already exists'), 400
+            elif Student.check_email_for_used(email) == 0:
+                return jsonify(status='Email already exists'), 400
+            else:
+                enc_password = generate_password_hash(password)
+                Student.save_students_user(login, first_name, last_name, email, enc_password)
+                id_student = GetStudent.get_students_id_from_db(login)
+                Student.save_info_about_students(id_student)
+            session['student'] = login
+            return jsonify(redirect="true", redirect_url="/user/student/" + login), 201
+        else:
+            return jsonify(redirect='false', message='Passwords don`t match. Try again....'), 400
     else:
-        enc_password = generate_password_hash(password)
-        Student.save_students_user(login, first_name, last_name, email, enc_password)
-        id_student = GetStudent.get_students_id_from_db(login)
-        Student.save_info_about_students(id_student)
-    session['student'] = login
-    return jsonify(redirect="true",redirect_url="/user/student/"+login), 201
+        return jsonify(redirect='false', message='Bad request'), 405

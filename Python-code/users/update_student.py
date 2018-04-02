@@ -6,6 +6,9 @@ from werkzeug.security import check_password_hash
 
 
 class UpdateStudent:
+    def __init__(self):
+        pass
+
     @classmethod
     def update_students_photo(cls, photo, id_students):
         connect = mysql.connect()
@@ -205,19 +208,17 @@ def api_update_students():
 
         if 'city' in request.json:
             city = request.json['city']
-            if city == "Null":
-                value = 0
-            elif city != "":
-                UpdateStudent.update_students_city(city, id_student)
-                value = 1
+            if city != "Null":
+                if city != "":
+                    UpdateStudent.update_students_city(city, id_student)
+                    value = 1
 
         if 'country' in request.json:
             country = request.json['country']
-            if country == "Null":
-                value = 0
-            elif country != "":
-                UpdateStudent.update_students_country(country, id_student)
-                value = 1
+            if country != "Null":
+                if country != "":
+                    UpdateStudent.update_students_country(country, id_student)
+                    value = 1
 
         if 'date_of_birth' in request.json:
             date_of_birth = request.json['date_of_birth']
