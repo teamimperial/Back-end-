@@ -1,11 +1,12 @@
 from setting.config import mysql
 from flask import Blueprint, request, jsonify, abort, session, redirect
 from werkzeug.security import check_password_hash
-from users.get_student import GetStudent
-from users.get_company import GetCompany
 
 
 class Login:
+    def __init__(self):
+        pass
+
     def __int__(self, user_login, password):
         self.login = user_login
         self.password = password

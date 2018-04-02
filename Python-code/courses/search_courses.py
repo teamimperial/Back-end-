@@ -3,6 +3,9 @@ from flask import render_template, request, Blueprint, session, redirect, jsonif
 
 
 class CourseSearch:
+    def __init__(self):
+        pass
+
     @classmethod
     def search_courses_in_db_by_name(cls, courses_name):
         connect = mysql.connect()

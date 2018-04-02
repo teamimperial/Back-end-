@@ -38,7 +38,7 @@ class UpdateCompany:
     def update_image(cls, photo, id_copmany):
         connect = mysql.connect()
         cursor = connect.cursor()
-        query = 'update infoaboutcomapny SET Photo = %s where idCompany = %s'
+        query = 'update infoaboutcompany SET Photo = %s where idCompany = %s'
         param = (photo, id_copmany)
         cursor.execute(query, param)
         connect.commit()
