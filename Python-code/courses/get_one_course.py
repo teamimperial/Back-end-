@@ -9,19 +9,19 @@ class OneCourse:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'select * from courses where idCourse = %s and idCompany = %s'
+        query = 'SELECT * FROM courses WHERE idCourse = %s AND idCompany = %s'
         param = (id_course, id_company)
 
         cursor.execute(query, param)
 
         result_course = cursor.fetchall()[0]
 
-        query_company_name = 'select CompanyName from company where idCompany = %s'
+        query_company_name = 'SELECT CompanyName FROM company WHERE idCompany = %s'
         param_company_name = (id_company)
-        cursor.execute(query_company_name,param_company_name)
+        cursor.execute(query_company_name, param_company_name)
         company = cursor.fetchone()[0]
 
-        query_company_login = 'select CompanyLogin from company where idCompany = %s'
+        query_company_login = 'SELECT CompanyLogin FROM company WHERE idCompany = %s'
         param_company_login = (id_company)
         cursor.execute(query_company_login, param_company_login)
         login = cursor.fetchone()[0]
@@ -47,7 +47,7 @@ class OneCourse:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'select CoursesStatus from courses where idCourse = %s and idCompany = %s'
+        query = 'SELECT CoursesStatus FROM courses WHERE idCourse = %s AND idCompany = %s'
         param = (id_course, id_company)
 
         cursor.execute(query, param)
@@ -64,7 +64,7 @@ class OneCourse:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'SELECT students.StudentsName, students.StudentsLastName, coursereviews.review, coursereviews.time FROM students, coursereviews WHERE students.idStudents = coursereviews.idStudents and coursereviews.idCourse = %s ORDER BY coursereviews.id_course_reviews DESC '
+        query = 'SELECT students.StudentsName, students.StudentsLastName, coursereviews.review, coursereviews.time FROM students, coursereviews WHERE students.idStudents = coursereviews.idStudents AND coursereviews.idCourse = %s ORDER BY coursereviews.id_course_reviews DESC '
         param = (course_id)
 
         cursor.execute(query, param)
@@ -81,7 +81,7 @@ class OneCourse:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'SELECT students.StudentsName, students.StudentsLastName, students.StudentsLogin FROM student_apply, students WHERE students.idStudents = student_apply.idStudents and student_apply.idCourse = %s'
+        query = 'SELECT students.StudentsName, students.StudentsLastName, students.StudentsLogin FROM student_apply, students WHERE students.idStudents = student_apply.idStudents AND student_apply.idCourse = %s'
         param = (course_id)
 
         cursor.execute(query, param)
