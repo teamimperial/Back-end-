@@ -47,28 +47,29 @@
 						{% for course in courses %}
 						<a href={{course.link}}>
 						<div class="card container">
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<h4 id="course-name">{{ course.course_name }}</h4></div>
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<p>Status: <span>{{course.status}}</span></p>
 							</div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <p><span>{{ course.status_student }}</span></p>
                             </div>
-
-							<div class="col-md-3">
+							<div class="col-md-4"></div>
+							<div class="col-md-4">
 								<p><i class="glyphicon glyphicon-calendar"></i> <cite id="time">{{course.date_of_start}} -
 									{{ course.date_of_end }}</cite></p>
 							</div>
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<p><i class="glyphicon glyphicon-map-marker"></i> <cite id="geolocation">{{ course.city }}, {{ course.country }}</cite>
 								</p>
 							</div>
-							<div class="col-md-3">
+							<div class="col-md-4"></div>
+							<div class="col-md-4">
 								<p><i class="glyphicon glyphicon-list-alt"></i> <span
 										id="full-amount">Licensed amount: {{ course.amount }}</span></p>
 							</div>
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<p><i class="glyphicon glyphicon-user"></i> <span
 										id="apply-amount">Number of applys</span></p>
 							</div>
