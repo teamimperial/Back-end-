@@ -46,7 +46,7 @@ class Login:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query_search = 'SELECT exists(SELECT * FROM Company WHERE CompanyLogin = %s)'
+        query_search = 'SELECT exists(SELECT * FROM company WHERE CompanyLogin = %s)'
         param_search = (login)
         cursor.execute(query_search, param_search)
         if cursor.fetchone()[0] == 1:

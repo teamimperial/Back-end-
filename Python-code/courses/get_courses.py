@@ -1,25 +1,28 @@
 from setting.config import mysql
-from flask import Blueprint, session, render_template
+from flask import Blueprint, session, render_template, redirect
 from users.get_company import GetCompany
 
 
 class GetCourses:
+    def __init__(self):
+        pass
+
     @classmethod
     def api_get_courses(cls, id_company):
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'select * from courses where idCompany = %s order by idCourse DESC'
-        param = (id_company)
+        query = 'SELECT * FROM courses WHERE idCompany = %s ORDER BY idCourse DESC'
+        param = id_company
 
-        cursor.execute(query,param)
+        cursor.execute(query, param)
 
         result = cursor.fetchall()
 
         return result
 
 
-get_courses = Blueprint('get_courses',__name__)
+get_courses = Blueprint('get_courses', __name__)
 
 
 @get_courses.route('/company/course', methods=['GET'])
@@ -53,3 +56,5 @@ def api_get_courses():
             }
             courses.append(course)
         return render_template('courses-c.html', courses=courses)
+    else:
+        return redirect("/")

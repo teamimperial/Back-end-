@@ -133,7 +133,7 @@ class GetCompany:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'select Company_Check from Company where CompanyLogin = %s'
+        query = 'select Company_Check from company where CompanyLogin = %s'
         param = (login)
         cursor.execute(query, param)
         check = cursor.fetchone()[0]
@@ -148,7 +148,7 @@ class GetCompany:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'select CompanyPassword from Company where CompanyLogin = %s'
+        query = 'select CompanyPassword from company where CompanyLogin = %s'
         param = (login)
         cursor.execute(query,param)
         password = cursor.fetchone()[0]
@@ -181,7 +181,7 @@ class GetCompany:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'select CompanyLogin from Company where idCompany = %s'
+        query = 'select CompanyLogin from company where idCompany = %s'
         param = (id_company)
         cursor.execute(query, param)
         login = cursor.fetchone()[0]

@@ -59,7 +59,7 @@ class Company:
     def save_company_user(cls, login, name, email, password):
         connect = mysql.connect()
         cursor = connect.cursor()
-        query_save = 'insert into Company(CompanyLogin,CompanyEmail,CompanyPassword,CompanyName,idTypeOfUsers,Company_Check) values(%s,%s,%s,%s,2,0)'
+        query_save = 'insert into company(CompanyLogin,CompanyEmail,CompanyPassword,CompanyName,idTypeOfUsers,Company_Check) values(%s,%s,%s,%s,2,0)'
         param_save = (login, email, password, name)
         cursor.execute(query_save, param_save)
         connect.commit()
@@ -69,7 +69,7 @@ class Company:
     def save_info_about_company(cls, id_company):
         connect = mysql.connect()
         cursor = connect.cursor()
-        query_save = 'insert into InfoAboutCompany(idCompany) values(%s)'
+        query_save = 'insert into infoaboutcompany(idCompany) values(%s)'
         param_save = (id_company)
         cursor.execute(query_save, param_save)
         connect.commit()
