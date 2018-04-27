@@ -1,4 +1,4 @@
-from flask import redirect, send_from_directory, render_template, Flask, session
+from flask import redirect, send_from_directory, render_template, Flask, session, request, jsonify
 from auth.login import login_api
 from auth.register_student import register_student
 from auth.register_company import register_company
@@ -122,6 +122,20 @@ def api_redirect_courses():
         return redirect('/company/course')
 
 
+@app.route('/test/iphone/request', methods=['POST'])
+def api_test_iphone():
+    if not request.json:
+        return jsonify(status='Something bed....'), 400
+    else:
+        print(request.json)
+        return jsonify(status='All are in good...'), 200
+
+
+@app.route('/test/iphone', methods=['GET'])
+def test_page():
+    return render_template('test.html')
+
+
 app.register_blueprint(register_student)
 app.register_blueprint(login_api)
 app.register_blueprint(register_company)
@@ -144,4 +158,4 @@ app.register_blueprint(comment_about_course)
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=80)
