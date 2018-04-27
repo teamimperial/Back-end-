@@ -23,7 +23,7 @@ from reviews.comment_about_course import comment_about_course
 app = Flask(__name__, static_url_path='/static')
 
 
-@app.route('/', methods=['POST', 'GET'])
+@app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
 
@@ -120,20 +120,6 @@ def api_redirect_courses():
         return redirect('/student/course')
     if 'company' in session:
         return redirect('/company/course')
-
-
-@app.route('/test/iphone/request', methods=['POST'])
-def api_test_iphone():
-    if not request.json:
-        return jsonify(status='Something bed....'), 400
-    else:
-        print(request.json)
-        return jsonify(status='All are in good...'), 200
-
-
-@app.route('/test/iphone', methods=['GET'])
-def test_page():
-    return render_template('test.html')
 
 
 app.register_blueprint(register_student)
