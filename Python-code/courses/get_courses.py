@@ -31,6 +31,11 @@ def api_get_courses():
         login = session['company']
         id_company = GetCompany.get_company_id_from_db(login)
         results = GetCourses.api_get_courses(id_company)
+        photo = GetCompany.get_photo_company(id_company)
+        if photo is None:
+            photo = 'http://placehold.it/100x100'
+        else:
+            photo = photo
         courses = []
         for result in results:
             id_course = str(result[0])
@@ -52,7 +57,8 @@ def api_get_courses():
                 "date_of_end": date_of_end,
                 "info": info,
                 "status": status,
-                "link": '/course/!' + id_course + '/!' + id_company
+                "link": '/course/!' + id_course + '/!' + id_company,
+                "photo": photo
             }
             courses.append(course)
         return render_template('courses-c.html', courses=courses)

@@ -10,7 +10,7 @@ class GetCompany:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query_get_name = 'select CompanyName from company where CompanyLogin=%s'
+        query_get_name = 'SELECT CompanyName FROM company WHERE CompanyLogin=%s'
         param_get_name = (login)
         cursor.execute(query_get_name, param_get_name)
         name = cursor.fetchone()[0]
@@ -25,7 +25,7 @@ class GetCompany:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query_get_email = 'select CompanyEmail from company where CompanyLogin=%s'
+        query_get_email = 'SELECT CompanyEmail FROM company WHERE CompanyLogin=%s'
         param_get_email = (login)
         cursor.execute(query_get_email, param_get_email)
         email = cursor.fetchone()[0]
@@ -40,9 +40,9 @@ class GetCompany:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query_get_id = 'select idCompany from company where CompanyLogin=%s'
+        query_get_id = 'SELECT idCompany FROM company WHERE CompanyLogin=%s'
         param_get_id = (login)
-        result = cursor.execute(query_get_id,param_get_id)
+        result = cursor.execute(query_get_id, param_get_id)
         if result == 0:
             id = 0
         else:
@@ -58,7 +58,7 @@ class GetCompany:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query_get_id = 'select City from infoaboutcompany where idCompany=%s'
+        query_get_id = 'SELECT City FROM infoaboutcompany WHERE idCompany=%s'
         param_get_id = (id_copmany)
         cursor.execute(query_get_id, param_get_id)
         city = cursor.fetchone()[0]
@@ -73,7 +73,7 @@ class GetCompany:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query_get_id = 'select WebSite from infoaboutcompany where idCompany=%s'
+        query_get_id = 'SELECT WebSite FROM infoaboutcompany WHERE idCompany=%s'
         param_get_id = (id_copmany)
         cursor.execute(query_get_id, param_get_id)
         web_site = cursor.fetchone()[0]
@@ -84,12 +84,12 @@ class GetCompany:
         return web_site
 
     @classmethod
-    def get_company_country(cls, id_copmany):
+    def get_company_country(cls, id_company):
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query_get_id = 'select Country from infoaboutcompany where idCompany=%s'
-        param_get_id = (id_copmany)
+        query_get_id = 'SELECT Country FROM infoaboutcompany WHERE idCompany=%s'
+        param_get_id = (id_company)
         cursor.execute(query_get_id, param_get_id)
         country = cursor.fetchone()[0]
 
@@ -103,7 +103,7 @@ class GetCompany:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query_get_id = 'select AboutCompany from infoaboutcompany where idCompany=%s'
+        query_get_id = 'SELECT AboutCompany FROM infoaboutcompany WHERE idCompany=%s'
         param_get_id = (id_copmany)
         cursor.execute(query_get_id, param_get_id)
         about = cursor.fetchone()[0]
@@ -118,7 +118,7 @@ class GetCompany:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query_get_id = 'select Photo from infoaboutcompany where idCompany=%s'
+        query_get_id = 'SELECT Photo FROM infoaboutcompany WHERE idCompany=%s'
         param_get_id = (id_copmany)
         cursor.execute(query_get_id, param_get_id)
         photo = cursor.fetchone()[0]
@@ -133,7 +133,7 @@ class GetCompany:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'select Company_Check from company where CompanyLogin = %s'
+        query = 'SELECT Company_Check FROM company WHERE CompanyLogin = %s'
         param = (login)
         cursor.execute(query, param)
         check = cursor.fetchone()[0]
@@ -148,9 +148,9 @@ class GetCompany:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'select CompanyPassword from company where CompanyLogin = %s'
+        query = 'SELECT CompanyPassword FROM company WHERE CompanyLogin = %s'
         param = (login)
-        cursor.execute(query,param)
+        cursor.execute(query, param)
         password = cursor.fetchone()[0]
 
         connect.commit()
@@ -163,9 +163,9 @@ class GetCompany:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'select exists(select * from company where CompanyName = %s)'
+        query = 'SELECT exists(SELECT * FROM company WHERE CompanyName = %s)'
         param = (login)
-        cursor.execute(query,param)
+        cursor.execute(query, param)
         check = cursor.fetchone()[0]
         if check == 1:
             login = 1
@@ -181,7 +181,7 @@ class GetCompany:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'select CompanyLogin from company where idCompany = %s'
+        query = 'SELECT CompanyLogin FROM company WHERE idCompany = %s'
         param = (id_company)
         cursor.execute(query, param)
         login = cursor.fetchone()[0]
@@ -190,3 +190,19 @@ class GetCompany:
         cursor.close()
 
         return login
+
+    @classmethod
+    def get_company_course(cls, id_company):
+        connect = mysql.connect()
+        cursor = connect.cursor()
+
+        query = 'SELECT courses.CoursesName, courses.idCourse, courses.CoursesStatus FROM courses WHERE ' \
+                'courses.idCompany = %s AND courses.CoursesStatus IN ("Started", "Not started")'
+        param = id_company
+        cursor.execute(query, param)
+        courses = cursor.fetchall()
+
+        connect.commit()
+        cursor.close()
+
+        return courses

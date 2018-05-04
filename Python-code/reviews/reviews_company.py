@@ -27,23 +27,46 @@ def api_info_about_company(login):
                 about_company = GetCompany.get_about_company(id_company)
                 photo = GetCompany.get_photo_company(id_company)
                 check = GetCompany.get_check_company(login)
-                print(photo)
+                courses = GetCompany.get_company_course(id_company)
+                courses_response = []
+                for course in courses:
+                    course = {
+                        'name': course[0],
+                        'status': course[2],
+                        'url': '/course/!' + str(course[1]) + "/!" + str(id_company)
+                    }
+                    courses_response.append(course)
                 if photo is None:
                     photo = 'http://placehold.it/500x500'
                 else:
                     photo = photo
                 if check == 0:
                     check = "color:transparent"
-                    company = {'name': name, 'email': email, 'website': web_site, 'city': city, 'country': country,
-                            'about_company': about_company, 'check': check, 'photo': photo}
-                    return render_template("profile-c.html", company=company)
+                    company = {'name': name,
+                               'email': email,
+                               'website': web_site,
+                               'city': city,
+                               'country': country,
+                               'about_company': about_company,
+                               'check': check,
+                               'photo': photo}
+                    return render_template("profile-c.html", company=company, courses=courses_response)
                 if check == 1:
                     check = "color:grey"
                     company = {'name': name, 'email': email, 'website': web_site, 'city': city, 'country': country,
                                'about_company': about_company, 'check': check, 'photo': photo}
-                    return render_template("profile-c.html", company=company)
+                    return render_template("profile-c.html", company=company, courses=courses_response)
             else:
                 return 'Please log in'
+
+
+@get_info_about_company.route('/get/<id_company>', methods=['GET'])
+def get_photo(id_company):
+    photo = GetCompany.get_photo_company(id_company)
+    photo_js = {
+        'photo': photo
+    }
+    return jsonify(photo=photo_js), 200
 
 
 @get_info_about_company.route('/company/review/<login>', methods=['GET'])
@@ -58,16 +81,22 @@ def api_get_info_about_company_review(login):
         country = GetCompany.get_company_country(id_company)
         about_company = GetCompany.get_about_company(id_company)
         photo = GetCompany.get_photo_company(id_company)
-        print(photo)
         check = GetCompany.get_check_company(login)
         if photo is None:
             photo = 'http://placehold.it/500x500'
         else:
             photo = photo
         company = {'name': name, 'email': email, 'website': web_site, 'city': city, 'country': country,
-                    'about_company': about_company, 'check': check, 'photo': photo}
-        return render_template("profile-c-reviews.html", company=company)
+                   'about_company': about_company, 'check': check, 'photo': photo}
+        courses = GetCompany.get_company_course(id_company)
+        courses_response = []
+        for course in courses:
+            course = {
+                'name': course[0],
+                'status': course[2],
+                'url': '/course/!' + str(course[1]) + "/!" + str(id_company)
+            }
+            courses_response.append(course)
+        return render_template("profile-c-reviews.html", company=company, courses=courses_response)
     else:
         return 'Not such user'
-
-
