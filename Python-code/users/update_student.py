@@ -184,7 +184,6 @@ update_students = Blueprint('update_students', __name__)
 @update_students.route('/student/update', methods=['POST'])
 def api_update_students():
     value = 0
-    print (request.json)
     if 'student' in session:
         login = session['student']
         id_student = GetStudent.get_students_id_from_db(login)
@@ -228,7 +227,6 @@ def api_update_students():
 
         if 'time_of_studing' in request.json:
             study_time = request.json['time_of_studing']
-            print(study_time)
             if study_time != "":
                 UpdateStudent.update_students_styding_time(study_time, id_student)
                 value = 1

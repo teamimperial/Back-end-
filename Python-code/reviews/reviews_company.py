@@ -27,6 +27,7 @@ def api_info_about_company(login):
                 about_company = GetCompany.get_about_company(id_company)
                 photo = GetCompany.get_photo_company(id_company)
                 check = GetCompany.get_check_company(login)
+                print(photo)
                 if photo is None:
                     photo = 'http://placehold.it/500x500'
                 else:
@@ -57,9 +58,14 @@ def api_get_info_about_company_review(login):
         country = GetCompany.get_company_country(id_company)
         about_company = GetCompany.get_about_company(id_company)
         photo = GetCompany.get_photo_company(id_company)
+        print(photo)
         check = GetCompany.get_check_company(login)
+        if photo is None:
+            photo = 'http://placehold.it/500x500'
+        else:
+            photo = photo
         company = {'name': name, 'email': email, 'website': web_site, 'city': city, 'country': country,
-                    'about_company': about_company, 'check': check}
+                    'about_company': about_company, 'check': check, 'photo': photo}
         return render_template("profile-c-reviews.html", company=company)
     else:
         return 'Not such user'
