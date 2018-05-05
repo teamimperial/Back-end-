@@ -93,6 +93,22 @@ class OneCourse:
 
         return result
 
+    @classmethod
+    def check_company_course(cls, id_company, id_course):
+        connect = mysql.connect()
+        cursor = connect.cursor()
+
+        query = 'select exists(select * from courses where courses.idCompany=%s and courses.idCourse=%s)'
+        param = (id_company, id_course)
+        cursor.execute(query, param)
+
+        result = cursor.fetchone()[0]
+
+        connect.commit()
+        cursor.close()
+
+        return result
+
 
 get_one_course = Blueprint('get_one_course', __name__)
 
@@ -128,9 +144,41 @@ def api_get_one_course(id_course, id_company):
                 }
                 comments.append(comment)
             return render_template('course-reviews.html', course=course, course_id=id_course, comments=comments)
+
         if 'company' in session:
-            course = OneCourse.api_get_one_course(id_course, id_company)
-            list_link = '/list_of_statement/' + id_course
-            return render_template('course-company-review.html', course=course, list_link=list_link)
+            check = OneCourse.check_company_course(id_company, id_course)
+            if check == 1:
+                if status == "Started" or status == "Not started":
+                    course = OneCourse.api_get_one_course(id_course, id_company)
+                    list_link = '/list_of_statement/' + id_course
+                    students = OneCourse.get_students_list_on_course(id_course)
+                    list_of_student = []
+                    for student in students:
+                        student = {
+                            'student_name': student[0],
+                            'student_last_name': student[1],
+                            'link': '/student/review/' + student[2]
+                        }
+                        list_of_student.append(student)
+                    return render_template('course-company-list-of-student.html', course=course, list_link=list_link,
+                                           list_of_student=list_of_student)
+                if status == "Finished":
+                    course = OneCourse.api_get_one_course(id_course, id_company)
+                    reviews = OneCourse.get_review_about_course(id_course)
+                    comments = []
+                    for review in reviews:
+                        comment = {
+                            'student_name': review[0],
+                            'student_last_name': review[1],
+                            'review': review[2],
+                            'time': review[3]
+                        }
+                        comments.append(comment)
+                    return render_template('course-company-review-finished.html', course=course, comments=comments)
+
+            if check == 0:
+                course = OneCourse.api_get_one_course(id_course, id_company)
+                list_link = '/list_of_statement/' + id_course
+                return render_template('course-company-review.html', course=course, list_link=list_link)
     else:
         return redirect('/'), 200
