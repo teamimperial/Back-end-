@@ -117,10 +117,15 @@ get_one_course = Blueprint('get_one_course', __name__)
 def api_get_one_course(id_course, id_company):
     if 'student' in session or 'company' in session:
         status = OneCourse.api_get_status_course(id_course, id_company)
-        if 'student' in session and status == "Started" or status == "Not started":
+        if 'student' in session and status == "Started" or status == "Not started" and 'company' not in session:
             global list_of_student
             course = OneCourse.api_get_one_course(id_course, id_company)
             students = OneCourse.get_students_list_on_course(id_course)
+            photo = GetCompany.get_photo_company(id_company)
+            if photo is None:
+                photo = 'http://placehold.it/500x500'
+            else:
+                photo = photo
             list_of_student = []
             for student in students:
                 student = {
@@ -129,11 +134,17 @@ def api_get_one_course(id_course, id_company):
                     'link': '/student/review/' + student[2]
                 }
                 list_of_student.append(student)
-            return render_template('course-apply.html', course=course, list_of_student=list_of_student)
+            return render_template('course-apply.html', course=course, list_of_student=list_of_student, photo=photo)
+
         if 'student' in session and status == "Finished":
             global comments
             course = OneCourse.api_get_one_course(id_course, id_company)
             reviews = OneCourse.get_review_about_course(id_course)
+            photo = GetCompany.get_photo_company(id_company)
+            if photo is None:
+                photo = 'http://placehold.it/500x500'
+            else:
+                photo = photo
             comments = []
             for review in reviews:
                 comment = {
@@ -143,15 +154,22 @@ def api_get_one_course(id_course, id_company):
                     'time': review[3]
                 }
                 comments.append(comment)
-            return render_template('course-reviews.html', course=course, course_id=id_course, comments=comments)
+            return render_template('course-reviews.html', course=course, course_id=id_course, comments=comments,
+                                   photo = photo)
 
         if 'company' in session:
-            check = OneCourse.check_company_course(id_company, id_course)
-            if check == 1:
+            login_company_in_session = session['company']
+            id_company_in_session = GetCompany.get_company_id_from_db(login_company_in_session)
+            if int(id_company) == int(id_company_in_session):
                 if status == "Started" or status == "Not started":
                     course = OneCourse.api_get_one_course(id_course, id_company)
                     list_link = '/list_of_statement/' + id_course
                     students = OneCourse.get_students_list_on_course(id_course)
+                    photo = GetCompany.get_photo_company(id_company)
+                    if photo is None:
+                        photo = 'http://placehold.it/500x500'
+                    else:
+                        photo = photo
                     list_of_student = []
                     for student in students:
                         student = {
@@ -161,10 +179,15 @@ def api_get_one_course(id_course, id_company):
                         }
                         list_of_student.append(student)
                     return render_template('course-company-list-of-student.html', course=course, list_link=list_link,
-                                           list_of_student=list_of_student)
+                                           list_of_student=list_of_student, photo=photo)
                 if status == "Finished":
                     course = OneCourse.api_get_one_course(id_course, id_company)
                     reviews = OneCourse.get_review_about_course(id_course)
+                    photo = GetCompany.get_photo_company(id_company)
+                    if photo is None:
+                        photo = 'http://placehold.it/500x500'
+                    else:
+                        photo = photo
                     comments = []
                     for review in reviews:
                         comment = {
@@ -174,11 +197,55 @@ def api_get_one_course(id_course, id_company):
                             'time': review[3]
                         }
                         comments.append(comment)
-                    return render_template('course-company-review-finished.html', course=course, comments=comments)
+                        students = OneCourse.get_students_list_on_course(id_course)
+                        list_of_student = []
+                        for student in students:
+                            student = {
+                                'student_name': student[0],
+                                'student_last_name': student[1],
+                                'link': '/student/review/' + student[2]
+                            }
+                            list_of_student.append(student)
+                    return render_template('course-company-review-finished.html', course=course, comments=comments,
+                                           list_of_student=list_of_student, photo=photo)
 
-            if check == 0:
-                course = OneCourse.api_get_one_course(id_course, id_company)
-                list_link = '/list_of_statement/' + id_course
-                return render_template('course-company-review.html', course=course, list_link=list_link)
+            if int(id_company) != int(id_company_in_session):
+                if status == "Finished":
+                    course = OneCourse.api_get_one_course(id_course, id_company)
+                    reviews = OneCourse.get_review_about_course(id_course)
+                    photo = GetCompany.get_photo_company(id_company)
+                    if photo is None:
+                        photo = 'http://placehold.it/500x500'
+                    else:
+                        photo = photo
+                    comments = []
+                    for review in reviews:
+                        comment = {
+                            'student_name': review[0],
+                            'student_last_name': review[1],
+                            'review': review[2],
+                            'time': review[3]
+                        }
+                        comments.append(comment)
+                    return render_template('course-company-review-finished-without-student.html',
+                                           course=course, comments=comments, photo=photo)
+
+                if status == "Started" or status == "Not started":
+                    course = OneCourse.api_get_one_course(id_course, id_company)
+                    students = OneCourse.get_students_list_on_course(id_course)
+                    photo = GetCompany.get_photo_company(id_company)
+                    if photo is None:
+                        photo = 'http://placehold.it/500x500'
+                    else:
+                        photo = photo
+                    list_of_student = []
+                    for student in students:
+                        student = {
+                            'student_name': student[0],
+                            'student_last_name': student[1]
+                        }
+                        list_of_student.append(student)
+                    return render_template('course-company-review-student.html', course=course,
+                                           list_of_student=list_of_student, photo=photo)
     else:
         return redirect('/'), 200
