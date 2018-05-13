@@ -87,8 +87,8 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `webproject`.`coursereviews`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `coursereviews` (
-  `id_course_reviews` INT(11) NOT NULL,
-  `idStudents` INT(11) NOT NULL AUTO_INCREMENT,
+  `id_course_reviews` INT(11) NOT NULL AUTO_INCREMENT,
+  `idStudents` INT(11) NOT NULL,
   `idCourse` INT(11) NOT NULL,
   `review` VARCHAR(2000) NOT NULL,
   `time` VARCHAR(45) NOT NULL,

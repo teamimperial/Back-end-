@@ -245,7 +245,7 @@ class GetStudent:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'SELECT studentsreviews.review, studentsreviews.time, company.CompanyName FROM company, students, studentsreviews WHERE studentsreviews.idCompany = company.idCompany AND students.idStudents= studentsreviews.idStudents AND students.StudentsLogin = %s'
+        query = 'SELECT studentsreviews.review, studentsreviews.time, company.CompanyName FROM company, students, studentsreviews WHERE studentsreviews.idCompany = company.idCompany AND students.idStudents= studentsreviews.idStudents AND students.StudentsLogin = %s order by studentsreviews.idStudentsCompanyReviews DESC'
         param = login
         cursor.execute(query, param)
         reviews = cursor.fetchall()
