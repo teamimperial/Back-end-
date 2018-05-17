@@ -53,6 +53,7 @@
 								<span>Edit</span>
 							</button>
 						</div>
+						<div id="course_id" style="display: none;">{{ course.id_course }}</div>
 					</div>
 
 					<!-- Modal -->
@@ -61,9 +62,7 @@
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-										&times;
-									</button>
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 									<h4 class="modal-title" id="myModalLabel">{{ course.course_name }}</h4>
 								</div>
 								<div class="modal-body">
@@ -154,10 +153,11 @@
 						<h4 style="text-align: center">Reviews</h4>
 						<div class="reviews-list">
 							{% for comment in comments %}
-							<div class="container card">
+							<div class="container card" id="{{comment.id_comment}}">
 								<br>
 								<span class="review-author">{{ comment.student_name }} {{ comment.student_last_name }}</span>
 								<span class="review-date">{{ comment.time }}</span>
+								<button type="button" class="close" value="Delete" onclick="Delete(this)">&times;</button>
 								<p><br>{{ comment.review }}
 								</p><br>
 							</div>
@@ -190,6 +190,30 @@
 <script src='/static/js/scroolreveal.js'></script>
 <script src='/static/js/bootstrap.min.js'></script>
 <script src='/static/js/magnific-popup.js'></script>
+<script>
+    function Delete(el) {
+        var data = {
+            "review_id": $(el).attr('id'),
+	        "course_id": $('#course_id').val()
+        };
+        $.ajax({
+            type: 'POST',
+            url: '/',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (response) {
+                if(response.redirect==='true'){
+                    alert(response.message);
+                    $(el).parent().remove();
+                }
+                if(response.redirect==='false'){
+                    alert(response.message);
+                }
+            }
+        });
+    }
+</script>
 
 </body>
 </html>
