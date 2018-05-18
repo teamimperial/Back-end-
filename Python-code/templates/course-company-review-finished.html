@@ -94,7 +94,7 @@
 								<br>
 								<span class="review-author">{{ comment.student_name }} {{ comment.student_last_name }}</span>
 								<span class="review-date">{{ comment.time }}</span>
-								<button type="button" class="close" value="Delete" onclick="Delete(this)">&times;</button>
+								<button type="button" class="close" value="Delete" onclick="Delete({{ comment.id_comment }})">&times;</button>
 								<p><br>{{ comment.review }}
 								</p><br>
 							</div>
@@ -130,19 +130,18 @@
 <script>
     function Delete(el) {
         var data = {
-            "review_id": $(el).attr('id'),
-            "course_id": $('#course_id').val()
+            "course_id": document.getElementById('course_id').innerHTML,
+            "review_id": el.toString()
         };
         $.ajax({
             type: 'POST',
-            url: '/',
+            url: '/delete/comment/company',
             dataType: 'json',
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function (response) {
-                if(response.redirect==='true'){
-                    alert(response.message);
-                    $(el).parent().remove();
+                if(response.status==='deleted'){
+                    $( "id" ).remove( "."+(el) );
                 }
                 if(response.redirect==='false'){
                     alert(response.message);

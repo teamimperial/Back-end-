@@ -27,6 +27,7 @@ class OneCourse:
         login = cursor.fetchone()[0]
 
         course = {
+            "id_course": id_course,
             "company_name": company,
             "course_name": result_course[2],
             "amount": result_course[3],
@@ -64,7 +65,7 @@ class OneCourse:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = 'SELECT students.StudentsName, students.StudentsLastName, coursereviews.review, coursereviews.time FROM students, coursereviews WHERE students.idStudents = coursereviews.idStudents AND coursereviews.idCourse = %s ORDER BY coursereviews.id_course_reviews DESC '
+        query = 'SELECT students.StudentsName, students.StudentsLastName, coursereviews.review, coursereviews.time, coursereviews.id_course_reviews FROM students, coursereviews WHERE students.idStudents = coursereviews.idStudents AND coursereviews.idCourse = %s ORDER BY coursereviews.id_course_reviews DESC '
         param = (course_id)
 
         cursor.execute(query, param)
@@ -151,7 +152,8 @@ def api_get_one_course(id_course, id_company):
                     'student_name': review[0],
                     'student_last_name': review[1],
                     'review': review[2],
-                    'time': review[3]
+                    'time': review[3],
+                    'id_comment': review[4]
                 }
                 comments.append(comment)
             return render_template('course-reviews.html', course=course, course_id=id_course, comments=comments,
@@ -194,18 +196,19 @@ def api_get_one_course(id_course, id_company):
                             'student_name': review[0],
                             'student_last_name': review[1],
                             'review': review[2],
-                            'time': review[3]
+                            'time': review[3],
+                            'id_comment': review[4]
                         }
                         comments.append(comment)
-                        students = OneCourse.get_students_list_on_course(id_course)
-                        list_of_student = []
-                        for student in students:
-                            student = {
-                                'student_name': student[0],
-                                'student_last_name': student[1],
-                                'link': '/student/review/' + student[2]
-                            }
-                            list_of_student.append(student)
+                    students = OneCourse.get_students_list_on_course(id_course)
+                    list_of_student = []
+                    for student in students:
+                        student = {
+                            'student_name': student[0],
+                            'student_last_name': student[1],
+                            'link': '/student/review/' + student[2]
+                        }
+                        list_of_student.append(student)
                     return render_template('course-company-review-finished.html', course=course, comments=comments,
                                            list_of_student=list_of_student, photo=photo)
 
