@@ -141,7 +141,7 @@
             data: JSON.stringify(data),
             success: function (response) {
                 if(response.status==='deleted'){
-                    $( "id" ).remove( "."+(el) );
+                    $( '#'+el ).remove();
                 }
                 if(response.redirect==='false'){
                     alert(response.message);
