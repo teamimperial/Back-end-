@@ -29,56 +29,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="course-company-review-finished.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/course-company-review-finished.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="143" column="27" lean-forward="false" selection-start-line="143" selection-start-column="27" selection-end-line="143" selection-end-column="27" />
-              <folding>
-                <element signature="e#3856#3863#1#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="login.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/js/login.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1450">
-              <caret line="58" column="20" lean-forward="false" selection-start-line="58" selection-start-column="20" selection-end-line="58" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="delete_comment.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/reviews/delete_comment.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="488">
-              <caret line="30" column="13" lean-forward="false" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-              <folding>
-                <element signature="e#0#61#0" expanded="true" />
-                <marker date="1526639246992" expanded="true" signature="323:419" ph="DELETE FROM coursereviews... " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="comment.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/js/comment.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="4" column="6" lean-forward="false" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="get_one_course.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/courses/get_one_course.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="925">
-              <caret line="39" column="43" lean-forward="false" selection-start-line="39" selection-start-column="43" selection-end-line="39" selection-end-column="43" />
+            <state relative-caret-position="4325">
+              <caret line="175" column="44" lean-forward="false" selection-start-line="175" selection-start-column="44" selection-end-line="175" selection-end-column="44" />
               <folding>
                 <marker date="1526637701530" expanded="true" signature="316:376" ph="SELECT * FRO... courses" />
                 <marker date="1526637701530" expanded="true" signature="533:585" ph="SELECT Compa... company" />
@@ -93,11 +48,58 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="manage.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="course-company-review.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/course-company-review.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5225">
+              <caret line="209" column="41" lean-forward="false" selection-start-line="209" selection-start-column="41" selection-end-line="209" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="edit_course.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reviews/edit_course.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="25">
+              <caret line="118" column="26" lean-forward="false" selection-start-line="118" selection-start-column="26" selection-end-line="118" selection-end-column="26" />
+              <folding>
+                <element signature="e#0#52#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="update_student.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/users/update_student.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5150">
+              <caret line="210" column="30" lean-forward="false" selection-start-line="210" selection-start-column="30" selection-end-line="210" selection-end-column="30" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+                <marker date="1525432593445" expanded="true" signature="473:533" ph="UPDATE infoaboutstudent... " />
+                <marker date="1525432593445" expanded="true" signature="816:875" ph="UPDATE infoaboutstudent... " />
+                <marker date="1525432593445" expanded="true" signature="1163:1225" ph="UPDATE infoaboutstudent... " />
+                <marker date="1525432593445" expanded="true" signature="1528:1594" ph="UPDATE infoaboutstudent... " />
+                <marker date="1525432593445" expanded="true" signature="1897:1962" ph="UPDATE infoaboutstudent... " />
+                <marker date="1525432593445" expanded="true" signature="2266:2334" ph="UPDATE infoaboutstudent... " />
+                <marker date="1525432593445" expanded="true" signature="2634:2703" ph="UPDATE infoaboutstudent... " />
+                <marker date="1525432593445" expanded="true" signature="3008:3075" ph="UPDATE infoaboutstudent... " />
+                <marker date="1525432593445" expanded="true" signature="3362:3419" ph="UPDATE infoaboutstudent... " />
+                <marker date="1525432593445" expanded="true" signature="3937:3996" ph="UPDATE students... " />
+                <marker date="1525432593445" expanded="true" signature="4291:4354" ph="UPDATE students... " />
+                <marker date="1525432593445" expanded="true" signature="4627:4736" ph="SELECT exist... " />
+                <marker date="1525432593445" expanded="true" signature="4641:4735" ph="SELECT * fro... students" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="manage.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/manage.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="463">
-              <caret line="131" column="39" lean-forward="false" selection-start-line="131" selection-start-column="39" selection-end-line="131" selection-end-column="39" />
+            <state relative-caret-position="338">
+              <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding>
                 <element signature="e#0#98#0" expanded="true" />
               </folding>
@@ -120,6 +122,7 @@
     <findStrings>
       <find>photo</find>
       <find>print</find>
+      <find>course-company-review</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -169,9 +172,10 @@
         <option value="$PROJECT_DIR$/templates/course-reviews.html" />
         <option value="$PROJECT_DIR$/templates/profile-s-reviews.html" />
         <option value="$PROJECT_DIR$/courses/get_one_course.py" />
-        <option value="$PROJECT_DIR$/manage.py" />
         <option value="$PROJECT_DIR$/reviews/delete_comment.py" />
         <option value="$PROJECT_DIR$/templates/course-company-review-finished.html" />
+        <option value="$PROJECT_DIR$/reviews/edit_course.py" />
+        <option value="$PROJECT_DIR$/manage.py" />
       </list>
     </option>
   </component>
@@ -201,12 +205,18 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="Python-code" type="b2602c69:ProjectViewProjectNode" />
               <item name="Python-code" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Python-code" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Python-code" type="462c0819:PsiDirectoryNode" />
+              <item name="courses" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Python-code" type="b2602c69:ProjectViewProjectNode" />
@@ -229,11 +239,15 @@
               <item name="Python-code" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Python-code" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Python-code" type="462c0819:PsiDirectoryNode" />
+              <item name="users" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -329,9 +343,9 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5208333" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29591838" sideWeight="0.47916666" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29591838" sideWeight="0.47916666" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19427083" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19427083" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -429,20 +443,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/course-company-review-student.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1125">
-          <caret line="45" column="41" lean-forward="false" selection-start-line="45" selection-start-column="41" selection-end-line="45" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/course-company-review-finished.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1150">
-          <caret line="46" column="41" lean-forward="false" selection-start-line="46" selection-start-column="41" selection-end-line="46" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/course-reviews.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="675">
@@ -602,13 +602,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/course-company-review.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-225">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/course-company-review-finished-without-student.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="795">
@@ -749,10 +742,69 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1450">
+          <caret line="58" column="20" lean-forward="false" selection-start-line="58" selection-start-column="20" selection-end-line="58" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/comment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="4" column="6" lean-forward="false" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/course-company-review-finished.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3038">
+          <caret line="142" column="48" lean-forward="true" selection-start-line="142" selection-start-column="48" selection-end-line="142" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reviews/delete_comment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="488">
+          <caret line="30" column="13" lean-forward="false" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/users/update_student.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5150">
+          <caret line="210" column="30" lean-forward="false" selection-start-line="210" selection-start-column="30" selection-end-line="210" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+            <marker date="1525432593445" expanded="true" signature="473:533" ph="UPDATE infoaboutstudent... " />
+            <marker date="1525432593445" expanded="true" signature="816:875" ph="UPDATE infoaboutstudent... " />
+            <marker date="1525432593445" expanded="true" signature="1163:1225" ph="UPDATE infoaboutstudent... " />
+            <marker date="1525432593445" expanded="true" signature="1528:1594" ph="UPDATE infoaboutstudent... " />
+            <marker date="1525432593445" expanded="true" signature="1897:1962" ph="UPDATE infoaboutstudent... " />
+            <marker date="1525432593445" expanded="true" signature="2266:2334" ph="UPDATE infoaboutstudent... " />
+            <marker date="1525432593445" expanded="true" signature="2634:2703" ph="UPDATE infoaboutstudent... " />
+            <marker date="1525432593445" expanded="true" signature="3008:3075" ph="UPDATE infoaboutstudent... " />
+            <marker date="1525432593445" expanded="true" signature="3362:3419" ph="UPDATE infoaboutstudent... " />
+            <marker date="1525432593445" expanded="true" signature="3937:3996" ph="UPDATE students... " />
+            <marker date="1525432593445" expanded="true" signature="4291:4354" ph="UPDATE students... " />
+            <marker date="1525432593445" expanded="true" signature="4627:4736" ph="SELECT exist... " />
+            <marker date="1525432593445" expanded="true" signature="4641:4735" ph="SELECT * fro... students" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/course-company-review.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5225">
+          <caret line="209" column="41" lean-forward="false" selection-start-line="209" selection-start-column="41" selection-end-line="209" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/courses/get_one_course.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="925">
-          <caret line="39" column="43" lean-forward="false" selection-start-line="39" selection-start-column="43" selection-end-line="39" selection-end-column="43" />
+        <state relative-caret-position="4325">
+          <caret line="175" column="44" lean-forward="false" selection-start-line="175" selection-start-column="44" selection-end-line="175" selection-end-column="44" />
           <folding>
             <marker date="1526637701530" expanded="true" signature="316:376" ph="SELECT * FRO... courses" />
             <marker date="1526637701530" expanded="true" signature="533:585" ph="SELECT Compa... company" />
@@ -766,49 +818,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/login.js">
+    <entry file="file://$PROJECT_DIR$/reviews/edit_course.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1450">
-          <caret line="58" column="20" lean-forward="false" selection-start-line="58" selection-start-column="20" selection-end-line="58" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/comment.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="6" lean-forward="false" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
-          <folding />
+        <state relative-caret-position="25">
+          <caret line="118" column="26" lean-forward="false" selection-start-line="118" selection-start-column="26" selection-end-line="118" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#52#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/manage.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="131" column="39" lean-forward="false" selection-start-line="131" selection-start-column="39" selection-end-line="131" selection-end-column="39" />
+        <state relative-caret-position="338">
+          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding>
             <element signature="e#0#98#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reviews/delete_comment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="30" column="13" lean-forward="false" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#61#0" expanded="true" />
-            <marker date="1526639246992" expanded="true" signature="323:419" ph="DELETE FROM coursereviews... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/course-company-review-finished.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="143" column="27" lean-forward="false" selection-start-line="143" selection-start-column="27" selection-end-line="143" selection-end-column="27" />
-          <folding>
-            <element signature="e#3856#3863#1#HTML" expanded="true" />
           </folding>
         </state>
       </provider>

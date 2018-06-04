@@ -24,6 +24,14 @@ from reviews.delete_comment import delete_comment_company
 app = Flask(__name__, static_url_path='/static')
 
 
+@app.before_request
+def before_request():
+    if request.url.startswith('http://'):
+        url = request.url.replace('http://', 'https://', 1)
+        code = 301
+        return redirect(url, code=code)
+
+
 @app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
