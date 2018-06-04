@@ -13,8 +13,9 @@ class CourseSearch:
         request_form = '%' + courses_name + '%'
         query = 'select company.CompanyName, courses.CoursesName, courses.CoursesAmount, courses.CoursesCity, ' \
                 'courses.CoursesCountry, courses.CoursesStart, courses.CoursesEnd, courses.CoursesInfo, ' \
-                'company.idCompany, courses.idCourse, courses.CoursesStatus from courses, company where courses.idCompany=company.idCompany ' \
-                'and CoursesName like %s order by idCourse DESC'
+                'company.idCompany, courses.idCourse, courses.CoursesStatus, infoaboutcompany.Photo ' \
+                'from courses, company, infoaboutcompany where courses.idCompany=company.idCompany ' \
+                'and infoaboutcompany.idCompany=company.idCompany and CoursesName like %s order by idCourse DESC'
         param = (request_form)
 
         cursor.execute(query, param)
@@ -45,6 +46,11 @@ def api_search(courses_name):
             id_company = str(result[8])
             id_course = str(result[9])
             status = result[10]
+            photo = result[11]
+            if photo is None:
+                photo = 'http://placehold.it/500x500'
+            else:
+                photo = photo
             course = {
                 "company_name": company_name,
                 "course_name": course_name,
@@ -55,9 +61,10 @@ def api_search(courses_name):
                 "date_of_end": date_of_end,
                 "info": info,
                 "link": '/course/!' + id_course + '/!' + id_company,
-                'status': status
+                'status': status,
+                "photo": photo
             }
             courses.append(course)
-        return render_template('praxis.html',courses=courses), 200
+        return render_template('praxis.html', courses=courses), 200
     else:
         return redirect("/")
