@@ -181,7 +181,7 @@ def api_get_one_course(id_course, id_company):
                         }
                         list_of_student.append(student)
                     return render_template('course-company-list-of-student.html', course=course, list_link=list_link,
-                                           list_of_student=list_of_student, photo=photo)
+                                           list_of_student=list_of_student, photo=photo, id_course=id_course)
                 if status == "Finished":
                     course = OneCourse.api_get_one_course(id_course, id_company)
                     reviews = OneCourse.get_review_about_course(id_course)
@@ -210,7 +210,7 @@ def api_get_one_course(id_course, id_company):
                         }
                         list_of_student.append(student)
                     return render_template('course-company-review-finished.html', course=course, comments=comments,
-                                           list_of_student=list_of_student, photo=photo)
+                                           list_of_student=list_of_student, photo=photo, id_course=id_course)
 
             if int(id_company) != int(id_company_in_session):
                 if status == "Finished":

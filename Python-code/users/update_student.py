@@ -277,9 +277,9 @@ def api_update_students():
                 else:
                     return jsonify(redirect='false',message='Password don`t match. Try again....'), 200
         if value == 1:
-            return jsonify(redirect='true', redirect_url='/user/student/' + login,message='Save changes.'), 201
+            return jsonify(redirect='true', redirect_url='/user/student/' + login,message='Changes have been successfully saved'), 201
         else:
-            return jsonify(redirect='false', message='Something bag!!'), 201
+            return jsonify(redirect='false', message='Something went wrong. Try again later!!!'), 201
 
     else:
         return 'Please login'

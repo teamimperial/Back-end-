@@ -1,4 +1,4 @@
-from flask import redirect, send_from_directory, render_template, Flask, session, request, jsonify
+from flask import redirect, send_from_directory, render_template, Flask, session, request
 from auth.login import login_api
 from auth.register_student import register_student
 from auth.register_company import register_company
@@ -20,16 +20,18 @@ from courses.approve_students import approve_student, set_status_students_on_cou
 from reviews.comment_about_student import comment_about_student
 from reviews.comment_about_course import comment_about_course
 from reviews.delete_comment import delete_comment_company
+from courses.edit_course import edit_course
 
 app = Flask(__name__, static_url_path='/static')
 
-
+'''
 @app.before_request
 def before_request():
     if request.url.startswith('http://'):
         url = request.url.replace('http://', 'https://', 1)
         code = 301
         return redirect(url, code=code)
+'''
 
 
 @app.route('/', methods=['GET'])
@@ -150,8 +152,9 @@ app.register_blueprint(set_status_students_on_course)
 app.register_blueprint(comment_about_student)
 app.register_blueprint(comment_about_course)
 app.register_blueprint(delete_comment_company)
+app.register_blueprint(edit_course)
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 if __name__ == '__main__':
-    app.run(debug=True, port=90)
+    app.run(debug=True, port=80)

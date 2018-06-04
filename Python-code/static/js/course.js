@@ -48,6 +48,7 @@ $('#edit-course').click(function() {
     var status = $('#status').val();
     var info = $('#info').val();
     var data = {
+        "id_course": document.getElementById('id_course').innerHTML,
         "name": name,
         "amount": amount,
         "city": city,
@@ -58,14 +59,20 @@ $('#edit-course').click(function() {
         "info": info
     };
     $.ajax({
-        url: '/create_course', //the page containing python script
+        url: '/edit/course', //the page containing python script
         dataType: 'json',
         contentType: 'application/json',
         data: JSON.stringify(data),
         type: 'POST',
         success: function(response) {
-            if (response.redirect == 'true'){
+            if (response.redirect=='true'){
+                var msg = response.message;
+                alert(msg);
                 window.location.href = response.redirect_url;
+            }
+            if (response.redirect=='false'){
+                var msg = response.message;
+                alert(msg);
             }
         },
         error: function() {

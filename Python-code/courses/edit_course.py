@@ -11,8 +11,8 @@ class EditCourse:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = ""
-        param = ()
+        query = "update courses Set CoursesName=%s where idCourse=%s"
+        param = (course_name, id_course)
 
         cursor.execute(query, param)
 
@@ -24,8 +24,8 @@ class EditCourse:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = ""
-        param = ()
+        query = "update courses Set CoursesAmount=%s where idCourse=%s"
+        param = (licensed_amount, id_course)
 
         cursor.execute(query, param)
 
@@ -38,8 +38,8 @@ class EditCourse:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = ""
-        param = ()
+        query = "update courses Set CoursesCity=%s where idCourse=%s"
+        param = (city, id_course)
 
         cursor.execute(query, param)
 
@@ -51,8 +51,8 @@ class EditCourse:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = ""
-        param = ()
+        query = "update courses Set CoursesCountry=%s where idCourse=%s"
+        param = (country, id_course)
 
         cursor.execute(query, param)
 
@@ -64,8 +64,8 @@ class EditCourse:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = ""
-        param = ()
+        query = "update courses Set CoursesStart=%s where idCourse=%s"
+        param = (date_of_start, id_course)
 
         cursor.execute(query, param)
 
@@ -77,8 +77,8 @@ class EditCourse:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = ""
-        param = ()
+        query = "update courses Set CoursesEnd=%s where idCourse=%s"
+        param = (date_of_end, id_course)
 
         cursor.execute(query, param)
 
@@ -90,8 +90,8 @@ class EditCourse:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = ""
-        param = ()
+        query = "update courses Set CoursesInfo=%s where idCourse=%s"
+        param = (info, id_course)
 
         cursor.execute(query, param)
 
@@ -103,8 +103,8 @@ class EditCourse:
         connect = mysql.connect()
         cursor = connect.cursor()
 
-        query = ""
-        param = ()
+        query = "update courses Set CoursesStatus=%s where idCourse=%s"
+        param = (status, id_course)
 
         cursor.execute(query, param)
 
@@ -115,59 +115,66 @@ class EditCourse:
 edit_course = Blueprint('edit_course', __name__)
 
 
-@edit_course.route('/edit/course')
+@edit_course.route('/edit/course', methods=['POST'])
 def edit_course_company():
     value = 0
-
+    print(request.json)
     if not request.json or 'id_course' not in request.json:
         abort(400)
 
     id_course = request.json['id_course']
 
-    if 'course_name' in request.json:
-        course_name = request.json['course_name']
+    if 'name' in request.json:
+        course_name = request.json['name']
         if course_name != "":
             EditCourse.edit_course_name(id_course, course_name)
             value = 1
 
-    if 'licensed_amount' in request.json:
-        licensed_amount = request.json['licensed_amount']
+    if 'amount' in request.json:
+        licensed_amount = request.json['amount']
         if licensed_amount != "":
+            EditCourse.edit_licensed_amount(id_course, licensed_amount)
             value = 1
 
     if 'city' in request.json:
         city = request.json['city']
         if city != "Null":
             if city != "":
+                EditCourse.edit_city(id_course, city)
                 value = 1
 
     if 'country' in request.json:
         country = request.json['country']
         if country != "Null":
             if country != "":
+                EditCourse.edit_country(id_course, country)
                 value = 1
 
     if 'date_of_start' in request.json:
         date_of_start = request.json['date_of_start']
         if date_of_start != "":
+            EditCourse.edit_date_of_start(id_course, date_of_start)
             value = 1
 
     if 'date_of_end' in request.json:
         date_of_end = request.json['date_of_end']
         if date_of_end != "":
+            EditCourse.edit_date_of_end(id_course, date_of_end)
             value = 1
 
     if 'status' in request.json:
         status = request.json['status']
         if status != "":
+            EditCourse.edit_status(id_course, status)
             value = 1
 
-    if 'info_about' in request.json:
-        info_about = request.json['info_about']
+    if 'info' in request.json:
+        info_about = request.json['info']
         if info_about != "":
+            EditCourse.edit_info(id_course, info_about)
             value = 1
 
     if value == 1:
-        return jsonify(redirect='true', redirect_url='/'), 200
+        return jsonify(redirect='true', message="Changes have been successfully saved", redirect_url=''), 200
     else:
-        return jsonify(redirect='false', message=''), 200
+        return jsonify(redirect='false', message='Something went wrong. Try again later!!!'), 200

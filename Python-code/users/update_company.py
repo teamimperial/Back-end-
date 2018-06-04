@@ -169,9 +169,11 @@ def api_update_company():
                 else:
                     return jsonify(redirect='false',message='Password don`t match. Try again....'), 200
         if value == 1:
-            return jsonify(redirect="true", redirect_url='/user/company/' + login, message='Success update'), 200
+            return jsonify(redirect="true", redirect_url='/user/company/' + login,
+                           message='Changes have been successfully saved'), 200
         if value == 0:
-            return jsonify(redirect="true", redirect_url='/user/company/' + login, message='Nothing was changed'), 200
+            return jsonify(redirect="true", redirect_url='/user/company/' + login,
+                           message='Something went wrong. Try again later!!!'), 200
     else:
         message = 'Please log in. Something wrong with your session.'
         return jsonify(redirect='true', redirect_url='/error/' + message), 405
